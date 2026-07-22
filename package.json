@@ -1,0 +1,25 @@
+{
+  "name": "home-menu-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/validate-deploy.mjs",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "validate:data": "node scripts/validate-data.mjs"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "ajv": "^8.17.1",
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
+  }
+}

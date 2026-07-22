@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import Ajv from 'ajv/dist/2020.js';
+const read = (name) => JSON.parse(fs.readFileSync(new URL(`../data/${name}`, import.meta.url), 'utf8'));
+const full = read('dishes.json'); const index = read('dish-index.json'); const schema = read('dishes.schema.json');
+const ajv = new Ajv({ strict: false });
+if (!ajv.validate(schema, full)) throw new Error(JSON.stringify(ajv.errors, null, 2));
+const ids = new Set(full.dishes.map((dish) => dish.id));
+if (ids.size !== 40 || index.length !== 40 || index.some((dish) => !ids.has(dish.id))) throw new Error('索引必须与 40 道详情完全对应');
+if (full.dishes.filter((dish) => dish.category === 'soup').length !== 5) throw new Error('汤必须恰好 5 道');
+if (full.dishes.some((dish) => dish.sourceCategory === 'aquatic' || dish.exclusionReason === 'fish')) throw new Error('当前菜单不得包含鱼类');
+if (full.dishes.some((dish) => JSON.stringify(dish).includes('茄子'))) throw new Error('当前菜单不得包含茄子');
+console.log('数据校验通过：40 道菜，5 道汤，不含茄子，ID 与索引一致。');

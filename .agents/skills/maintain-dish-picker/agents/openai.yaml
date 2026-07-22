@@ -1,0 +1,4 @@
+interface:
+  display_name: "维护今晚吃什么"
+  short_description: "维护菜单数据、选菜交互、分享链接和采购清单并完成验证"
+  default_prompt: "使用 $maintain-dish-picker 安全更新并验证这个点菜应用。"

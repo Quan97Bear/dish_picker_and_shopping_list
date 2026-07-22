@@ -1,0 +1,3878 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-21",
+  "dishes": [
+    {
+      "id": "tomato-egg",
+      "name": "西红柿炒鸡蛋",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 15,
+      "difficulty": 1,
+      "homestyleScore": 98,
+      "homestyleRank": 1,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "tomato",
+          "name": "西红柿",
+          "amount": 2,
+          "unit": "个",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 3,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sugar",
+          "name": "白糖",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": true,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "西红柿洗净切块，鸡蛋加少许盐打散。",
+        "热锅放油，将鸡蛋炒至刚凝固后盛出。",
+        "原锅炒软西红柿，加入鸡蛋、盐和可选白糖，翻匀出锅。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/西红柿炒鸡蛋.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%A5%BF%E7%BA%A2%E6%9F%BF%E7%82%92%E9%B8%A1%E8%9B%8B",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "hot-sour-potato",
+      "name": "酸辣土豆丝",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 98,
+      "homestyleRank": 2,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dried-chili",
+          "name": "干辣椒",
+          "amount": 5,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "vinegar",
+          "name": "香醋",
+          "amount": 15,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "土豆切细丝，用清水淘洗掉表面淀粉并沥干。",
+        "热油煸香干辣椒，下土豆丝大火快速翻炒。",
+        "沿锅边淋醋，加盐炒至断生，保持爽脆后出锅。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/酸辣土豆丝.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%85%B8%E8%BE%A3%E5%9C%9F%E8%B1%86%E4%B8%9D",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "hand-torn-cabbage",
+      "name": "手撕包菜",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 15,
+      "difficulty": 1,
+      "homestyleScore": 97,
+      "homestyleRank": 3,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "cabbage",
+          "name": "包菜",
+          "amount": 500,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dried-chili",
+          "name": "干辣椒",
+          "amount": 4,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "vinegar",
+          "name": "香醋",
+          "amount": 8,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "包菜用手撕成小片，洗净后充分沥水。",
+        "热锅放油，爆香蒜和干辣椒。",
+        "下包菜大火炒软，加生抽和醋快速翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/手撕包菜.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "garlic-broccoli",
+      "name": "蒜蓉西兰花",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 18,
+      "difficulty": 1,
+      "homestyleScore": 96,
+      "homestyleRank": 4,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "broccoli",
+          "name": "西兰花",
+          "amount": 450,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 20,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "西兰花切小朵，用淡盐水浸泡后洗净。",
+        "沸水中加少许盐和油，焯西兰花约一分钟后捞出。",
+        "热油炒香蒜末，下西兰花和盐快速翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/蒜蓉西兰花.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%92%9C%E8%93%89%E8%A5%BF%E5%85%B0%E8%8A%B1",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "oyster-lettuce",
+      "name": "蚝油生菜",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 12,
+      "difficulty": 1,
+      "homestyleScore": 95,
+      "homestyleRank": 5,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "lettuce",
+          "name": "生菜",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "oyster-sauce",
+          "name": "蚝油",
+          "amount": 18,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "生菜逐片洗净并沥干，蒜切末。",
+        "沸水中加少许油，将生菜快速焯至变色后装盘。",
+        "热油炒香蒜末和蚝油，加少量水煮开后淋在生菜上。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/蚝油生菜.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%9A%9D%E6%B2%B9%E7%94%9F%E8%8F%9C",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "chive-egg",
+      "name": "韭菜炒蛋",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 12,
+      "difficulty": 1,
+      "homestyleScore": 94,
+      "homestyleRank": 6,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chive",
+          "name": "韭菜",
+          "amount": 220,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 4,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "韭菜洗净沥干切段，鸡蛋加盐打散。",
+        "热锅放油，把鸡蛋炒至蓬松后盛出。",
+        "下韭菜快速炒至断生，倒回鸡蛋翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/韭菜炒蛋.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%9F%AD%E8%8F%9C%E7%82%92%E8%9B%8B",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "zucchini-egg",
+      "name": "西葫芦炒鸡蛋",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 15,
+      "difficulty": 1,
+      "homestyleScore": 94,
+      "homestyleRank": 7,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "zucchini",
+          "name": "西葫芦",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 3,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "西葫芦洗净切薄片，鸡蛋加盐打散。",
+        "先将鸡蛋炒至凝固后盛出。",
+        "原锅炒西葫芦至断生，倒回鸡蛋加盐翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/西葫芦炒鸡蛋.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%A5%BF%E8%91%AB%E8%8A%A6%E7%82%92%E9%B8%A1%E8%9B%8B",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "scallion-tofu",
+      "name": "葱煎豆腐",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 22,
+      "difficulty": 2,
+      "homestyleScore": 93,
+      "homestyleRank": 8,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "tofu",
+          "name": "北豆腐",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "scallion",
+          "name": "小葱",
+          "amount": 30,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "豆腐切厚片，用厨房纸吸去表面水分。",
+        "平底锅放油，将豆腐两面煎至金黄。",
+        "淋入生抽和少量水，撒葱花焖一分钟。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/葱煎豆腐.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%91%B1%E7%85%8E%E8%B1%86%E8%85%90",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "pepper-pork",
+      "name": "辣椒炒肉",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "快手"
+      ],
+      "avoid": [
+        "pepper",
+        "pork",
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 92,
+      "homestyleRank": 9,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-belly",
+          "name": "五花肉",
+          "amount": 250,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "green-pepper",
+          "name": "青椒",
+          "amount": 250,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "doubanjiang",
+          "name": "豆瓣酱",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "五花肉切薄片，青椒切滚刀块。",
+        "少油煸炒五花肉至出油微焦，加入蒜和豆瓣酱。",
+        "下青椒大火炒至起虎皮，加生抽翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/辣椒炒肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%BE%A3%E6%A4%92%E7%82%92%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "kung-pao-chicken",
+      "name": "宫保鸡丁",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 30,
+      "difficulty": 3,
+      "homestyleScore": 91,
+      "homestyleRank": 10,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-breast",
+          "name": "鸡胸肉",
+          "amount": 350,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "peanut",
+          "name": "花生米",
+          "amount": 60,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dried-chili",
+          "name": "干辣椒",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "scallion",
+          "name": "大葱",
+          "amount": 50,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "vinegar",
+          "name": "香醋",
+          "amount": 12,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sugar",
+          "name": "白糖",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡肉切丁，用生抽和淀粉腌十分钟。",
+        "调匀生抽、醋、糖和少量水，热油炒香辣椒和葱段。",
+        "下鸡丁炒熟，倒入料汁收浓，最后拌入花生米。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/宫保鸡丁.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%AE%AB%E4%BF%9D%E9%B8%A1%E4%B8%81",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "fish-fragrant-pork",
+      "name": "鱼香肉丝",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pepper",
+        "pork",
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 30,
+      "difficulty": 3,
+      "homestyleScore": 90,
+      "homestyleRank": 11,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-tenderloin",
+          "name": "猪里脊",
+          "amount": 300,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "wood-ear",
+          "name": "泡发木耳",
+          "amount": 80,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "carrot",
+          "name": "胡萝卜",
+          "amount": 100,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "green-pepper",
+          "name": "青椒",
+          "amount": 100,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "pickled-chili",
+          "name": "泡椒",
+          "amount": 20,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "vinegar",
+          "name": "香醋",
+          "amount": 15,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sugar",
+          "name": "白糖",
+          "amount": 12,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "里脊切丝，用生抽和淀粉腌制；配菜切丝。",
+        "将生抽、醋、糖、淀粉和水调成鱼香汁。",
+        "炒散肉丝后加入泡椒和配菜，倒入鱼香汁炒至浓稠。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/鱼香肉丝.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%B1%BC%E9%A6%99%E8%82%89%E4%B8%9D",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "mapo-tofu",
+      "name": "麻婆豆腐",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork",
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 25,
+      "difficulty": 3,
+      "homestyleScore": 90,
+      "homestyleRank": 12,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "tofu",
+          "name": "嫩豆腐",
+          "amount": 500,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ground-pork",
+          "name": "猪肉末",
+          "amount": 120,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "doubanjiang",
+          "name": "豆瓣酱",
+          "amount": 25,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sichuan-pepper",
+          "name": "花椒粉",
+          "amount": 2,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "豆腐切块，在淡盐水中焯一分钟后沥干。",
+        "热油炒散肉末，加入豆瓣酱炒出红油。",
+        "加水和豆腐烧入味，分次勾芡，撒花椒粉。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/麻婆豆腐.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%BA%BB%E5%A9%86%E8%B1%86%E8%85%90",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "cola-wings",
+      "name": "可乐鸡翅",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 40,
+      "difficulty": 2,
+      "homestyleScore": 89,
+      "homestyleRank": 13,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-wing",
+          "name": "鸡翅中",
+          "amount": 10,
+          "unit": "个",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "cola",
+          "name": "可乐",
+          "amount": 330,
+          "unit": "毫升",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 5,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡翅两面划刀，冷水下锅焯去浮沫。",
+        "煎至两面金黄，加入姜片、生抽、老抽和可乐。",
+        "煮开后转小火焖熟，最后大火收至汤汁浓亮。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/可乐鸡翅.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%8F%AF%E4%B9%90%E9%B8%A1%E7%BF%85",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "braised-chicken",
+      "name": "黄焖鸡",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pepper"
+      ],
+      "servings": 2,
+      "durationMinutes": 50,
+      "difficulty": 3,
+      "homestyleScore": 88,
+      "homestyleRank": 14,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-thigh",
+          "name": "鸡腿",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "shiitake",
+          "name": "香菇",
+          "amount": 150,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 250,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "green-pepper",
+          "name": "青椒",
+          "amount": 100,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 8,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡腿剁块焯水，香菇和土豆切块。",
+        "炒香姜片和鸡块，加生抽、老抽和热水。",
+        "加入香菇和土豆焖至软烂，最后下青椒收汁。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/黄焖鸡.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%BB%84%E7%84%96%E9%B8%A1",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "potato-ribs",
+      "name": "土豆炖排骨",
+      "sourceCategory": "vegetable_dish",
+      "category": "stew",
+      "categoryName": "炖菜",
+      "tags": [
+        "家常",
+        "暖胃",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 65,
+      "difficulty": 3,
+      "homestyleScore": 87,
+      "homestyleRank": 15,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-ribs",
+          "name": "排骨",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "scallion",
+          "name": "大葱",
+          "amount": 30,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 8,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "排骨冷水下锅焯水，洗净浮沫；土豆切块。",
+        "炒香葱姜和排骨，加生抽、老抽及热水，小火炖四十分钟。",
+        "加入土豆继续炖至软烂，按口味加盐收汁。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/土豆炖排骨.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%9C%9F%E8%B1%86%E7%82%96%E6%8E%92%E9%AA%A8",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "tomato-beef-stew",
+      "name": "西红柿土豆炖牛肉",
+      "sourceCategory": "vegetable_dish",
+      "category": "stew",
+      "categoryName": "炖菜",
+      "tags": [
+        "家常",
+        "暖胃",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 90,
+      "difficulty": 3,
+      "homestyleScore": 86,
+      "homestyleRank": 16,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "beef-brisket",
+          "name": "牛腩",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "tomato",
+          "name": "西红柿",
+          "amount": 3,
+          "unit": "个",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 350,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "onion",
+          "name": "洋葱",
+          "amount": 120,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "牛腩切块冷水焯净，西红柿和土豆切块。",
+        "炒软洋葱和一半西红柿，加入牛腩与热水炖约一小时。",
+        "加入土豆和剩余西红柿，炖软后加盐调味。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/西红柿土豆炖牛肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%A5%BF%E7%BA%A2%E6%9F%BF%E5%9C%9F%E8%B1%86%E7%82%96%E7%89%9B%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "twice-cooked-pork",
+      "name": "回锅肉",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork",
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 40,
+      "difficulty": 3,
+      "homestyleScore": 86,
+      "homestyleRank": 17,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-belly",
+          "name": "五花肉",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "green-garlic",
+          "name": "蒜苗",
+          "amount": 180,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "doubanjiang",
+          "name": "豆瓣酱",
+          "amount": 20,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sweet-bean-paste",
+          "name": "甜面酱",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "五花肉与姜片煮至八成熟，放凉后切薄片。",
+        "少油煸炒肉片至卷曲出油，加入豆瓣酱和甜面酱。",
+        "下蒜苗大火翻炒至断生。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/回锅肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%9B%9E%E9%94%85%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "mushroom-chicken",
+      "name": "香菇滑鸡",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 35,
+      "difficulty": 2,
+      "homestyleScore": 85,
+      "homestyleRank": 18,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-thigh",
+          "name": "鸡腿肉",
+          "amount": 450,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "shiitake",
+          "name": "香菇",
+          "amount": 180,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "oyster-sauce",
+          "name": "蚝油",
+          "amount": 12,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡腿肉切块，用生抽、蚝油和淀粉腌十五分钟。",
+        "香菇切片，热油炒香姜丝和鸡肉。",
+        "鸡肉变色后下香菇，加少量水焖熟收汁。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/香菇滑鸡.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%A6%99%E8%8F%87%E6%BB%91%E9%B8%A1",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "onion-pork",
+      "name": "洋葱炒猪肉",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "快手"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 84,
+      "homestyleRank": 19,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-tenderloin",
+          "name": "猪里脊",
+          "amount": 280,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "onion",
+          "name": "洋葱",
+          "amount": 300,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 6,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "猪肉切片，用生抽和淀粉腌十分钟；洋葱切丝。",
+        "热锅滑炒肉片至变色后盛出。",
+        "原锅炒软洋葱，倒回肉片加盐翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/洋葱炒猪肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E6%B4%8B%E8%91%B1%E7%82%92%E7%8C%AA%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "cabbage-pork-noodle-stew",
+      "name": "白菜猪肉炖粉条",
+      "sourceCategory": "vegetable_dish",
+      "category": "stew",
+      "categoryName": "炖菜",
+      "tags": [
+        "家常",
+        "暖胃",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 50,
+      "difficulty": 3,
+      "homestyleScore": 83,
+      "homestyleRank": 20,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-belly",
+          "name": "五花肉",
+          "amount": 300,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "napa-cabbage",
+          "name": "大白菜",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "glass-noodle",
+          "name": "红薯粉条",
+          "amount": 150,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 6,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "粉条提前泡软，白菜切大片，五花肉切片。",
+        "煸香五花肉和姜片，加生抽、老抽及热水。",
+        "下白菜和粉条，中小火炖至粉条软透。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/白菜猪肉炖粉条.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E7%99%BD%E8%8F%9C%E7%8C%AA%E8%82%89%E7%82%96%E7%B2%89%E6%9D%A1",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "pepper-potato-pork",
+      "name": "青椒土豆炒肉",
+      "sourceCategory": "vegetable_dish",
+      "category": "mixed",
+      "categoryName": "混合菜",
+      "tags": [
+        "家常",
+        "荤素搭配",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pepper",
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 25,
+      "difficulty": 2,
+      "homestyleScore": 82,
+      "homestyleRank": 21,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-tenderloin",
+          "name": "猪里脊",
+          "amount": 220,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 280,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "green-pepper",
+          "name": "青椒",
+          "amount": 160,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 6,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "肉切片腌制，土豆和青椒切片。",
+        "先将肉片炒至变色盛出，再炒土豆片至断生。",
+        "加入青椒和肉片，淋生抽快速翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/青椒土豆炒肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%9D%92%E6%A4%92%E5%9C%9F%E8%B1%86%E7%82%92%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "garlic-sprout-mince",
+      "name": "蒜苔炒肉末",
+      "sourceCategory": "vegetable_dish",
+      "category": "mixed",
+      "categoryName": "混合菜",
+      "tags": [
+        "家常",
+        "荤素搭配",
+        "快手"
+      ],
+      "avoid": [
+        "pork",
+        "spicy"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 82,
+      "homestyleRank": 22,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "ground-pork",
+          "name": "猪肉末",
+          "amount": 250,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic-sprout",
+          "name": "蒜苔",
+          "amount": 350,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "doubanjiang",
+          "name": "豆瓣酱",
+          "amount": 8,
+          "unit": true,
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "蒜苔洗净切小段。",
+        "热油炒散肉末至微焦，可加入豆瓣酱炒香。",
+        "下蒜苔大火翻炒至断生，加生抽调味。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/蒜苔炒肉末.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%92%9C%E8%8B%94%E7%82%92%E8%82%89%E6%9C%AB",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "tomato-egg-soup",
+      "name": "西红柿鸡蛋汤",
+      "sourceCategory": "soup",
+      "category": "soup",
+      "categoryName": "汤",
+      "tags": [
+        "家常",
+        "汤羹",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 15,
+      "difficulty": 1,
+      "homestyleScore": 81,
+      "homestyleRank": 23,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "tomato",
+          "name": "西红柿",
+          "amount": 2,
+          "unit": "个",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 2,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "scallion",
+          "name": "小葱",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sesame-oil",
+          "name": "香油",
+          "amount": 3,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": true,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "西红柿切块，鸡蛋打散。",
+        "锅中加水和西红柿煮至出味。",
+        "缓缓淋入蛋液，凝固后加盐，撒葱花和可选香油。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/soup/西红柿鸡蛋汤.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%A5%BF%E7%BA%A2%E6%9F%BF%E9%B8%A1%E8%9B%8B%E6%B1%A4",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "seaweed-egg-soup",
+      "name": "紫菜蛋花汤",
+      "sourceCategory": "soup",
+      "category": "soup",
+      "categoryName": "汤",
+      "tags": [
+        "家常",
+        "汤羹",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 10,
+      "difficulty": 1,
+      "homestyleScore": 80,
+      "homestyleRank": 24,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "seaweed",
+          "name": "干紫菜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 2,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "scallion",
+          "name": "小葱",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sesame-oil",
+          "name": "香油",
+          "amount": 3,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": true,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "紫菜撕小片，鸡蛋打散，葱切花。",
+        "水烧开后放入紫菜煮一分钟。",
+        "淋入蛋液，关火后加盐、葱花和可选香油。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/soup/紫菜蛋花汤.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E7%B4%AB%E8%8F%9C%E8%9B%8B%E8%8A%B1%E6%B1%A4",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "corn-rib-soup",
+      "name": "玉米排骨汤",
+      "sourceCategory": "soup",
+      "category": "soup",
+      "categoryName": "汤",
+      "tags": [
+        "家常",
+        "汤羹",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 80,
+      "difficulty": 2,
+      "homestyleScore": 79,
+      "homestyleRank": 25,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-ribs",
+          "name": "排骨",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "corn",
+          "name": "甜玉米",
+          "amount": 2,
+          "unit": "根",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "carrot",
+          "name": "胡萝卜",
+          "amount": 150,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "排骨冷水下锅焯净，玉米切段，胡萝卜切块。",
+        "排骨、姜片和足量清水煮开，转小火炖五十分钟。",
+        "加入玉米和胡萝卜再炖二十分钟，加盐调味。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/soup/玉米排骨汤.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E7%8E%89%E7%B1%B3%E6%8E%92%E9%AA%A8%E6%B1%A4",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "yam-corn-rib-soup",
+      "name": "排骨山药玉米汤",
+      "sourceCategory": "soup",
+      "category": "soup",
+      "categoryName": "汤",
+      "tags": [
+        "家常",
+        "汤羹",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 90,
+      "difficulty": 2,
+      "homestyleScore": 78,
+      "homestyleRank": 26,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-ribs",
+          "name": "排骨",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "yam",
+          "name": "山药",
+          "amount": 350,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "corn",
+          "name": "甜玉米",
+          "amount": 1,
+          "unit": "根",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "carrot",
+          "name": "胡萝卜",
+          "amount": 120,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "排骨焯水，山药去皮切块，玉米切段。",
+        "排骨和姜片加水，小火炖约一小时。",
+        "放入玉米、山药和胡萝卜再炖二十五分钟，加盐。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/soup/排骨山药玉米汤.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E6%8E%92%E9%AA%A8%E5%B1%B1%E8%8D%AF%E7%8E%89%E7%B1%B3%E6%B1%A4",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "cucumber-century-egg-soup",
+      "name": "黄瓜皮蛋汤",
+      "sourceCategory": "soup",
+      "category": "soup",
+      "categoryName": "汤",
+      "tags": [
+        "家常",
+        "汤羹",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 78,
+      "homestyleRank": 27,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "cucumber",
+          "name": "黄瓜",
+          "amount": 1,
+          "unit": "根",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "whole"
+        },
+        {
+          "key": "century-egg",
+          "name": "皮蛋",
+          "amount": 2,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "scallion",
+          "name": "小葱",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sesame-oil",
+          "name": "香油",
+          "amount": 3,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": true,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "黄瓜切片，皮蛋切小块，姜切丝。",
+        "少油煸香姜丝和皮蛋，加热水煮五分钟。",
+        "加入黄瓜片煮至断生，加盐和可选香油。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/soup/黄瓜皮蛋汤.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%BB%84%E7%93%9C%E7%9A%AE%E8%9B%8B%E6%B1%A4",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "stir-fried-bok-choy",
+      "name": "清炒小白菜",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 12,
+      "difficulty": 1,
+      "homestyleScore": 77,
+      "homestyleRank": 28,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "bok-choy",
+          "name": "小白菜",
+          "amount": 450,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "小白菜洗净沥干，菜梗和菜叶分开放。",
+        "热油炒香蒜末，先下菜梗翻炒。",
+        "加入菜叶和盐，大火炒至刚软即可。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/清炒小白菜.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E6%B8%85%E7%82%92%E5%B0%8F%E7%99%BD%E8%8F%9C",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "garlic-a-choy",
+      "name": "蒜蓉油麦菜",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 10,
+      "difficulty": 1,
+      "homestyleScore": 76,
+      "homestyleRank": 29,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "a-choy",
+          "name": "油麦菜",
+          "amount": 450,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 20,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "油麦菜洗净切段，蒜切末。",
+        "热锅放油，小火炒香蒜末。",
+        "下油麦菜大火翻炒，断生后加盐。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/蒜蓉油麦菜.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%92%9C%E8%93%89%E6%B2%B9%E9%BA%A6%E8%8F%9C",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "mushroom-bok-choy",
+      "name": "香菇油菜",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 18,
+      "difficulty": 1,
+      "homestyleScore": 75,
+      "homestyleRank": 30,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "bok-choy",
+          "name": "油菜",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "shiitake",
+          "name": "香菇",
+          "amount": 180,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "oyster-sauce",
+          "name": "蚝油",
+          "amount": 15,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "油菜和香菇分别洗净，香菇切片。",
+        "油菜焯水后摆盘，热油炒香蒜末和香菇。",
+        "加入蚝油和少量水烧浓，浇在油菜上。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/香菇油菜.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%A6%99%E8%8F%87%E6%B2%B9%E8%8F%9C",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "celery-pork",
+      "name": "芹菜炒肉",
+      "sourceCategory": "vegetable_dish",
+      "category": "mixed",
+      "categoryName": "混合菜",
+      "tags": [
+        "家常",
+        "荤素搭配",
+        "快手"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 20,
+      "difficulty": 2,
+      "homestyleScore": 74,
+      "homestyleRank": 31,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-tenderloin",
+          "name": "猪里脊",
+          "amount": 250,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "celery",
+          "name": "芹菜",
+          "amount": 300,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "starch",
+          "name": "淀粉",
+          "amount": 6,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "猪肉切丝，用生抽和淀粉腌十分钟；芹菜切段。",
+        "热锅滑炒肉丝至变色后盛出。",
+        "下芹菜炒至断生，倒回肉丝翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/芹菜炒肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%8A%B9%E8%8F%9C%E7%82%92%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "moo-shu-pork",
+      "name": "木须肉",
+      "sourceCategory": "vegetable_dish",
+      "category": "mixed",
+      "categoryName": "混合菜",
+      "tags": [
+        "家常",
+        "荤素搭配",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork",
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 25,
+      "difficulty": 2,
+      "homestyleScore": 74,
+      "homestyleRank": 32,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-tenderloin",
+          "name": "猪里脊",
+          "amount": 200,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 3,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "wood-ear",
+          "name": "泡发木耳",
+          "amount": 100,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cucumber",
+          "name": "黄瓜",
+          "amount": 150,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "肉切片，鸡蛋打散，木耳和黄瓜切片。",
+        "鸡蛋炒熟盛出，再将肉片炒至变色。",
+        "加入木耳和黄瓜，倒回鸡蛋加生抽翻匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/木须肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E6%9C%A8%E9%A1%BB%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "pan-fried-chicken-thigh",
+      "name": "香煎鸡腿",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 35,
+      "difficulty": 2,
+      "homestyleScore": 73,
+      "homestyleRank": 33,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-thigh",
+          "name": "去骨鸡腿",
+          "amount": 500,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "oyster-sauce",
+          "name": "蚝油",
+          "amount": 12,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡腿肉擦干，用生抽、蚝油和姜腌十五分钟。",
+        "平底锅少油，鸡皮朝下中小火煎至金黄。",
+        "翻面煎熟，静置两分钟后切块。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/香煎鸡腿.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%A6%99%E7%85%8E%E9%B8%A1%E8%85%BF",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "potato-chicken",
+      "name": "土豆烧鸡",
+      "sourceCategory": "vegetable_dish",
+      "category": "stew",
+      "categoryName": "炖菜",
+      "tags": [
+        "家常",
+        "暖胃",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 50,
+      "difficulty": 2,
+      "homestyleScore": 72,
+      "homestyleRank": 34,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "chicken-thigh",
+          "name": "鸡腿",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "potato",
+          "name": "土豆",
+          "amount": 400,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 6,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡腿剁块焯水，土豆切块。",
+        "炒香姜片和鸡块，加生抽、老抽及热水炖二十分钟。",
+        "加入土豆继续炖至软烂，收汁出锅。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/土豆烧鸡.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%9C%9F%E8%B1%86%E7%83%A7%E9%B8%A1",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "red-braised-pork",
+      "name": "红烧肉",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 75,
+      "difficulty": 3,
+      "homestyleScore": 71,
+      "homestyleRank": 35,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-belly",
+          "name": "五花肉",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "dark-soy-sauce",
+          "name": "老抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "rock-sugar",
+          "name": "冰糖",
+          "amount": 25,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "star-anise",
+          "name": "八角",
+          "amount": 2,
+          "unit": "个",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "五花肉切块焯水，沥干备用。",
+        "小火融化冰糖，放肉块炒至上色，加姜、八角和酱油。",
+        "加热水没过肉，小火焖至软糯后收汁。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/红烧肉.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E7%BA%A2%E7%83%A7%E8%82%89",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "sweet-sour-ribs",
+      "name": "糖醋排骨",
+      "sourceCategory": "meat_dish",
+      "category": "meat",
+      "categoryName": "肉菜",
+      "tags": [
+        "家常",
+        "下饭",
+        "耐心制作"
+      ],
+      "avoid": [
+        "pork"
+      ],
+      "servings": 2,
+      "durationMinutes": 55,
+      "difficulty": 3,
+      "homestyleScore": 70,
+      "homestyleRank": 36,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "pork-ribs",
+          "name": "排骨",
+          "amount": 600,
+          "unit": "克",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "ginger",
+          "name": "姜",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "vinegar",
+          "name": "香醋",
+          "amount": 25,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sugar",
+          "name": "白糖",
+          "amount": 25,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "排骨焯水后沥干，少油煎至表面金黄。",
+        "加入姜、生抽、醋、糖和热水。",
+        "小火焖熟，最后大火收成浓亮糖醋汁。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/meat_dish/糖醋排骨.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E7%B3%96%E9%86%8B%E6%8E%92%E9%AA%A8",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "steamed-egg",
+      "name": "蒸水蛋",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 18,
+      "difficulty": 1,
+      "homestyleScore": 70,
+      "homestyleRank": 37,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 3,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 5,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "sesame-oil",
+          "name": "香油",
+          "amount": 3,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": true,
+          "rounding": "none"
+        },
+        {
+          "key": "scallion",
+          "name": "小葱",
+          "amount": 8,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "鸡蛋打散，加入约 1.5 倍温水搅匀并过滤。",
+        "盖住碗口，水开后中小火蒸约十分钟。",
+        "关火焖两分钟，淋生抽和可选香油，撒葱花。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/蒸水蛋.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E8%92%B8%E6%B0%B4%E8%9B%8B",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "home-style-tofu",
+      "name": "家常豆腐",
+      "sourceCategory": "vegetable_dish",
+      "category": "mixed",
+      "categoryName": "混合菜",
+      "tags": [
+        "家常",
+        "荤素搭配",
+        "耐心制作"
+      ],
+      "avoid": [],
+      "servings": 2,
+      "durationMinutes": 25,
+      "difficulty": 2,
+      "homestyleScore": 69,
+      "homestyleRank": 38,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "tofu",
+          "name": "北豆腐",
+          "amount": 450,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "wood-ear",
+          "name": "泡发木耳",
+          "amount": 80,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "carrot",
+          "name": "胡萝卜",
+          "amount": 100,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "garlic",
+          "name": "蒜",
+          "amount": 10,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "oyster-sauce",
+          "name": "蚝油",
+          "amount": 12,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "豆腐切片煎至两面金黄，木耳和胡萝卜切片。",
+        "炒香蒜末，加入木耳和胡萝卜翻炒。",
+        "放回豆腐，加生抽、蚝油和少量水焖入味。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/家常豆腐.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%AE%B6%E5%B8%B8%E8%B1%86%E8%85%90",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "cucumber-egg",
+      "name": "黄瓜炒蛋",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "快手"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 12,
+      "difficulty": 1,
+      "homestyleScore": 68,
+      "homestyleRank": 39,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "cucumber",
+          "name": "黄瓜",
+          "amount": 300,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 3,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "salt",
+          "name": "盐",
+          "amount": 3,
+          "unit": "克",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "黄瓜切片，鸡蛋加盐打散。",
+        "热油将鸡蛋炒至凝固后盛出。",
+        "下黄瓜快速翻炒，倒回鸡蛋加盐炒匀。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/黄瓜炒蛋.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E9%BB%84%E7%93%9C%E7%82%92%E8%9B%8B",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    },
+    {
+      "id": "cabbage-vermicelli",
+      "name": "包菜炒粉丝",
+      "sourceCategory": "vegetable_dish",
+      "category": "vegetable",
+      "categoryName": "素菜",
+      "tags": [
+        "家常",
+        "清爽",
+        "耐心制作"
+      ],
+      "avoid": [
+        "egg"
+      ],
+      "servings": 2,
+      "durationMinutes": 22,
+      "difficulty": 2,
+      "homestyleScore": 67,
+      "homestyleRank": 40,
+      "homestyleReason": "原料常见，步骤简单，适合家庭厨房和日常晚餐。",
+      "excludedFromApp": false,
+      "exclusionReason": null,
+      "image": null,
+      "ingredients": [
+        {
+          "key": "cabbage",
+          "name": "包菜",
+          "amount": 350,
+          "unit": "克",
+          "shoppingCategory": "蔬菜",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "glass-noodle",
+          "name": "粉丝",
+          "amount": 120,
+          "unit": "克",
+          "shoppingCategory": "其他",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "egg",
+          "name": "鸡蛋",
+          "amount": 2,
+          "unit": "枚",
+          "shoppingCategory": "肉蛋水产",
+          "optional": false,
+          "rounding": "ceil"
+        },
+        {
+          "key": "light-soy-sauce",
+          "name": "生抽",
+          "amount": 10,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        },
+        {
+          "key": "cooking-oil",
+          "name": "食用油",
+          "amount": 20,
+          "unit": "毫升",
+          "shoppingCategory": "调味品",
+          "optional": false,
+          "rounding": "none"
+        }
+      ],
+      "tools": [
+        "炒锅或汤锅",
+        "菜刀",
+        "砧板"
+      ],
+      "steps": [
+        "粉丝泡软剪短，包菜切丝，鸡蛋炒熟盛出。",
+        "热油下包菜炒软，加入粉丝。",
+        "淋生抽翻炒均匀，最后倒回鸡蛋。"
+      ],
+      "notes": [
+        "食材用量为 2 人份参考值，调味请按口味调整。"
+      ],
+      "source": {
+        "project": "Anduin2017/HowToCook",
+        "path": "dishes/vegetable_dish/包菜炒粉丝.md",
+        "url": "https://github.com/Anduin2017/HowToCook/search?q=%E5%8C%85%E8%8F%9C%E7%82%92%E7%B2%89%E4%B8%9D",
+        "license": "Unlicense",
+        "commit": null,
+        "retrievedAt": "2026-07-21"
+      }
+    }
+  ]
+}

@@ -1,0 +1,707 @@
+[
+  {
+    "id": "tomato-egg",
+    "name": "西红柿炒鸡蛋",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 98,
+    "homestyleRank": 1,
+    "durationMinutes": 15,
+    "enabled": true
+  },
+  {
+    "id": "hot-sour-potato",
+    "name": "酸辣土豆丝",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "spicy"
+    ],
+    "homestyleScore": 98,
+    "homestyleRank": 2,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "hand-torn-cabbage",
+    "name": "手撕包菜",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "spicy"
+    ],
+    "homestyleScore": 97,
+    "homestyleRank": 3,
+    "durationMinutes": 15,
+    "enabled": true
+  },
+  {
+    "id": "garlic-broccoli",
+    "name": "蒜蓉西兰花",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [],
+    "homestyleScore": 96,
+    "homestyleRank": 4,
+    "durationMinutes": 18,
+    "enabled": true
+  },
+  {
+    "id": "oyster-lettuce",
+    "name": "蚝油生菜",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [],
+    "homestyleScore": 95,
+    "homestyleRank": 5,
+    "durationMinutes": 12,
+    "enabled": true
+  },
+  {
+    "id": "chive-egg",
+    "name": "韭菜炒蛋",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 94,
+    "homestyleRank": 6,
+    "durationMinutes": 12,
+    "enabled": true
+  },
+  {
+    "id": "zucchini-egg",
+    "name": "西葫芦炒鸡蛋",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 94,
+    "homestyleRank": 7,
+    "durationMinutes": 15,
+    "enabled": true
+  },
+  {
+    "id": "scallion-tofu",
+    "name": "葱煎豆腐",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 93,
+    "homestyleRank": 8,
+    "durationMinutes": 22,
+    "enabled": true
+  },
+  {
+    "id": "pepper-pork",
+    "name": "辣椒炒肉",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "快手"
+    ],
+    "avoid": [
+      "pepper",
+      "pork",
+      "spicy"
+    ],
+    "homestyleScore": 92,
+    "homestyleRank": 9,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "kung-pao-chicken",
+    "name": "宫保鸡丁",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "spicy"
+    ],
+    "homestyleScore": 91,
+    "homestyleRank": 10,
+    "durationMinutes": 30,
+    "enabled": true
+  },
+  {
+    "id": "fish-fragrant-pork",
+    "name": "鱼香肉丝",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pepper",
+      "pork",
+      "spicy"
+    ],
+    "homestyleScore": 90,
+    "homestyleRank": 11,
+    "durationMinutes": 30,
+    "enabled": true
+  },
+  {
+    "id": "mapo-tofu",
+    "name": "麻婆豆腐",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork",
+      "spicy"
+    ],
+    "homestyleScore": 90,
+    "homestyleRank": 12,
+    "durationMinutes": 25,
+    "enabled": true
+  },
+  {
+    "id": "cola-wings",
+    "name": "可乐鸡翅",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 89,
+    "homestyleRank": 13,
+    "durationMinutes": 40,
+    "enabled": true
+  },
+  {
+    "id": "braised-chicken",
+    "name": "黄焖鸡",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pepper"
+    ],
+    "homestyleScore": 88,
+    "homestyleRank": 14,
+    "durationMinutes": 50,
+    "enabled": true
+  },
+  {
+    "id": "potato-ribs",
+    "name": "土豆炖排骨",
+    "category": "stew",
+    "categoryName": "炖菜",
+    "tags": [
+      "家常",
+      "暖胃",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 87,
+    "homestyleRank": 15,
+    "durationMinutes": 65,
+    "enabled": true
+  },
+  {
+    "id": "tomato-beef-stew",
+    "name": "西红柿土豆炖牛肉",
+    "category": "stew",
+    "categoryName": "炖菜",
+    "tags": [
+      "家常",
+      "暖胃",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 86,
+    "homestyleRank": 16,
+    "durationMinutes": 90,
+    "enabled": true
+  },
+  {
+    "id": "twice-cooked-pork",
+    "name": "回锅肉",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork",
+      "spicy"
+    ],
+    "homestyleScore": 86,
+    "homestyleRank": 17,
+    "durationMinutes": 40,
+    "enabled": true
+  },
+  {
+    "id": "mushroom-chicken",
+    "name": "香菇滑鸡",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 85,
+    "homestyleRank": 18,
+    "durationMinutes": 35,
+    "enabled": true
+  },
+  {
+    "id": "onion-pork",
+    "name": "洋葱炒猪肉",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "快手"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 84,
+    "homestyleRank": 19,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "cabbage-pork-noodle-stew",
+    "name": "白菜猪肉炖粉条",
+    "category": "stew",
+    "categoryName": "炖菜",
+    "tags": [
+      "家常",
+      "暖胃",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 83,
+    "homestyleRank": 20,
+    "durationMinutes": 50,
+    "enabled": true
+  },
+  {
+    "id": "pepper-potato-pork",
+    "name": "青椒土豆炒肉",
+    "category": "mixed",
+    "categoryName": "混合菜",
+    "tags": [
+      "家常",
+      "荤素搭配",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pepper",
+      "pork"
+    ],
+    "homestyleScore": 82,
+    "homestyleRank": 21,
+    "durationMinutes": 25,
+    "enabled": true
+  },
+  {
+    "id": "garlic-sprout-mince",
+    "name": "蒜苔炒肉末",
+    "category": "mixed",
+    "categoryName": "混合菜",
+    "tags": [
+      "家常",
+      "荤素搭配",
+      "快手"
+    ],
+    "avoid": [
+      "pork",
+      "spicy"
+    ],
+    "homestyleScore": 82,
+    "homestyleRank": 22,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "tomato-egg-soup",
+    "name": "西红柿鸡蛋汤",
+    "category": "soup",
+    "categoryName": "汤",
+    "tags": [
+      "家常",
+      "汤羹",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 81,
+    "homestyleRank": 23,
+    "durationMinutes": 15,
+    "enabled": true
+  },
+  {
+    "id": "seaweed-egg-soup",
+    "name": "紫菜蛋花汤",
+    "category": "soup",
+    "categoryName": "汤",
+    "tags": [
+      "家常",
+      "汤羹",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 80,
+    "homestyleRank": 24,
+    "durationMinutes": 10,
+    "enabled": true
+  },
+  {
+    "id": "corn-rib-soup",
+    "name": "玉米排骨汤",
+    "category": "soup",
+    "categoryName": "汤",
+    "tags": [
+      "家常",
+      "汤羹",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 79,
+    "homestyleRank": 25,
+    "durationMinutes": 80,
+    "enabled": true
+  },
+  {
+    "id": "yam-corn-rib-soup",
+    "name": "排骨山药玉米汤",
+    "category": "soup",
+    "categoryName": "汤",
+    "tags": [
+      "家常",
+      "汤羹",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 78,
+    "homestyleRank": 26,
+    "durationMinutes": 90,
+    "enabled": true
+  },
+  {
+    "id": "cucumber-century-egg-soup",
+    "name": "黄瓜皮蛋汤",
+    "category": "soup",
+    "categoryName": "汤",
+    "tags": [
+      "家常",
+      "汤羹",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 78,
+    "homestyleRank": 27,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "stir-fried-bok-choy",
+    "name": "清炒小白菜",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [],
+    "homestyleScore": 77,
+    "homestyleRank": 28,
+    "durationMinutes": 12,
+    "enabled": true
+  },
+  {
+    "id": "garlic-a-choy",
+    "name": "蒜蓉油麦菜",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [],
+    "homestyleScore": 76,
+    "homestyleRank": 29,
+    "durationMinutes": 10,
+    "enabled": true
+  },
+  {
+    "id": "mushroom-bok-choy",
+    "name": "香菇油菜",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [],
+    "homestyleScore": 75,
+    "homestyleRank": 30,
+    "durationMinutes": 18,
+    "enabled": true
+  },
+  {
+    "id": "celery-pork",
+    "name": "芹菜炒肉",
+    "category": "mixed",
+    "categoryName": "混合菜",
+    "tags": [
+      "家常",
+      "荤素搭配",
+      "快手"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 74,
+    "homestyleRank": 31,
+    "durationMinutes": 20,
+    "enabled": true
+  },
+  {
+    "id": "moo-shu-pork",
+    "name": "木须肉",
+    "category": "mixed",
+    "categoryName": "混合菜",
+    "tags": [
+      "家常",
+      "荤素搭配",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork",
+      "egg"
+    ],
+    "homestyleScore": 74,
+    "homestyleRank": 32,
+    "durationMinutes": 25,
+    "enabled": true
+  },
+  {
+    "id": "pan-fried-chicken-thigh",
+    "name": "香煎鸡腿",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 73,
+    "homestyleRank": 33,
+    "durationMinutes": 35,
+    "enabled": true
+  },
+  {
+    "id": "potato-chicken",
+    "name": "土豆烧鸡",
+    "category": "stew",
+    "categoryName": "炖菜",
+    "tags": [
+      "家常",
+      "暖胃",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 72,
+    "homestyleRank": 34,
+    "durationMinutes": 50,
+    "enabled": true
+  },
+  {
+    "id": "red-braised-pork",
+    "name": "红烧肉",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 71,
+    "homestyleRank": 35,
+    "durationMinutes": 75,
+    "enabled": true
+  },
+  {
+    "id": "sweet-sour-ribs",
+    "name": "糖醋排骨",
+    "category": "meat",
+    "categoryName": "肉菜",
+    "tags": [
+      "家常",
+      "下饭",
+      "耐心制作"
+    ],
+    "avoid": [
+      "pork"
+    ],
+    "homestyleScore": 70,
+    "homestyleRank": 36,
+    "durationMinutes": 55,
+    "enabled": true
+  },
+  {
+    "id": "steamed-egg",
+    "name": "蒸水蛋",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 70,
+    "homestyleRank": 37,
+    "durationMinutes": 18,
+    "enabled": true
+  },
+  {
+    "id": "home-style-tofu",
+    "name": "家常豆腐",
+    "category": "mixed",
+    "categoryName": "混合菜",
+    "tags": [
+      "家常",
+      "荤素搭配",
+      "耐心制作"
+    ],
+    "avoid": [],
+    "homestyleScore": 69,
+    "homestyleRank": 38,
+    "durationMinutes": 25,
+    "enabled": true
+  },
+  {
+    "id": "cucumber-egg",
+    "name": "黄瓜炒蛋",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "快手"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 68,
+    "homestyleRank": 39,
+    "durationMinutes": 12,
+    "enabled": true
+  },
+  {
+    "id": "cabbage-vermicelli",
+    "name": "包菜炒粉丝",
+    "category": "vegetable",
+    "categoryName": "素菜",
+    "tags": [
+      "家常",
+      "清爽",
+      "耐心制作"
+    ],
+    "avoid": [
+      "egg"
+    ],
+    "homestyleScore": 67,
+    "homestyleRank": 40,
+    "durationMinutes": 22,
+    "enabled": true
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "project": "Anduin2017/HowToCook",
+  "repository": "https://github.com/Anduin2017/HowToCook",
+  "license": "Unlicense",
+  "retrievedAt": "2026-07-21",
+  "commit": null,
+  "scope": "当前应用使用的 40 道简单家常菜（不含茄子）",
+  "reviewStatus": "本地初稿；上线前仍需逐道对照上游原文复核路径、用量和食品安全表述"
+}
