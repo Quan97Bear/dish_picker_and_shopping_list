@@ -49,68 +49,88 @@
 .suggestion-tags span{padding:7px 13px;border-radius:999px;background:rgba(255,149,0,.14);color:#8a4b00;font-size:1rem;font-weight:600;letter-spacing:-.02em;box-shadow:inset 0 0 0 1px rgba(255,149,0,.08)}
 @media(max-width:600px){.suggestion-field{padding:16px}.suggestion-card{margin:0 14px 28px;padding:20px}}
 
-/* 米纸与灶火：色彩来自餐桌，橙色只表达选择与行动。 */
+/* 瓷白餐桌：低饱和釉色各司其职，暖橙只留给建议与提醒。 */
 :root{
-  --rice-paper:oklch(97.5% .014 78);
-  --porcelain:oklch(99% .007 78);
-  --wheat-wash:oklch(94.5% .022 75);
-  --sesame-ink:oklch(28% .025 55);
-  --soy-muted:oklch(51% .018 55);
-  --charred-wood:oklch(30% .032 50);
-  --stove-flame:oklch(58% .16 48);
-  --stove-flame-dark:oklch(49% .15 44);
-  --stove-flame-soft:color-mix(in oklch,var(--stove-flame),transparent 88%);
-  --destructive:oklch(52% .16 28);
+  --warm-white:oklch(97.8% .010 82);
+  --porcelain:oklch(99.2% .004 85);
+  --porcelain-raised:oklch(100% 0 0);
+  --rice-wash:oklch(95.2% .014 82);
+  --sesame-ink:oklch(27% .022 55);
+  --soy-muted:oklch(51% .018 60);
+  --ink-glaze:oklch(31% .035 230);
+  --celadon:oklch(56% .085 220);
+  --celadon-dark:oklch(46% .080 220);
+  --celadon-soft:color-mix(in oklch,var(--celadon),transparent 88%);
+  --bamboo:oklch(57% .075 145);
+  --bamboo-dark:oklch(43% .070 145);
+  --bamboo-soft:color-mix(in oklch,var(--bamboo),transparent 87%);
+  --apricot:oklch(72% .105 74);
+  --apricot-dark:oklch(48% .090 66);
+  --apricot-soft:color-mix(in oklch,var(--apricot),transparent 82%);
+  --lotus:oklch(66% .075 18);
+  --lotus-dark:oklch(47% .090 22);
+  --lotus-soft:color-mix(in oklch,var(--lotus),transparent 87%);
+  --destructive:oklch(50% .145 27);
   --destructive-soft:color-mix(in oklch,var(--destructive),transparent 89%);
-  --warning:oklch(62% .12 70);
-  --focus:oklch(52% .12 230);
-  --paper:var(--rice-paper);
+  --focus:oklch(53% .105 230);
+  --paper:var(--warm-white);
   --card:var(--porcelain);
   --ink:var(--sesame-ink);
   --muted:var(--soy-muted);
-  --accent:var(--stove-flame);
-  --accent-dark:var(--stove-flame-dark);
-  --green:oklch(53% .12 150);
-  --line:oklch(35% .02 55/.14);
-  --hairline:oklch(35% .02 55/.09);
-  --shadow:0 1px 3px oklch(30% .02 55/.08);
+  --accent:var(--celadon);
+  --accent-dark:var(--celadon-dark);
+  --green:var(--bamboo);
+  --line:oklch(35% .018 65/.13);
+  --hairline:oklch(35% .018 65/.08);
+  --shadow:0 1px 3px oklch(32% .020 65/.07);
 }
-body{background:var(--rice-paper);color:var(--sesame-ink)}
+body{background:var(--warm-white);color:var(--sesame-ink)}
 :focus-visible{outline-color:var(--focus)}
-.site-header{background:color-mix(in oklch,var(--rice-paper),transparent 16%)}
-.brand-mark{background:var(--stove-flame)}
-.filter-toolbar{background:color-mix(in oklch,var(--rice-paper),transparent 12%)}
-.filter-toolbar:after{background:linear-gradient(color-mix(in oklch,var(--rice-paper),transparent 68%),transparent)}
+.site-header{background:color-mix(in oklch,var(--warm-white),transparent 14%)}
+.brand-mark{background:var(--ink-glaze)}
+.header-count,.header-link,.eyebrow{color:var(--celadon-dark)}
+.filter-toolbar{background:color-mix(in oklch,var(--warm-white),transparent 10%)}
+.filter-toolbar:after{background:linear-gradient(color-mix(in oklch,var(--warm-white),transparent 66%),transparent)}
 .search,.compact-search,.compact-avoid{background:var(--porcelain);box-shadow:var(--shadow)}
-.filters button,.avoid-filters button{background:var(--wheat-wash);color:var(--sesame-ink)}
-.filters button:hover,.avoid-filters button:hover{background:color-mix(in oklch,var(--wheat-wash),var(--stove-flame) 6%)}
-.filters button.active,.avoid-filters button.active{background:var(--stove-flame);color:white}
+.filters button,.avoid-filters button{background:var(--rice-wash);color:var(--sesame-ink)}
+.filters button:hover{background:color-mix(in oklch,var(--rice-wash),var(--celadon) 7%)}
+.filters button.active{background:var(--ink-glaze);color:white}
+.avoid-filters button:hover{background:color-mix(in oklch,var(--rice-wash),var(--bamboo) 8%)}
+.avoid-filters button.active{background:var(--bamboo-soft);color:var(--bamboo-dark)}
+.compact-avoid span{background:var(--bamboo);color:white}
 .avoid-popover,.drawer,.share-card{background:var(--porcelain);box-shadow:var(--shadow)}
 .dish-card,.shopping-panel,.recipe-card{background:var(--porcelain);box-shadow:var(--shadow)}
 .dish-card:hover{box-shadow:var(--shadow)}
-.dish-card.selected{box-shadow:0 0 0 2px var(--stove-flame)}
-.dish-art,.art-meat,.art-soup,.art-mixed,.art-stew{background:var(--wheat-wash)}
-.dish-art span{background:var(--porcelain);box-shadow:var(--shadow)}
-.add-button,.button.secondary{background:var(--wheat-wash)}
-.add-button span{background:var(--stove-flame-soft)}
-.selected .add-button,.button.primary{background:var(--stove-flame);color:white}
-.button.primary:hover{background:var(--stove-flame-dark)}
-.bottom-bar{background:color-mix(in oklch,var(--charred-wood),transparent 4%);box-shadow:var(--shadow)}
-.drawer-backdrop{background:oklch(24% .02 50/.28)}
-.icon-button,.stepper,.suggestion-field,.recipe-notes{background:var(--wheat-wash)}
-.selected-dish input{background:color-mix(in oklch,var(--wheat-wash),white 32%)}
-.note-add,.note-chip,.note-done{background:var(--stove-flame-soft);color:var(--stove-flame-dark)}
-.note-chip-action{color:var(--stove-flame-dark)}
-.note-chip-action:hover{background:color-mix(in oklch,var(--stove-flame),transparent 86%)}
+.dish-card.selected{box-shadow:0 0 0 2px var(--celadon)}
+.dish-art{background:var(--bamboo-soft)}
+.art-meat{background:var(--lotus-soft)}
+.art-soup{background:var(--apricot-soft)}
+.art-mixed{background:color-mix(in oklch,var(--celadon),transparent 88%)}
+.art-stew{background:color-mix(in oklch,var(--apricot-soft),var(--lotus-soft) 35%)}
+.dish-art span{background:color-mix(in oklch,var(--porcelain-raised),transparent 10%);box-shadow:var(--shadow)}
+.add-button,.button.secondary{background:var(--rice-wash)}
+.add-button span{background:var(--celadon-soft)}
+.selected .add-button,.button.primary{background:var(--celadon);color:white}
+.button.primary:hover{background:var(--celadon-dark)}
+.bottom-bar{background:color-mix(in oklch,var(--ink-glaze),transparent 3%);box-shadow:var(--shadow)}
+.drawer-backdrop{background:oklch(24% .025 230/.26)}
+.icon-button,.stepper,.suggestion-field,.recipe-notes{background:var(--rice-wash)}
+.stepper button{color:var(--celadon-dark)}
+.selected-dish input{background:color-mix(in oklch,var(--rice-wash),white 42%)}
+.note-add,.note-chip,.note-done{background:var(--celadon-soft);color:var(--celadon-dark)}
+.note-chip-action{color:var(--celadon-dark)}
+.note-chip-action:hover{background:color-mix(in oklch,var(--celadon),transparent 85%)}
 .note-chip-action:focus-visible{outline-color:var(--focus)}
 .note-editor input:focus-visible{box-shadow:inset 0 0 0 2px var(--focus)}
 .suggestion-field input:focus{box-shadow:inset 0 0 0 2px var(--focus)}
 .danger{color:var(--destructive)}
 .dish-remove{background:var(--destructive-soft);color:var(--destructive)}
-.dish-remove:hover{background:color-mix(in oklch,var(--destructive),transparent 84%)}
-.menu-tags span{background:var(--wheat-wash);color:var(--sesame-ink)}
-.suggestion-card{background:var(--wheat-wash)}
-.suggestion-tags span{background:var(--stove-flame-soft);color:var(--stove-flame-dark);box-shadow:none}
-.order-note{background:color-mix(in oklch,var(--warning),transparent 84%);color:oklch(42% .08 62)}
-.toast{background:var(--charred-wood)}
-@media(prefers-reduced-transparency:reduce){.site-header,.filter-toolbar,.avoid-popover,.drawer,.share-card{background:var(--porcelain)}.bottom-bar{background:var(--charred-wood)}}
+.dish-remove:hover{background:color-mix(in oklch,var(--destructive),transparent 83%)}
+.menu-tags span{background:var(--celadon-soft);color:var(--celadon-dark)}
+.suggestion-card{background:var(--apricot-soft)}
+.suggestion-tags span{background:color-mix(in oklch,var(--apricot),transparent 74%);color:var(--apricot-dark);box-shadow:none}
+.order-note{background:var(--apricot-soft);color:var(--apricot-dark)}
+.toast{background:var(--ink-glaze)}
+.custom-check{border-color:color-mix(in oklch,var(--bamboo),var(--soy-muted) 45%)}
+.check-row input:checked+.custom-check{background:var(--bamboo);border-color:var(--bamboo)}
+@media(prefers-reduced-transparency:reduce){.site-header,.filter-toolbar,.avoid-popover,.drawer,.share-card{background:var(--porcelain)}.bottom-bar{background:var(--ink-glaze)}}
