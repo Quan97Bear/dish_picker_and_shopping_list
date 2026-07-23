@@ -49,7 +49,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
         edit.type = 'button';
         edit.className = 'note-chip-action';
         edit.setAttribute('aria-label', `修改${dish.name}的备注`);
-        edit.textContent = '✏️';
+        edit.textContent = '✎';
         edit.addEventListener('click', openNoteEditor);
         const remove = document.createElement('button');
         remove.type = 'button';
@@ -85,6 +85,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
     noteInput.value = notes[id] || '';
     noteInput.addEventListener('input', (event) => onNote(id, event.target.value));
     noteInput.addEventListener('keydown', (event) => {
+      if (event.isComposing || event.keyCode === 229) return;
       if (event.key === 'Enter' || event.key === 'Escape') closeNoteEditor(true);
     });
     item.querySelector('.note-done').addEventListener('click', (event) => closeNoteEditor(event.detail === 0));

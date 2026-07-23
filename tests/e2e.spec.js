@@ -5,6 +5,8 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.getByRole('button',{name:/查看菜单/}).click();
   await page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'}).click();
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
+  await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).dispatchEvent('keydown',{key:'Enter',code:'Enter',keyCode:229,isComposing:true});
+  await expect(page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'})).toBeVisible();
   await page.getByRole('button',{name:'完成西红柿炒鸡蛋备注'}).click();
   await expect(page.getByText('不要葱')).toBeVisible();
   await expect(page.getByRole('button',{name:'修改西红柿炒鸡蛋的备注'})).toBeVisible();
