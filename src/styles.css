@@ -49,57 +49,68 @@
 .suggestion-tags span{padding:7px 13px;border-radius:999px;background:rgba(255,149,0,.14);color:#8a4b00;font-size:1rem;font-weight:600;letter-spacing:-.02em;box-shadow:inset 0 0 0 1px rgba(255,149,0,.08)}
 @media(max-width:600px){.suggestion-field{padding:16px}.suggestion-card{margin:0 14px 28px;padding:20px}}
 
-/* Local palette experiment: warm, fresh, and still restrained. */
+/* 米纸与灶火：色彩来自餐桌，橙色只表达选择与行动。 */
 :root{
-  --paper:#fff8ee;
-  --card:#fffdf9;
-  --ink:#20352d;
-  --muted:#6d756f;
-  --accent:#c64b32;
-  --accent-dark:#9d3323;
-  --green:#3f8f63;
-  --focus:#147aa2;
-  --line:rgba(54,75,64,.15);
-  --hairline:rgba(54,75,64,.11);
-  --shadow:0 18px 60px rgba(78,54,34,.14);
+  --rice-paper:oklch(97.5% .014 78);
+  --porcelain:oklch(99% .007 78);
+  --wheat-wash:oklch(94.5% .022 75);
+  --sesame-ink:oklch(28% .025 55);
+  --soy-muted:oklch(51% .018 55);
+  --charred-wood:oklch(30% .032 50);
+  --stove-flame:oklch(58% .16 48);
+  --stove-flame-dark:oklch(49% .15 44);
+  --stove-flame-soft:color-mix(in oklch,var(--stove-flame),transparent 88%);
+  --destructive:oklch(52% .16 28);
+  --destructive-soft:color-mix(in oklch,var(--destructive),transparent 89%);
+  --warning:oklch(62% .12 70);
+  --focus:oklch(52% .12 230);
+  --paper:var(--rice-paper);
+  --card:var(--porcelain);
+  --ink:var(--sesame-ink);
+  --muted:var(--soy-muted);
+  --accent:var(--stove-flame);
+  --accent-dark:var(--stove-flame-dark);
+  --green:oklch(53% .12 150);
+  --line:oklch(35% .02 55/.14);
+  --hairline:oklch(35% .02 55/.09);
+  --shadow:0 1px 3px oklch(30% .02 55/.08);
 }
-body{background:radial-gradient(circle at 90% 0,rgba(255,190,128,.26),transparent 28rem),radial-gradient(circle at 0 34rem,rgba(132,207,166,.18),transparent 27rem),linear-gradient(180deg,#fffaf3 0,#f8f5ea 48rem);color:var(--ink)}
+body{background:var(--rice-paper);color:var(--sesame-ink)}
 :focus-visible{outline-color:var(--focus)}
-.site-header{background:rgba(255,250,243,.78)}
-.brand-mark{background:#2f604c}
-.filter-toolbar{background:rgba(255,248,238,.8)}
-.filter-toolbar:after{background:linear-gradient(rgba(255,248,238,.28),transparent)}
-.search,.compact-search,.compact-avoid{background:rgba(255,253,249,.9)}
-.filters button{background:rgba(198,75,50,.09)}
-.filters button.active{background:#2f604c}
-.avoid-filters button{background:rgba(63,143,99,.1);color:#365e48}
-.avoid-filters button:hover{background:rgba(63,143,99,.16)}
-.avoid-filters button.active{background:#dff1e5;color:#275f40}
-.avoid-popover{background:rgba(255,251,245,.94)}
-.dish-card{background:rgba(255,253,249,.96);box-shadow:0 2px 3px rgba(67,55,39,.025),0 9px 28px rgba(79,59,37,.065)}
-.dish-card.selected{box-shadow:0 0 0 2px var(--accent),0 10px 32px rgba(198,75,50,.15)}
-.add-button{background:rgba(198,75,50,.09)}
-.add-button span{background:rgba(198,75,50,.12)}
-.bottom-bar{background:rgba(32,65,51,.94);box-shadow:0 18px 50px rgba(32,65,51,.24)}
-.button.secondary{background:rgba(95,113,102,.1)}
-.drawer-backdrop{background:rgba(27,49,40,.32)}
-.drawer,.share-card{background:rgba(255,252,247,.96)}
-.icon-button{background:#f5ead8}
-.suggestion-field{background:rgba(63,143,99,.09)}
-.stepper{background:rgba(63,143,99,.1)}
-.selected-dish input{background:rgba(95,113,102,.08)}
-.note-add{background:rgba(198,75,50,.1)}
-.note-chip{background:rgba(255,177,73,.2);color:#774818}
-.note-chip-action{color:#914a1b}
-.note-chip-action:hover{background:rgba(198,75,50,.1)}
+.site-header{background:color-mix(in oklch,var(--rice-paper),transparent 16%)}
+.brand-mark{background:var(--stove-flame)}
+.filter-toolbar{background:color-mix(in oklch,var(--rice-paper),transparent 12%)}
+.filter-toolbar:after{background:linear-gradient(color-mix(in oklch,var(--rice-paper),transparent 68%),transparent)}
+.search,.compact-search,.compact-avoid{background:var(--porcelain);box-shadow:var(--shadow)}
+.filters button,.avoid-filters button{background:var(--wheat-wash);color:var(--sesame-ink)}
+.filters button:hover,.avoid-filters button:hover{background:color-mix(in oklch,var(--wheat-wash),var(--stove-flame) 6%)}
+.filters button.active,.avoid-filters button.active{background:var(--stove-flame);color:white}
+.avoid-popover,.drawer,.share-card{background:var(--porcelain);box-shadow:var(--shadow)}
+.dish-card,.shopping-panel,.recipe-card{background:var(--porcelain);box-shadow:var(--shadow)}
+.dish-card:hover{box-shadow:var(--shadow)}
+.dish-card.selected{box-shadow:0 0 0 2px var(--stove-flame)}
+.dish-art,.art-meat,.art-soup,.art-mixed,.art-stew{background:var(--wheat-wash)}
+.dish-art span{background:var(--porcelain);box-shadow:var(--shadow)}
+.add-button,.button.secondary{background:var(--wheat-wash)}
+.add-button span{background:var(--stove-flame-soft)}
+.selected .add-button,.button.primary{background:var(--stove-flame);color:white}
+.button.primary:hover{background:var(--stove-flame-dark)}
+.bottom-bar{background:color-mix(in oklch,var(--charred-wood),transparent 4%);box-shadow:var(--shadow)}
+.drawer-backdrop{background:oklch(24% .02 50/.28)}
+.icon-button,.stepper,.suggestion-field,.recipe-notes{background:var(--wheat-wash)}
+.selected-dish input{background:color-mix(in oklch,var(--wheat-wash),white 32%)}
+.note-add,.note-chip,.note-done{background:var(--stove-flame-soft);color:var(--stove-flame-dark)}
+.note-chip-action{color:var(--stove-flame-dark)}
+.note-chip-action:hover{background:color-mix(in oklch,var(--stove-flame),transparent 86%)}
 .note-chip-action:focus-visible{outline-color:var(--focus)}
 .note-editor input:focus-visible{box-shadow:inset 0 0 0 2px var(--focus)}
-.note-done{background:rgba(198,75,50,.12)}
 .suggestion-field input:focus{box-shadow:inset 0 0 0 2px var(--focus)}
-.menu-tags span{background:rgba(63,143,99,.12);color:#315f46}
-.suggestion-card{background:rgba(255,177,73,.13)}
-.suggestion-tags span{background:rgba(255,177,73,.2);color:#754516;box-shadow:inset 0 0 0 1px rgba(188,113,25,.1)}
-.shopping-panel,.recipe-card{background:rgba(255,253,249,.94)}
-.recipe-notes{background:rgba(63,143,99,.09)}
-.toast{background:rgba(32,65,51,.94)}
-@media(prefers-reduced-transparency:reduce){.site-header,.filter-toolbar,.avoid-popover,.drawer,.share-card{background:#fffaf3}.bottom-bar{background:#204133}}
+.danger{color:var(--destructive)}
+.dish-remove{background:var(--destructive-soft);color:var(--destructive)}
+.dish-remove:hover{background:color-mix(in oklch,var(--destructive),transparent 84%)}
+.menu-tags span{background:var(--wheat-wash);color:var(--sesame-ink)}
+.suggestion-card{background:var(--wheat-wash)}
+.suggestion-tags span{background:var(--stove-flame-soft);color:var(--stove-flame-dark);box-shadow:none}
+.order-note{background:color-mix(in oklch,var(--warning),transparent 84%);color:oklch(42% .08 62)}
+.toast{background:var(--charred-wood)}
+@media(prefers-reduced-transparency:reduce){.site-header,.filter-toolbar,.avoid-popover,.drawer,.share-card{background:var(--porcelain)}.bottom-bar{background:var(--charred-wood)}}
