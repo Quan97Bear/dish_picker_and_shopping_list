@@ -25,3 +25,11 @@
 .avoid-section{position:relative;margin-top:0;padding-top:20px}
 .avoid-section:before{position:absolute;top:0;right:24px;left:24px;height:1px;background:var(--hairline);content:""}
 @media(max-width:600px){.control-label{flex-basis:60px;min-width:60px}.avoid-section:before{right:14px;left:14px}}
+
+/* One shared horizontal grid for category and dietary preference rows. */
+.filter-toolbar,.avoid-section{padding-inline:max(14px,calc((100% - 1160px)/2 + 24px))}
+.filter-toolbar{gap:14px}
+.avoid-section{max-width:none}
+.avoid-section .avoid-filters{padding-inline:0}
+.avoid-section:before{right:max(14px,calc((100% - 1160px)/2 + 24px));left:max(14px,calc((100% - 1160px)/2 + 24px))}
+@media(max-width:600px){.filter-toolbar,.avoid-section{padding-inline:14px}}
