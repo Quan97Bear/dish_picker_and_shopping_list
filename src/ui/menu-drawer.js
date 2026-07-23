@@ -85,8 +85,12 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
     noteInput.value = notes[id] || '';
     noteInput.addEventListener('input', (event) => onNote(id, event.target.value));
     noteInput.addEventListener('keydown', (event) => {
-      if (event.isComposing || event.keyCode === 229) return;
-      if (event.key === 'Enter' || event.key === 'Escape') closeNoteEditor(true);
+      if (event.isComposing) return;
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        closeNoteEditor(true);
+      }
+      if (event.key === 'Escape') closeNoteEditor(true);
     });
     item.querySelector('.note-done').addEventListener('click', (event) => closeNoteEditor(event.detail === 0));
     renderNoteControl();
