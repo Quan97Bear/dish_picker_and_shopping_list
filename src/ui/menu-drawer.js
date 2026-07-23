@@ -16,56 +16,79 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
     const dish = dishMap.get(id);
     const item = document.createElement('li');
     item.innerHTML = `<div class="selected-dish">
-      <div class="selected-dish-heading"><strong>${dish.name}</strong><button class="text-button danger" data-remove aria-label="移除 ${dish.name}">移除</button></div>
-      <button type="button" class="note-toggle" aria-expanded="false"></button>
+      <div class="selected-dish-row">
+        <strong>${dish.name}</strong>
+        <div class="note-control"></div>
+        <button class="text-button danger dish-remove" data-remove aria-label="移除 ${dish.name}">移除</button>
+      </div>
       <div class="note-editor" hidden>
         <label><span class="sr-only">给${dish.name}添加备注</span><input type="text" maxlength="80" placeholder="例如：少辣、不要葱"></label>
         <button type="button" class="note-done" aria-label="完成${dish.name}备注">完成</button>
       </div>
     </div>`;
-    const noteToggle = item.querySelector('.note-toggle');
+    const noteControl = item.querySelector('.note-control');
     const noteEditor = item.querySelector('.note-editor');
     const noteInput = item.querySelector('input');
 
-    const updateNoteSummary = () => {
+    const openNoteEditor = () => {
+      noteControl.hidden = true;
+      noteEditor.hidden = false;
+      noteInput.focus();
+    };
+    const renderNoteControl = () => {
       const value = noteInput.value.trim();
-      noteToggle.replaceChildren();
+      noteControl.replaceChildren();
       if (value) {
+        const chip = document.createElement('span');
+        chip.className = 'note-chip';
+        chip.setAttribute('aria-label', `${dish.name}的备注：${value}`);
         const summary = document.createElement('span');
-        summary.className = 'note-summary-text';
-        summary.textContent = `备注：${value}`;
-        const action = document.createElement('span');
-        action.className = 'note-summary-action';
-        action.textContent = '修改';
-        noteToggle.append(summary, action);
-        noteToggle.setAttribute('aria-label', `修改${dish.name}的备注`);
+        summary.className = 'note-chip-text';
+        summary.textContent = value;
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.className = 'note-chip-action';
+        edit.setAttribute('aria-label', `修改${dish.name}的备注`);
+        edit.textContent = '✏️';
+        edit.addEventListener('click', openNoteEditor);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'note-chip-action note-chip-delete';
+        remove.setAttribute('aria-label', `删除${dish.name}的备注`);
+        remove.textContent = '×';
+        remove.addEventListener('click', (event) => {
+          noteInput.value = '';
+          onNote(id, '');
+          renderNoteControl();
+          if (event.detail === 0) noteControl.querySelector('button').focus();
+        });
+        chip.append(summary, edit, remove);
+        noteControl.append(chip);
       } else {
-        noteToggle.textContent = '＋ 添加备注';
-        noteToggle.setAttribute('aria-label', `给${dish.name}添加备注`);
+        const add = document.createElement('button');
+        add.type = 'button';
+        add.className = 'note-add';
+        add.setAttribute('aria-label', `给${dish.name}添加备注`);
+        add.textContent = '＋ 添加备注';
+        add.addEventListener('click', openNoteEditor);
+        noteControl.append(add);
       }
     };
-    const closeNoteEditor = () => {
+    const closeNoteEditor = (restoreFocus = false) => {
       noteEditor.hidden = true;
-      noteToggle.hidden = false;
-      noteToggle.setAttribute('aria-expanded', 'false');
-      updateNoteSummary();
-      noteToggle.focus();
+      noteControl.hidden = false;
+      renderNoteControl();
+      if (restoreFocus) noteControl.querySelector('button').focus();
     };
 
     item.querySelector('[data-remove]').addEventListener('click', () => onRemove(id));
     noteInput.value = notes[id] || '';
     noteInput.addEventListener('input', (event) => onNote(id, event.target.value));
     noteInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === 'Escape') closeNoteEditor();
+      if (event.key === 'Enter' || event.key === 'Escape') closeNoteEditor(true);
     });
-    noteToggle.addEventListener('click', () => {
-      noteToggle.hidden = true;
-      noteEditor.hidden = false;
-      noteToggle.setAttribute('aria-expanded', 'true');
-      noteInput.focus();
-    });
-    item.querySelector('.note-done').addEventListener('click', closeNoteEditor);
-    updateNoteSummary();
+    item.querySelector('.note-done').addEventListener('click', (event) => closeNoteEditor(event.detail === 0));
+    renderNoteControl();
     list.append(item);
   }
   if (!selected.length) list.innerHTML = '<li class="empty-row">现有菜单里没有想吃的？可以在下面推荐新菜。</li>';
