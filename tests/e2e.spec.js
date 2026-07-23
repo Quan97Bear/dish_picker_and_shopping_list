@@ -29,8 +29,34 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.goto(href);
   await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
   await expect(page.getByText('不要葱')).toBeVisible();
-  await page.getByRole('button',{name:/生成采购清单/}).click();
+  const viewport = page.viewportSize();
+  const recipesTitleBox = await page.getByRole('heading',{name:'菜谱详情'}).boundingBox();
+  expect(Math.abs(recipesTitleBox.x + recipesTitleBox.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
+  const shoppingTrigger = page.locator('.shopping-trigger');
+  await shoppingTrigger.click();
   await expect(page.getByRole('heading',{name:'采购清单'})).toBeVisible();
+  await expect(page.getByText('勾选状态会保存在这台设备上',{exact:true})).toBeVisible();
+  await expect(shoppingTrigger).toHaveAttribute('aria-expanded', 'true');
+  const shoppingPanelBox = await page.locator('.shopping-panel').boundingBox();
+  expect(Math.abs(shoppingPanelBox.x - (viewport.width - shoppingPanelBox.width) / 2)).toBeLessThanOrEqual(1);
+  const shoppingTitleBox = await page.getByRole('heading',{name:'采购清单'}).boundingBox();
+  expect(Math.abs(shoppingTitleBox.x + shoppingTitleBox.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
+  await expect(page.locator('.ingredient-source').filter({hasText:/用于：/}).first()).toBeVisible();
+  const firstShoppingItem = page.locator('.shopping-panel input[type="checkbox"]').first();
+  await firstShoppingItem.check();
+  const vegetableGroup = page.locator('.shopping-group').filter({hasText:'蔬菜'});
+  await expect(vegetableGroup).toHaveAttribute('open', '');
+  await vegetableGroup.locator('summary').click();
+  await expect(firstShoppingItem).toBeHidden();
+  await vegetableGroup.locator('summary').click();
+  await expect(firstShoppingItem).toBeChecked();
+  await page.locator('.shopping-panel').getByRole('button',{name:/收起/}).click();
+  await expect(page.getByRole('heading',{name:'采购清单'})).toBeHidden();
+  await expect(shoppingTrigger).toBeFocused();
+  await expect(shoppingTrigger).toHaveAttribute('aria-expanded', 'false');
+  await shoppingTrigger.click();
+  await expect(page.getByRole('heading',{name:'采购清单'})).toBeVisible();
+  await expect(firstShoppingItem).toBeChecked();
 });
 
 test('share a new-dish suggestion without selecting a dish', async ({ page }) => {
@@ -40,7 +66,8 @@ test('share a new-dish suggestion without selecting a dish', async ({ page }) =>
   await page.getByRole('button',{name:/查看菜单/}).click();
   await page.getByLabel('想添加的新菜').fill('糖醋里脊、锅包肉');
   await page.getByRole('button',{name:'发送建议'}).click();
-  const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
+  await expect(page.getByText('持有链接的人可以查看这条建议',{exact:true})).toBeVisible();
+  const href = await page.getByRole('link',{name:'预览建议'}).getAttribute('href');
   await page.goto(href);
   await expect(page.getByRole('heading',{name:'收到新菜建议'})).toBeVisible();
   await expect(page.getByText('糖醋里脊')).toBeVisible();

@@ -102,7 +102,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
   const suggestionField = document.createElement('section');
   suggestionField.className = 'suggestion-field';
   suggestionField.setAttribute('aria-labelledby', 'suggestion-title');
-  suggestionField.innerHTML = `<div><span class="eyebrow">菜单里没有？</span><h3 id="suggestion-title">推荐新菜</h3><p>可以写多道，QQQ 打开分享链接后就能看到。</p></div><label><span class="sr-only">想添加的新菜</span><input type="text" maxlength="${MAX_SUGGESTION_LENGTH}" placeholder="例如：糖醋里脊、锅包肉" aria-describedby="suggestion-count"></label><small id="suggestion-count"><b>0</b> / ${MAX_SUGGESTION_LENGTH}</small>`;
+  suggestionField.innerHTML = `<div><span class="eyebrow">菜单里没有？</span><h3 id="suggestion-title">推荐新菜</h3><p>可以写多道，QQQ 打开分享链接后就能看到</p></div><label><span class="sr-only">想添加的新菜</span><input type="text" maxlength="${MAX_SUGGESTION_LENGTH}" placeholder="例如：糖醋里脊、锅包肉" aria-describedby="suggestion-count"></label><small id="suggestion-count"><b>0</b> / ${MAX_SUGGESTION_LENGTH}</small>`;
   const suggestionInput = suggestionField.querySelector('input');
   const suggestionCount = suggestionField.querySelector('small b');
   suggestionInput.value = suggestion || '';
