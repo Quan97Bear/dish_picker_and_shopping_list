@@ -1,4 +1,5 @@
 import { buildShoppingList, CATEGORY_ORDER, shoppingListText } from '../shopping-list.js';
+import { splitSuggestionList } from '../menu-state.js';
 import { copyText } from '../utils/share.js';
 import { showToast } from './toast.js';
 
@@ -12,7 +13,7 @@ export function renderRecipient(root, { dishes, servings, notes = {}, suggestion
   warnings.forEach((warning) => { const note = document.createElement('p'); note.className = 'notice'; note.textContent = warning; warningArea.append(note); });
   if (suggestion) {
     const suggestionTags = root.querySelector('.suggestion-tags');
-    const suggestions = suggestion.split(/[，,、；;\n]+/).map((item) => item.trim()).filter(Boolean);
+    const suggestions = splitSuggestionList(suggestion);
     for (const name of suggestions) {
       const tag = document.createElement('span');
       tag.textContent = name;

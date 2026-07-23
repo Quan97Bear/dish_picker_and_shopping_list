@@ -52,3 +52,10 @@ export function encodeMenu(ids, servings, notes = {}, baseUrl = window.location.
   if (sharedSuggestion) url.searchParams.set('suggestion', sharedSuggestion);
   return url.toString();
 }
+
+export function splitSuggestionList(suggestion = '') {
+  return suggestion
+    .split(/[\s，,、；;]+/u)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
