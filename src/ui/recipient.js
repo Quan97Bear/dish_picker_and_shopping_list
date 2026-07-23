@@ -2,12 +2,15 @@ import { buildShoppingList, CATEGORY_ORDER, shoppingListText } from '../shopping
 import { copyText } from '../utils/share.js';
 import { showToast } from './toast.js';
 
-export function renderRecipient(root, { dishes, servings, notes = {}, warnings }) {
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${dishes.length ? '今晚吃这些' : '这份菜单空空的'}</h1><p>${dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : '菜品可能已下架，或链接不完整。'}</p><div class="menu-tags"></div>${dishes.length ? '<button class="button primary shopping-trigger">生成采购清单 <span>↓</span></button>' : '<a class="button primary" href="./">重新选菜</a>'}</section><section class="warning-area" aria-live="polite"></section><section class="shopping-panel" hidden aria-labelledby="shopping-title"></section><section class="recipes" aria-labelledby="recipes-title"><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section></main>`;
+export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [] }) {
+  const title = dishes.length ? '今晚吃这些' : suggestion ? '收到一道新菜建议' : '这份菜单空空的';
+  const subtitle = dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : suggestion ? '选菜人想在菜单里看到这道菜。' : '菜品可能已下架，或链接不完整。';
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${title}</h1><p>${subtitle}</p><div class="menu-tags"></div>${dishes.length ? '<button class="button primary shopping-trigger">生成采购清单 <span>↓</span></button>' : '<a class="button primary" href="./">返回菜单</a>'}</section><section class="warning-area" aria-live="polite"></section><section class="suggestion-card" ${suggestion ? '' : 'hidden'} aria-labelledby="suggestion-card-title"><span class="eyebrow">新菜建议</span><h2 id="suggestion-card-title">想新增这道菜</h2><p></p></section><section class="shopping-panel" hidden aria-labelledby="shopping-title"></section><section class="recipes" ${dishes.length ? '' : 'hidden'} aria-labelledby="recipes-title"><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section></main>`;
   const tags = root.querySelector('.menu-tags');
   dishes.forEach((dish) => { const tag = document.createElement('span'); tag.textContent = dish.name; tags.append(tag); });
   const warningArea = root.querySelector('.warning-area');
   warnings.forEach((warning) => { const note = document.createElement('p'); note.className = 'notice'; note.textContent = warning; warningArea.append(note); });
+  if (suggestion) root.querySelector('.suggestion-card p').textContent = suggestion;
   const recipeList = root.querySelector('.recipe-list');
   dishes.forEach((dish, index) => {
     const details = document.createElement('details'); details.className = 'recipe-card'; details.open = index === 0;

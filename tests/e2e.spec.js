@@ -12,3 +12,16 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.getByRole('button',{name:/生成采购清单/}).click();
   await expect(page.getByRole('heading',{name:'采购清单'})).toBeVisible();
 });
+
+test('share a new-dish suggestion without selecting a dish', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.getByRole('button',{name:/查看菜单/}).click();
+  await page.getByLabel('想添加的新菜').fill('糖醋里脊');
+  await page.getByRole('button',{name:'发送建议'}).click();
+  const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
+  await page.goto(href);
+  await expect(page.getByRole('heading',{name:'收到一道新菜建议'})).toBeVisible();
+  await expect(page.getByText('糖醋里脊')).toBeVisible();
+});

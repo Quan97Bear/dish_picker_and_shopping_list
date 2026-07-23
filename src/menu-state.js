@@ -1,5 +1,6 @@
 export const DEFAULT_SERVINGS = 2;
 export const MAX_DISHES = 12;
+export const MAX_SUGGESTION_LENGTH = 60;
 export const PROTOCOL_VERSION = '1';
 
 export function normalizeServings(value) {
@@ -7,13 +8,17 @@ export function normalizeServings(value) {
   return Number.isInteger(parsed) && parsed >= 1 && parsed <= 8 ? parsed : DEFAULT_SERVINGS;
 }
 
+export function normalizeSuggestion(value) {
+  return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, MAX_SUGGESTION_LENGTH) : '';
+}
+
 export function decodeMenu(search, validIds, aliases = {}) {
   const params = new URLSearchParams(search);
-  if (!params.has('menu')) return { mode: 'picker', ids: [], servings: DEFAULT_SERVINGS, notes: {}, warnings: [] };
+  if (!params.has('menu')) return { mode: 'picker', ids: [], servings: DEFAULT_SERVINGS, notes: {}, suggestion: '', warnings: [] };
   const warnings = [];
   if (params.get('v') && params.get('v') !== PROTOCOL_VERSION) warnings.push('链接版本无法识别，已尽量恢复菜单');
   const raw = params.get('menu') || '';
-  const safeParts = raw.length <= 512 ? raw.split(',').slice(0, MAX_DISHES) : [];
+  const safeParts = raw && raw.length <= 512 ? raw.split(',').slice(0, MAX_DISHES) : [];
   const seen = new Set();
   const ids = [];
   let invalid = false;
@@ -31,10 +36,10 @@ export function decodeMenu(search, validIds, aliases = {}) {
       if (typeof parsedNotes[id] === 'string' && parsedNotes[id].trim()) notes[id] = parsedNotes[id].trim().slice(0, 80);
     }
   } catch { warnings.push('部分点菜备注无法读取'); }
-  return { mode: 'recipient', ids, servings: normalizeServings(params.get('p')), notes, warnings };
+  return { mode: 'recipient', ids, servings: normalizeServings(params.get('p')), notes, suggestion: normalizeSuggestion(params.get('suggestion')), warnings };
 }
 
-export function encodeMenu(ids, servings, notes = {}, baseUrl = window.location.href) {
+export function encodeMenu(ids, servings, notes = {}, baseUrl = window.location.href, suggestion = '') {
   const url = new URL(baseUrl);
   url.search = '';
   url.hash = '';
@@ -43,5 +48,7 @@ export function encodeMenu(ids, servings, notes = {}, baseUrl = window.location.
   url.searchParams.set('v', PROTOCOL_VERSION);
   const sharedNotes = Object.fromEntries(ids.filter((id) => notes[id]?.trim()).map((id) => [id, notes[id].trim().slice(0, 80)]));
   if (Object.keys(sharedNotes).length) url.searchParams.set('notes', JSON.stringify(sharedNotes));
+  const sharedSuggestion = normalizeSuggestion(suggestion);
+  if (sharedSuggestion) url.searchParams.set('suggestion', sharedSuggestion);
   return url.toString();
 }

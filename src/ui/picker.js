@@ -5,10 +5,11 @@ import { showToast } from './toast.js';
 
 const CATEGORY_EMOJI = { vegetable: '🥬', meat: '🥩', mixed: '🍲', stew: '🥘', soup: '🥣' };
 
-export function renderPicker(root, { index, initialSelected = [], initialServings = 2, initialNotes = {}, makeUrl }) {
+export function renderPicker(root, { index, initialSelected = [], initialServings = 2, initialNotes = {}, initialSuggestion = '', makeUrl }) {
   let selected = [...initialSelected];
   let servings = initialServings;
   let notes = { ...initialNotes };
+  let suggestion = initialSuggestion;
   let category = 'all';
   let query = '';
   let avoid = new Set();
@@ -109,17 +110,17 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
     else selected.push(id);
     persist(); draw();
   }
-  function persist() { localStorage.setItem('home-menu-draft', JSON.stringify({ selected, servings, notes })); }
+  function persist() { localStorage.setItem('home-menu-draft', JSON.stringify({ selected, servings, notes, suggestion })); }
   function updateCounts() { root.querySelectorAll('[data-open-menu] strong, .bottom-bar b').forEach((node) => { node.textContent = selected.length; }); }
   function openDrawer() {
-    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(); openDrawer(); }, onClear: () => { selected = []; notes = {}; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); closeDrawer(); openDrawer(); }, onGenerate: showShare, onClose: closeDrawer });
+    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(); openDrawer(); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); closeDrawer(); openDrawer(); }, onGenerate: showShare, onClose: closeDrawer });
     document.body.append(drawer); drawer.querySelector('[data-close]').focus(); document.body.classList.add('no-scroll');
   }
   function closeDrawer() { document.querySelector('.drawer-backdrop')?.remove(); document.body.classList.remove('no-scroll'); }
   async function showShare() {
-    const url = makeUrl(selected, servings, notes); closeDrawer();
+    const url = makeUrl(selected, servings, notes, window.location.href, suggestion); closeDrawer();
     const modal = document.createElement('div'); modal.className = 'drawer-backdrop';
-    modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">菜单已备好</span><h2 id="share-title">把今晚的好味分享出去</h2><p>持有链接的人可以查看菜单。</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button primary" data-share>系统分享</button><button class="button secondary" data-copy>复制链接</button><a class="button ghost" href="${url}">预览菜单</a></div></section>`;
+    modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${selected.length ? '菜单已备好' : '新菜建议已备好'}</span><h2 id="share-title">${selected.length ? '把今晚的好味分享出去' : '把想吃的新菜告诉 QQQ'}</h2><p>持有链接的人可以查看${selected.length ? '菜单和建议' : '这条建议'}。</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button primary" data-share>系统分享</button><button class="button secondary" data-copy>复制链接</button><a class="button ghost" href="${url}">预览菜单</a></div></section>`;
     modal.querySelector('input').value = url; document.body.append(modal); document.body.classList.add('no-scroll');
     await renderQr(modal.querySelector('canvas'), url);
     const close = () => { modal.remove(); document.body.classList.remove('no-scroll'); };

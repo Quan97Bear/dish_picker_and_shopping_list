@@ -7,4 +7,6 @@ describe('URL menu state', () => {
   it('falls back for invalid servings', () => expect(decodeMenu('?menu=tomato-egg&p=99', valid).servings).toBe(2));
   it('encodes only unique ids', () => expect(new URL(encodeMenu(['tomato-egg','tomato-egg'],2,{},'https://example.test/')).searchParams.get('menu')).toBe('tomato-egg'));
   it('shares notes for selected dishes', () => { const url = encodeMenu(['tomato-egg'],2,{'tomato-egg':'不要葱'},'https://example.test/'); expect(decodeMenu(new URL(url).search,valid).notes).toEqual({'tomato-egg':'不要葱'}); });
+  it('shares a new-dish suggestion without selected dishes', () => { const url = encodeMenu([],2,{},'https://example.test/','糖醋里脊'); expect(decodeMenu(new URL(url).search,valid)).toMatchObject({ mode:'recipient', ids:[], suggestion:'糖醋里脊', warnings:[] }); });
+  it('normalizes and limits suggestions', () => { const url = encodeMenu([],2,{},'https://example.test/',`  想吃   ${'菜'.repeat(80)}  `); const suggestion = decodeMenu(new URL(url).search,valid).suggestion; expect(suggestion.startsWith('想吃 菜')).toBe(true); expect(suggestion.length).toBe(60); });
 });
