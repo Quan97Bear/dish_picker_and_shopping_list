@@ -22,6 +22,6 @@ test('share a new-dish suggestion without selecting a dish', async ({ page }) =>
   await page.getByRole('button',{name:'发送建议'}).click();
   const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
   await page.goto(href);
-  await expect(page.getByRole('heading',{name:'收到一道新菜建议'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'收到新菜建议'})).toBeVisible();
   await expect(page.getByText('糖醋里脊')).toBeVisible();
 });
