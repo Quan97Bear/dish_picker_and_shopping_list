@@ -9,7 +9,9 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await expect(page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'})).toBeVisible();
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).press('Enter');
   await expect(page.getByText('不要葱')).toBeVisible();
-  await expect(page.getByRole('button',{name:'修改西红柿炒鸡蛋的备注'})).toBeVisible();
+  const editNote = page.getByRole('button',{name:'修改西红柿炒鸡蛋的备注'});
+  await expect(editNote).toBeVisible();
+  await expect(editNote).not.toBeFocused();
   await page.getByRole('button',{name:'删除西红柿炒鸡蛋的备注'}).click();
   await expect(page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'})).toBeVisible();
   await page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'}).click();

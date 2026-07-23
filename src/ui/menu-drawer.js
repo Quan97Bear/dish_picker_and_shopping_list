@@ -88,7 +88,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
       if (event.isComposing) return;
       if (event.key === 'Enter') {
         event.preventDefault();
-        closeNoteEditor(true);
+        closeNoteEditor(false);
       }
       if (event.key === 'Escape') closeNoteEditor(true);
     });
