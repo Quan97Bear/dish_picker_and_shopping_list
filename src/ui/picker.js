@@ -74,12 +74,18 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
     if (!collapse) closeAvoid();
   }, { threshold: [0, 0.25, 0.55, 0.8, 1] });
   searchObserver.observe(heroSearch);
-  const avoidObserver = new IntersectionObserver(([entry]) => {
-    const avoidScrolledPast = entry.boundingClientRect.bottom <= toolbar.offsetHeight;
-    toolbar.classList.toggle('has-compact-avoid', avoidScrolledPast);
-    if (!avoidScrolledPast) closeAvoid();
-  }, { threshold: [0, 0.01, 0.5, 1] });
-  avoidObserver.observe(avoidSection);
+  let avoidSyncFrame = 0;
+  const syncCompactAvoid = () => {
+    cancelAnimationFrame(avoidSyncFrame);
+    avoidSyncFrame = requestAnimationFrame(() => {
+      const avoidScrolledPast = avoidSection.getBoundingClientRect().bottom <= toolbar.getBoundingClientRect().bottom + 1;
+      toolbar.classList.toggle('has-compact-avoid', avoidScrolledPast);
+      if (!avoidScrolledPast) closeAvoid();
+    });
+  };
+  window.addEventListener('scroll', syncCompactAvoid, { passive: true });
+  window.addEventListener('resize', syncCompactAvoid);
+  syncCompactAvoid();
 
   function draw() {
     filters.querySelectorAll('button').forEach((button) => button.classList.toggle('active', button.dataset.category === category));
