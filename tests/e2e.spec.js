@@ -2,7 +2,13 @@ import { test, expect } from '@playwright/test';
 test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.goto('/');
   for (const name of ['西红柿炒鸡蛋','芹菜炒肉','紫菜蛋花汤']) await page.getByRole('article').filter({hasText:name}).getByRole('button').click();
-  await page.getByRole('button',{name:/查看菜单/}).click();
+  const menuButton = page.getByRole('button',{name:/查看菜单/});
+  await menuButton.click();
+  const menuDialog = page.getByRole('dialog',{name:'今日菜单'});
+  await expect(menuDialog).toBeFocused();
+  await menuDialog.press('Escape');
+  await expect(menuButton).toBeFocused();
+  await menuButton.click();
   await page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'}).click();
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).dispatchEvent('keydown',{key:'Enter',code:'Enter',keyCode:229,isComposing:true});
@@ -18,6 +24,7 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
   await page.getByRole('button',{name:'完成西红柿炒鸡蛋备注'}).click();
   await page.getByRole('button',{name:'生成菜单'}).click();
+  await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toBeFocused();
   const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
   await page.goto(href);
   await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();

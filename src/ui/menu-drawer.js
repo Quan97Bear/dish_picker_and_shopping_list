@@ -9,6 +9,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
   drawer.setAttribute('role', 'dialog');
   drawer.setAttribute('aria-modal', 'true');
   drawer.setAttribute('aria-labelledby', 'drawer-title');
+  drawer.tabIndex = -1;
   drawer.innerHTML = `<div class="drawer-handle"></div><div class="section-heading"><div><span class="eyebrow">已选菜品</span><h2 id="drawer-title">今日菜单</h2></div><button class="icon-button" data-close aria-label="关闭菜单">×</button></div>`;
   const list = document.createElement('ul');
   list.className = 'selected-list';

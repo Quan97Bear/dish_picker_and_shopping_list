@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { decodeMenu, encodeMenu, splitSuggestionList } from '../src/menu-state.js';
+import { decodeMenu, encodeMenu, normalizeDraft, splitSuggestionList } from '../src/menu-state.js';
 const valid = new Set(['tomato-egg', 'pepper-pork', 'seaweed-egg-soup']);
 describe('URL menu state', () => {
   it('returns picker mode without menu', () => expect(decodeMenu('', valid).mode).toBe('picker'));
@@ -11,4 +11,15 @@ describe('URL menu state', () => {
   it('normalizes and limits suggestions', () => { const url = encodeMenu([],2,{},'https://example.test/',`  想吃   ${'菜'.repeat(80)}  `); const suggestion = decodeMenu(new URL(url).search,valid).suggestion; expect(suggestion.startsWith('想吃 菜')).toBe(true); expect(suggestion.length).toBe(60); });
   it('renders space-separated suggestions as separate dishes', () => expect(splitSuggestionList('锅包肉 包菜')).toEqual(['锅包肉', '包菜']));
   it('supports punctuation and line breaks between suggested dishes', () => expect(splitSuggestionList('糖醋里脊、锅包肉\n手撕包菜')).toEqual(['糖醋里脊', '锅包肉', '手撕包菜']));
+  it('cleans corrupted local drafts before rendering', () => expect(normalizeDraft({
+    selected: ['tomato-egg', 'bad', 'tomato-egg'],
+    servings: 99,
+    notes: { 'tomato-egg': '  不要葱  ', bad: '忽略' },
+    suggestion: '  锅包肉   包菜  '
+  }, valid)).toEqual({
+    selected: ['tomato-egg'],
+    servings: 2,
+    notes: { 'tomato-egg': '不要葱' },
+    suggestion: '锅包肉 包菜'
+  }));
 });

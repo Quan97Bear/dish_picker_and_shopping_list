@@ -4,6 +4,30 @@ import { copyText, renderQr, shareUrl } from '../utils/share.js';
 import { showToast } from './toast.js';
 
 const CATEGORY_EMOJI = { vegetable: '🥬', meat: '🥩', mixed: '🍲', stew: '🥘', soup: '🥣' };
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function handleDialogKeys(event, dialog, close) {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    close();
+    return;
+  }
+  if (event.key !== 'Tab') return;
+  const focusable = [...dialog.querySelectorAll(FOCUSABLE_SELECTOR)].filter((element) => !element.hidden && element.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable.at(-1);
+  if (document.activeElement === dialog) {
+    event.preventDefault();
+    (event.shiftKey ? last : first).focus();
+  } else if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
 
 export function renderPicker(root, { index, initialSelected = [], initialServings = 2, initialNotes = {}, initialSuggestion = '', makeUrl }) {
   let selected = [...initialSelected];
@@ -12,10 +36,11 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
   let suggestion = initialSuggestion;
   let category = 'all';
   let query = '';
+  let drawerOpener = null;
   let avoid = new Set();
   try { avoid = new Set(JSON.parse(localStorage.getItem('home-menu-avoid') || '[]')); } catch {}
   const dishMap = new Map(index.map((dish) => [dish.id, dish]));
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单交给QQQ</p><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label></section><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">不想吃<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>不想吃</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">不想吃</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">家常好味</span><h2 id="dish-title">今日候选</h2></div><span class="result-count"></span></div><div class="dish-grid"></div></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div>`;
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单交给QQQ</p><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label></section><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">不想吃<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>不想吃</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">不想吃</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">家常好味</span><h2 id="dish-title">今日候选</h2></div><span class="result-count" aria-live="polite"></span></div><div class="dish-grid"></div></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div>`;
   const grid = root.querySelector('.dish-grid');
   const categories = [['all', '全部'], ['vegetable', '素菜'], ['meat', '肉菜'], ['mixed', '混合菜'], ['stew', '炖菜'], ['soup', '汤']];
   const filters = root.querySelector('.filters');
@@ -48,8 +73,9 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
   }
   const compactAvoid = root.querySelector('.compact-avoid');
   const avoidPopover = root.querySelector('.avoid-popover');
-  const closeAvoid = () => {
+  const closeAvoid = (restoreFocus = false) => {
     avoidPopover.dataset.open = 'false'; compactAvoid.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) compactAvoid.focus();
     setTimeout(() => { if (avoidPopover.dataset.open === 'false') avoidPopover.hidden = true; }, 180);
   };
   compactAvoid.addEventListener('click', () => {
@@ -58,7 +84,13 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
     avoidPopover.hidden = false;
     requestAnimationFrame(() => { avoidPopover.dataset.open = 'true'; compactAvoid.setAttribute('aria-expanded', 'true'); });
   });
-  avoidPopover.querySelector('[data-close-avoid]').addEventListener('click', closeAvoid);
+  avoidPopover.querySelector('[data-close-avoid]').addEventListener('click', (event) => closeAvoid(event.detail === 0));
+  avoidPopover.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeAvoid(true);
+    }
+  });
   const searchInputs = [...root.querySelectorAll('input[type="search"]')];
   searchInputs.forEach((input) => input.addEventListener('input', (event) => {
     query = event.target.value.trim().toLowerCase();
@@ -89,7 +121,11 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
   syncCompactAvoid();
 
   function draw() {
-    filters.querySelectorAll('button').forEach((button) => button.classList.toggle('active', button.dataset.category === category));
+    filters.querySelectorAll('button').forEach((button) => {
+      const active = button.dataset.category === category;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
     avoidFilterGroups.forEach((group) => group.querySelectorAll('[data-avoid]').forEach((button) => { const active = avoid.has(button.dataset.avoid); button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); button.textContent = `${active ? '✓ ' : ''}${avoidOptions.find(([key]) => key === button.dataset.avoid)[1]}`; }));
     const avoidCount = compactAvoid.querySelector('span'); avoidCount.hidden = avoid.size === 0; avoidCount.textContent = avoid.size;
     const shown = index.filter((dish) => (category === 'all' || dish.category === category) && !dish.avoid.some((tag) => avoid.has(tag)) && (!query || dish.name.toLowerCase().includes(query) || dish.tags.some((tag) => tag.toLowerCase().includes(query))));
@@ -112,21 +148,43 @@ export function renderPicker(root, { index, initialSelected = [], initialServing
   }
   function persist() { localStorage.setItem('home-menu-draft', JSON.stringify({ selected, servings, notes, suggestion })); }
   function updateCounts() { root.querySelector('.bottom-bar b').textContent = selected.length; }
-  function openDrawer() {
-    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(); openDrawer(); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); closeDrawer(); openDrawer(); }, onGenerate: showShare, onClose: closeDrawer });
-    document.body.append(drawer); drawer.querySelector('[data-close]').focus(); document.body.classList.add('no-scroll');
+  function openDrawer({ preserveOpener = false } = {}) {
+    if (!preserveOpener) drawerOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-menu]');
+    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onGenerate: showShare, onClose: closeDrawer });
+    const dialog = drawer.querySelector('.drawer');
+    drawer.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closeDrawer));
+    root.inert = true;
+    document.body.append(drawer);
+    document.body.classList.add('no-scroll');
+    dialog.focus();
   }
-  function closeDrawer() { document.querySelector('.drawer-backdrop')?.remove(); document.body.classList.remove('no-scroll'); }
+  function closeDrawer(restoreFocus = true) {
+    document.querySelector('.drawer-backdrop')?.remove();
+    document.body.classList.remove('no-scroll');
+    root.inert = false;
+    if (restoreFocus && drawerOpener?.isConnected) drawerOpener.focus();
+  }
   async function showShare() {
-    const url = makeUrl(selected, servings, notes, window.location.href, suggestion); closeDrawer();
+    const url = makeUrl(selected, servings, notes, window.location.href, suggestion); closeDrawer(false);
     const modal = document.createElement('div'); modal.className = 'drawer-backdrop';
-    modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${selected.length ? '菜单已备好' : '新菜建议已备好'}</span><h2 id="share-title">${selected.length ? '把今晚的好味分享出去' : '把想吃的新菜告诉 QQQ'}</h2><p>持有链接的人可以查看${selected.length ? '菜单和建议' : '这条建议'}。</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button primary" data-share>系统分享</button><button class="button secondary" data-copy>复制链接</button><a class="button ghost" href="${url}">预览菜单</a></div></section>`;
-    modal.querySelector('input').value = url; document.body.append(modal); document.body.classList.add('no-scroll');
-    await renderQr(modal.querySelector('canvas'), url);
-    const close = () => { modal.remove(); document.body.classList.remove('no-scroll'); };
+    modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title" tabindex="-1"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${selected.length ? '菜单已备好' : '新菜建议已备好'}</span><h2 id="share-title">${selected.length ? '把今晚的好味分享出去' : '把想吃的新菜告诉 QQQ'}</h2><p>持有链接的人可以查看${selected.length ? '菜单和建议' : '这条建议'}。</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button primary" data-share>系统分享</button><button class="button secondary" data-copy>复制链接</button><a class="button ghost" href="${url}">预览菜单</a></div></section>`;
+    const dialog = modal.querySelector('.share-card');
+    const close = () => {
+      modal.remove();
+      document.body.classList.remove('no-scroll');
+      root.inert = false;
+      if (drawerOpener?.isConnected) drawerOpener.focus();
+    };
+    modal.querySelector('input').value = url;
+    modal.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, close));
+    root.inert = true;
+    document.body.append(modal);
+    document.body.classList.add('no-scroll');
     modal.querySelector('.share-close').addEventListener('click', close); modal.addEventListener('click', (event) => { if (event.target === modal) close(); });
     modal.querySelector('[data-copy]').addEventListener('click', async () => { await copyText(url); showToast('链接已复制'); });
     modal.querySelector('[data-share]').addEventListener('click', async () => { try { const result = await shareUrl(url); if (result === 'copied') showToast('链接已复制'); } catch (error) { if (error.name !== 'AbortError') showToast('分享失败，请复制链接'); } });
+    dialog.focus();
+    try { await renderQr(modal.querySelector('canvas'), url); } catch { showToast('二维码生成失败，请复制链接'); }
   }
-  root.querySelectorAll('[data-open-menu]').forEach((button) => button.addEventListener('click', openDrawer)); draw();
+  root.querySelectorAll('[data-open-menu]').forEach((button) => button.addEventListener('click', () => openDrawer())); draw();
 }

@@ -12,6 +12,24 @@ export function normalizeSuggestion(value) {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, MAX_SUGGESTION_LENGTH) : '';
 }
 
+export function normalizeDraft(value, validIds) {
+  const rawSelected = Array.isArray(value?.selected) ? value.selected : [];
+  const selected = [...new Set(rawSelected)]
+    .filter((id) => typeof id === 'string' && validIds.has(id))
+    .slice(0, MAX_DISHES);
+  const notes = {};
+  for (const id of selected) {
+    const note = value?.notes?.[id];
+    if (typeof note === 'string' && note.trim()) notes[id] = note.trim().slice(0, 80);
+  }
+  return {
+    selected,
+    servings: normalizeServings(value?.servings),
+    notes,
+    suggestion: normalizeSuggestion(value?.suggestion)
+  };
+}
+
 export function decodeMenu(search, validIds, aliases = {}) {
   const params = new URLSearchParams(search);
   if (!params.has('menu')) return { mode: 'picker', ids: [], servings: DEFAULT_SERVINGS, notes: {}, suggestion: '', warnings: [] };
