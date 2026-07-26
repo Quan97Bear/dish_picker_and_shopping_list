@@ -1,4 +1,4 @@
-const dataUrl = (name) => new URL(`../data/${name}`, import.meta.url);
+const dataUrl = (name) => new URL(`../../data/${name}`, import.meta.url);
 
 export async function loadAppData() {
   const [indexResponse, dishesResponse, aliasesResponse] = await Promise.all([

@@ -1,7 +1,7 @@
-import { buildShoppingList, CATEGORY_ORDER, shoppingListText } from '../shopping-list.js';
-import { splitSuggestionList } from '../menu-state.js';
-import { copyText } from '../utils/share.js';
-import { showToast } from './toast.js';
+import { buildShoppingList, CATEGORY_ORDER, shoppingListText } from '../../domain/shopping-list.js';
+import { splitSuggestionList } from '../../domain/menu-state.js';
+import { copyText } from '../../shared/share.js';
+import { showToast } from '../../shared/toast.js';
 
 export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [] }) {
   const title = dishes.length ? '今晚吃这些' : suggestion ? '收到新菜建议' : '这份菜单空空的';
@@ -23,7 +23,7 @@ export function renderRecipient(root, { dishes, servings, notes = {}, suggestion
   const recipeList = root.querySelector('.recipe-list');
   dishes.forEach((dish, index) => {
     const details = document.createElement('details'); details.className = 'recipe-card'; details.open = index === 0;
-    details.innerHTML = `<summary><div><span class="recipe-number">${String(index + 1).padStart(2, '0')}</span><h3>${dish.name}</h3></div><div class="recipe-summary-meta"><span>${dish.durationMinutes} 分钟</span><span>难度 ${dish.difficulty}/5</span><i aria-hidden="true"></i></div></summary><div class="recipe-content"><div class="order-note" hidden><strong>点菜备注</strong><p></p></div><div><h4>食材 · ${servings} 人份</h4><ul class="ingredient-list"></ul></div><div><h4>做法</h4><ol class="step-list"></ol></div><div class="recipe-notes"><strong>小提示</strong><p>${dish.notes.join('；') || '调味请按口味调整。'}</p></div><a class="source-link" href="${dish.source.url}" target="_blank" rel="noopener noreferrer">查看菜谱来源 ↗</a></div>`;
+    details.innerHTML = `<summary><div><span class="recipe-number">${String(index + 1).padStart(2, '0')}</span><h3>${dish.name}</h3></div><div class="recipe-summary-meta"><span>${dish.durationMinutes} 分钟</span><span>难度 ${dish.difficulty}/5</span><i aria-hidden="true"></i></div></summary><div class="recipe-content"><div class="order-note" hidden><strong>点菜备注</strong><p></p></div><div><h4>食材 · ${servings} 人份</h4><ul class="ingredient-list"></ul></div><div><h4>做法</h4><ol class="step-list"></ol></div><div class="recipe-notes"><strong>小提示</strong><p>${dish.notes.join('；') || '调味请按口味调整。'}</p></div></div>`;
     if (notes[dish.id]) { const note = details.querySelector('.order-note'); note.hidden = false; note.querySelector('p').textContent = notes[dish.id]; }
     const factor = servings / dish.servings;
     dish.ingredients.forEach((ingredient) => {

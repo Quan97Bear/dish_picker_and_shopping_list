@@ -1,8 +1,10 @@
 # 今晚吃什么
 
-一个无登录、无后端、手机优先的家常菜单选择与采购清单静态应用。当前部署携带固定的 40 道简单家常菜，其中恰好 5 道汤，不含茄子。选菜者可按青椒/尖椒、鱼、猪肉、鸡蛋和辣味设置忌口筛选，也可以通过分享链接向接收者推荐菜单中尚未收录的新菜。
+手机优先的中文选菜、菜谱和采购清单网页。当前生产版本为静态应用，无登录、无后端，运行时不访问 GitHub 或付费 API。
 
-## 本地运行
+线上地址：[dish-picker.pages.dev](https://dish-picker.pages.dev)
+
+## 开始开发
 
 需要 Node.js 20 或更高版本。
 
@@ -11,52 +13,117 @@ npm install
 npm run dev
 ```
 
-终端会显示本地访问地址。应用运行时只加载本站的静态 JSON，不访问 GitHub 或其他 API。
+## 手机联调
 
-## 测试与构建
+日常手机 Demo 不需要构建：
+
+```bash
+npm run demo:phone
+```
+
+手机与电脑连接同一 Wi‑Fi，然后打开终端显示的 `Network` 地址。开发服务器会
+监听代码变化并自动刷新；服务保持运行时，不需要重复启动，也不需要 Codex
+参与。
+
+关闭本项目的手机 Demo：
+
+```bash
+npm run demo:stop
+```
+
+该命令只停止工作目录属于本项目、并且监听 5173 端口的进程。端口没有服务时
+直接成功；如果端口属于其他项目，它会拒绝停止，避免误杀。
+
+只有最终发布检查需要构建并预览 `dist/`：
+
+```bash
+npm run build
+npm run preview -- --host 0.0.0.0
+```
+
+## 自动化检查
+
+| 目的 | 命令 | 固定执行内容 |
+| --- | --- | --- |
+| 日常快速检查 | `npm run check:fast` | 数据校验、Vitest、构建、部署产物检查、文档检查 |
+| 手机关键流程 | `npm run check:phone` | 构建后用 Chromium 和 WebKit 检查奶油色、预览覆盖与滚动恢复 |
+| 发布前完整检查 | `npm run check:full` | 快速检查加全部 Playwright 流程 |
+| 只检查文档 | `npm run validate:docs` | 本地链接、README 命令、历史说法、文档职责和本地资源哈希 |
+
+文档检查器位于 `scripts/validate-docs.mjs`。通常使用
+`npm run validate:docs`；只有排查脚本本身时才直接运行：
+
+```bash
+node scripts/validate-docs.mjs
+```
+
+首次运行端到端测试前安装 Chromium：
+
+```bash
+npx playwright install chromium
+```
+
+## 在 Codex Chat 中使用
+
+直接发送下面任意一句即可，不需要解释命令内部步骤：
+
+| Chat 中发送 | Codex 执行 |
+| --- | --- |
+| `开手机Demo`、`手机Demo`、`phone demo` | 复用已经运行的 5173 服务；没有服务时启动 `npm run demo:phone`，然后返回手机 URL |
+| `关闭手机Demo`、`kill phone demo`、`stop demo` | `npm run demo:stop` |
+| `跑快检`、`quick test` | `npm run check:fast` |
+| `跑手机检查`、`quick phone test` | `npm run check:phone` |
+| `跑全检`、`full test` | `npm run check:full` |
+| `检查文档` | `npm run validate:docs` |
+
+`demo:phone` 是持续运行的开发服务；其余命令执行完会直接报告通过或失败。
+Chat 请求只运行对应的固定入口，不临时拼接另一套流程。
+
+本地固定流程由 `scripts/run-workflow.mjs` 执行。如果 Codex 的托管 shell
+只有 Node、没有 npm，Codex 会用当前 Node 直接运行同一个 workflow；不会
+安装 npm，也不会改写检查步骤。
+
+## 重要目录
+
+- `src/domain/`：不依赖 DOM 的菜单与采购领域逻辑
+- `src/features/`：按用户流程组织的选菜与收件人界面
+- `src/infrastructure/`：运行时数据加载
+- `src/shared/`：跨功能共享的分享、二维码与提示工具
+- `data/dishes.json`：生产环境使用的 40 道完整菜谱
+- `data/dish-index.json`：与生产菜谱对应的轻量索引
+- `data/dish-catalog.json`：只在本地使用的轮换候选池
+- `tests/`：Vitest 与 Playwright 测试
+- `dist/`：唯一允许部署的构建产物
+
+菜品数据约束、URL 合同和验收规则见
+[`docs/PRODUCT_REQUIREMENTS.md`](docs/PRODUCT_REQUIREMENTS.md)。
+
+## 部署
+
+生产环境是 Cloudflare Pages 项目 `dish-picker`：
 
 ```bash
 npm run validate:data
 npm test
 npm run build
-npm run preview
+npx wrangler pages deploy dist --project-name dish-picker --branch main
 ```
 
-端到端测试首次运行前需要安装 Playwright 浏览器：
+只发布 `dist/`。`npm run build` 会检查部署产物，阻止项目指导、skills、文档、测试、维护脚本、本地候选池和 source map 泄漏到生产环境。
 
-```bash
-npx playwright install chromium
-npm run test:e2e
-```
+Cloudflare Pages 配置：
 
-生产文件输出到 `dist/`。`npm run build` 会自动检查部署产物，阻止 `AGENTS.md`、`.agents/skills`、PRD、测试、维护脚本、source map 和候选菜单等开发文件进入生产包。部署内容包含构建后的运行时菜谱数据；`dish-catalog.json` 是维护用候选清单，不会进入生产构建，应用运行时也不会请求它。部署平台必须发布 `dist/`，不能发布仓库根目录。
+- Build command：`npm run build`
+- Output directory：`dist`
+- Node.js：20 或更高
+- P0/P1 不启用 Pages Functions
 
-## 数据维护
+## 文档入口
 
-- `data/dishes.json`：当前运行的 40 道完整菜谱。
-- `data/dish-index.json`：与当前 40 道完全对应的轻量索引。
-- `data/dish-catalog.json`：以后轮换菜品使用的本地候选清单。
-- `data/source-manifest.json`：来源版本与人工复核状态。
-- `data/aliases.json`：旧 ID 到新 ID 的兼容映射。
+AI 和维护者从 [`AGENTS.md`](AGENTS.md) 开始。它会根据任务指向唯一的下一份文档。
 
-轮换菜品时，应先从候选清单选择条目，补齐并人工审核食材、份量、步骤及来源，然后同时更新详情和索引。运行 `npm run validate:data`，确保仍为 40 道、5 道汤、不含茄子且 ID 完全一致。新菜必须正确标注 `avoid`，以便忌口筛选。不要复用已发布过的 ID；必要时用 aliases 保持旧链接兼容。
-
-当前 40 道菜的数据是可运行初稿。正式上线前仍应逐道对照 HowToCook 固定 commit，核实源文件路径、份量、步骤和食品安全表述，并在 `source-manifest.json` 填入 commit。
-
-## 免费部署
-
-### Cloudflare Pages（推荐）
-
-连接仓库后设置 Build command 为 `npm run build`，Output directory 为 `dist`，无需启用 Functions。
-
-### GitHub Pages
-
-仓库已包含 `.github/workflows/deploy-pages.yml`。在仓库 Pages 设置中选择 GitHub Actions。工作流会把仓库名作为 Vite 子路径构建。
-
-### Vercel
-
-导入仓库，Framework Preset 选择 Vite，Build Command 使用 `npm run build`，Output Directory 使用 `dist`。本项目不需要 Functions。
-
-## 隐私
-
-应用不收集个人信息，不包含分析或广告。分享 URL 会保存菜品 ID、人数、点菜备注、新菜建议和协议版本；持有链接的人都能看到这些内容，因此请勿填写敏感信息。
+- [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md)：现在生产环境是什么、已知问题是什么
+- [`docs/TODO.md`](docs/TODO.md)：正在做什么、下次从哪里继续
+- [`docs/PRODUCT_REQUIREMENTS.md`](docs/PRODUCT_REQUIREMENTS.md)：稳定产品合同
+- [`docs/PRODUCT_ROADMAP.md`](docs/PRODUCT_ROADMAP.md)：批准的未来需求和优先级
+- [`NOTICE.md`](NOTICE.md)：菜谱来源与许可证说明

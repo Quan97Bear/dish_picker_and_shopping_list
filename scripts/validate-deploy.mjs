@@ -1,4 +1,4 @@
-import { readdir } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -13,11 +13,6 @@ const forbiddenDirectories = new Set([
   'tests'
 ]);
 const forbiddenFiles = [
-  /^AGENTS(?:\.override)?\.md$/i,
-  /^SKILL\.md$/i,
-  /^README\.md$/i,
-  /^NOTICE\.md$/i,
-  /^dish_picker_and_shopping_list\.md$/i,
   /^package(?:-lock)?\.json$/i,
   /^pnpm-lock\.yaml$/i,
   /^playwright\.config\./i,
@@ -25,6 +20,7 @@ const forbiddenFiles = [
   /^dish-catalog(?:-[^.]+)?\.json$/i,
   /^dishes\.schema(?:-[^.]+)?\.json$/i,
   /^source-manifest(?:-[^.]+)?\.json$/i,
+  /\.md$/i,
   /\.map$/i
 ];
 
@@ -72,6 +68,16 @@ if (!files.includes('index.html')) {
 
 if (forbidden.length > 0) {
   throw new Error(`部署产物包含开发或维护文件：\n${forbidden.join('\n')}`);
+}
+
+const html = await readFile(path.join(distDir, 'index.html'), 'utf8');
+const themeColor = html.match(/<meta\s+name=["']theme-color["']\s+content=["'](#[0-9a-f]{6})["']/i)?.[1]?.toLowerCase();
+const cssFiles = files.filter((file) => file.endsWith('.css'));
+const css = (await Promise.all(cssFiles.map((file) => readFile(path.join(distDir, file), 'utf8')))).join('\n');
+const canvasColor = css.match(/--warm-white:(#[0-9a-f]{6})/i)?.[1]?.toLowerCase();
+
+if (!themeColor || !canvasColor || themeColor !== canvasColor) {
+  throw new Error(`theme-color 与网页基础色不一致：theme-color=${themeColor || '缺失'}，--warm-white=${canvasColor || '缺失'}`);
 }
 
 console.log(`部署产物校验通过：dist/ 共 ${files.length} 个运行时文件。`);

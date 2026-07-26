@@ -10,4 +10,5 @@ if (ids.size !== 40 || index.length !== 40 || indexIds.size !== 40 || index.some
 if (full.dishes.filter((dish) => dish.category === 'soup').length !== 5) throw new Error('汤必须恰好 5 道');
 if (full.dishes.some((dish) => dish.sourceCategory === 'aquatic' || dish.exclusionReason === 'fish')) throw new Error('当前菜单不得包含鱼类');
 if (full.dishes.some((dish) => JSON.stringify(dish).includes('茄子'))) throw new Error('当前菜单不得包含茄子');
+if (index.some((dish) => !/^[a-z]+(?:-[a-z]+)*$/.test(dish.pinyinKey || ''))) throw new Error('每道运行菜必须维护有效拼音排序键');
 console.log('数据校验通过：40 道菜，5 道汤，不含茄子，ID 与索引一致。');

@@ -13,9 +13,18 @@ export async function copyText(text) {
 }
 
 export async function shareUrl(url) {
-  if (navigator.share) return navigator.share({ title: '今晚的菜单', text: '今晚吃这些，点开看菜谱和采购清单。', url });
-  await copyText(url);
-  return 'copied';
+  if (!navigator.share) {
+    await copyText(url);
+    return 'copied';
+  }
+  try {
+    await navigator.share({ title: '今晚的菜单', text: '今晚吃这些，点开看菜谱和采购清单。', url });
+    return 'shared';
+  } catch (error) {
+    if (error?.name === 'AbortError') return 'cancelled';
+    await copyText(url);
+    return 'copied-after-failure';
+  }
 }
 
 export function renderQr(canvas, url) {

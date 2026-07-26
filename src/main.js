@@ -1,8 +1,8 @@
 import './styles.css';
-import { loadAppData } from './data.js';
-import { decodeMenu, encodeMenu, normalizeDraft } from './menu-state.js';
-import { renderPicker } from './ui/picker.js';
-import { renderRecipient } from './ui/recipient.js';
+import { loadAppData } from './infrastructure/load-app-data.js';
+import { decodeMenu, encodeMenu, normalizeDraft } from './domain/menu-state.js';
+import { renderPicker } from './features/picker/picker.js';
+import { renderRecipient } from './features/recipient/recipient.js';
 
 const root = document.querySelector('#app');
 
@@ -20,7 +20,7 @@ async function start() {
     let savedDraft = {};
     try { savedDraft = JSON.parse(localStorage.getItem('home-menu-draft') || '{}'); } catch {}
     const draft = normalizeDraft(savedDraft, validIds);
-    renderPicker(root, { index, initialSelected: draft.selected, initialServings: draft.servings, initialNotes: draft.notes, initialSuggestion: draft.suggestion, makeUrl: encodeMenu });
+    renderPicker(root, { index, dishes, initialSelected: draft.selected, initialServings: draft.servings, initialNotes: draft.notes, initialSuggestion: draft.suggestion, makeUrl: encodeMenu });
   } catch (error) {
     root.innerHTML = `<main class="error-state"><span>🍚</span><h1>菜谱暂时没端上来</h1><p>${error.message}</p><button class="button primary" onclick="location.reload()">重试</button></main>`;
   }

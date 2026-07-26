@@ -6,13 +6,18 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "vite",
+    "demo:phone": "node scripts/run-workflow.mjs demo:phone",
+    "demo:stop": "node scripts/run-workflow.mjs demo:stop",
     "build": "vite build && node scripts/validate-deploy.mjs",
-    "build:sites": "vite build && node scripts/validate-deploy.mjs && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "validate:data": "node scripts/validate-data.mjs"
+    "check:fast": "node scripts/run-workflow.mjs check:fast",
+    "check:phone": "node scripts/run-workflow.mjs check:phone",
+    "check:full": "node scripts/run-workflow.mjs check:full",
+    "validate:data": "node scripts/validate-data.mjs",
+    "validate:docs": "node scripts/validate-docs.mjs"
   },
   "dependencies": {
     "qrcode": "^1.5.4"

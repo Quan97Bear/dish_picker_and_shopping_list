@@ -2,6 +2,7 @@
   {
     "id": "tomato-egg",
     "name": "西红柿炒鸡蛋",
+    "pinyinKey": "xihongshi-chao-jidan",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -20,6 +21,7 @@
   {
     "id": "hot-sour-potato",
     "name": "酸辣土豆丝",
+    "pinyinKey": "suanla-tudousi",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -38,6 +40,7 @@
   {
     "id": "hand-torn-cabbage",
     "name": "手撕包菜",
+    "pinyinKey": "shousi-baocai",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -56,6 +59,7 @@
   {
     "id": "garlic-broccoli",
     "name": "蒜蓉西兰花",
+    "pinyinKey": "suanrong-xilanhua",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -72,6 +76,7 @@
   {
     "id": "oyster-lettuce",
     "name": "蚝油生菜",
+    "pinyinKey": "haoyou-shengcai",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -88,6 +93,7 @@
   {
     "id": "chive-egg",
     "name": "韭菜炒蛋",
+    "pinyinKey": "jiucai-chaodan",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -106,6 +112,7 @@
   {
     "id": "zucchini-egg",
     "name": "西葫芦炒鸡蛋",
+    "pinyinKey": "xihulu-chao-jidan",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -124,6 +131,7 @@
   {
     "id": "scallion-tofu",
     "name": "葱煎豆腐",
+    "pinyinKey": "cong-jian-doufu",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -140,6 +148,7 @@
   {
     "id": "pepper-pork",
     "name": "辣椒炒肉",
+    "pinyinKey": "lajiao-chaorou",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -160,6 +169,7 @@
   {
     "id": "kung-pao-chicken",
     "name": "宫保鸡丁",
+    "pinyinKey": "gongbao-jiding",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -178,6 +188,7 @@
   {
     "id": "fish-fragrant-pork",
     "name": "鱼香肉丝",
+    "pinyinKey": "yuxiang-rousi",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -198,6 +209,7 @@
   {
     "id": "mapo-tofu",
     "name": "麻婆豆腐",
+    "pinyinKey": "mapo-doufu",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -217,6 +229,7 @@
   {
     "id": "cola-wings",
     "name": "可乐鸡翅",
+    "pinyinKey": "kele-jichi",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -233,6 +246,7 @@
   {
     "id": "braised-chicken",
     "name": "黄焖鸡",
+    "pinyinKey": "huangmenji",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -251,6 +265,7 @@
   {
     "id": "potato-ribs",
     "name": "土豆炖排骨",
+    "pinyinKey": "tudou-dun-paigu",
     "category": "stew",
     "categoryName": "炖菜",
     "tags": [
@@ -269,6 +284,7 @@
   {
     "id": "tomato-beef-stew",
     "name": "西红柿土豆炖牛肉",
+    "pinyinKey": "xihongshi-tudou-dun-niurou",
     "category": "stew",
     "categoryName": "炖菜",
     "tags": [
@@ -285,6 +301,7 @@
   {
     "id": "twice-cooked-pork",
     "name": "回锅肉",
+    "pinyinKey": "huiguorou",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -304,6 +321,7 @@
   {
     "id": "mushroom-chicken",
     "name": "香菇滑鸡",
+    "pinyinKey": "xianggu-huaji",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -320,6 +338,7 @@
   {
     "id": "onion-pork",
     "name": "洋葱炒猪肉",
+    "pinyinKey": "yangcong-chao-zhurou",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -338,6 +357,7 @@
   {
     "id": "cabbage-pork-noodle-stew",
     "name": "白菜猪肉炖粉条",
+    "pinyinKey": "baicai-zhurou-dun-fentiao",
     "category": "stew",
     "categoryName": "炖菜",
     "tags": [
@@ -356,6 +376,7 @@
   {
     "id": "pepper-potato-pork",
     "name": "青椒土豆炒肉",
+    "pinyinKey": "qingjiao-tudou-chaorou",
     "category": "mixed",
     "categoryName": "混合菜",
     "tags": [
@@ -375,6 +396,7 @@
   {
     "id": "garlic-sprout-mince",
     "name": "蒜苔炒肉末",
+    "pinyinKey": "suantai-chao-roumo",
     "category": "mixed",
     "categoryName": "混合菜",
     "tags": [
@@ -394,6 +416,7 @@
   {
     "id": "tomato-egg-soup",
     "name": "西红柿鸡蛋汤",
+    "pinyinKey": "xihongshi-jidan-tang",
     "category": "soup",
     "categoryName": "汤",
     "tags": [
@@ -412,6 +435,7 @@
   {
     "id": "seaweed-egg-soup",
     "name": "紫菜蛋花汤",
+    "pinyinKey": "zicai-danhua-tang",
     "category": "soup",
     "categoryName": "汤",
     "tags": [
@@ -430,6 +454,7 @@
   {
     "id": "corn-rib-soup",
     "name": "玉米排骨汤",
+    "pinyinKey": "yumi-paigu-tang",
     "category": "soup",
     "categoryName": "汤",
     "tags": [
@@ -448,6 +473,7 @@
   {
     "id": "yam-corn-rib-soup",
     "name": "排骨山药玉米汤",
+    "pinyinKey": "paigu-shanyao-yumi-tang",
     "category": "soup",
     "categoryName": "汤",
     "tags": [
@@ -466,6 +492,7 @@
   {
     "id": "cucumber-century-egg-soup",
     "name": "黄瓜皮蛋汤",
+    "pinyinKey": "huanggua-pidan-tang",
     "category": "soup",
     "categoryName": "汤",
     "tags": [
@@ -484,6 +511,7 @@
   {
     "id": "stir-fried-bok-choy",
     "name": "清炒小白菜",
+    "pinyinKey": "qingchao-xiaobaicai",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -500,6 +528,7 @@
   {
     "id": "garlic-a-choy",
     "name": "蒜蓉油麦菜",
+    "pinyinKey": "suanrong-youmaicai",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -516,6 +545,7 @@
   {
     "id": "mushroom-bok-choy",
     "name": "香菇油菜",
+    "pinyinKey": "xianggu-youcai",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -532,6 +562,7 @@
   {
     "id": "celery-pork",
     "name": "芹菜炒肉",
+    "pinyinKey": "qincai-chaorou",
     "category": "mixed",
     "categoryName": "混合菜",
     "tags": [
@@ -550,6 +581,7 @@
   {
     "id": "moo-shu-pork",
     "name": "木须肉",
+    "pinyinKey": "muxurou",
     "category": "mixed",
     "categoryName": "混合菜",
     "tags": [
@@ -569,6 +601,7 @@
   {
     "id": "pan-fried-chicken-thigh",
     "name": "香煎鸡腿",
+    "pinyinKey": "xiangjian-jitui",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -585,6 +618,7 @@
   {
     "id": "potato-chicken",
     "name": "土豆烧鸡",
+    "pinyinKey": "tudou-shaoji",
     "category": "stew",
     "categoryName": "炖菜",
     "tags": [
@@ -601,6 +635,7 @@
   {
     "id": "red-braised-pork",
     "name": "红烧肉",
+    "pinyinKey": "hongshaorou",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -619,6 +654,7 @@
   {
     "id": "sweet-sour-ribs",
     "name": "糖醋排骨",
+    "pinyinKey": "tangcu-paigu",
     "category": "meat",
     "categoryName": "肉菜",
     "tags": [
@@ -637,6 +673,7 @@
   {
     "id": "steamed-egg",
     "name": "蒸水蛋",
+    "pinyinKey": "zheng-shuidan",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -655,6 +692,7 @@
   {
     "id": "home-style-tofu",
     "name": "家常豆腐",
+    "pinyinKey": "jiachang-doufu",
     "category": "mixed",
     "categoryName": "混合菜",
     "tags": [
@@ -671,6 +709,7 @@
   {
     "id": "cucumber-egg",
     "name": "黄瓜炒蛋",
+    "pinyinKey": "huanggua-chaodan",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [
@@ -689,6 +728,7 @@
   {
     "id": "cabbage-vermicelli",
     "name": "包菜炒粉丝",
+    "pinyinKey": "baocai-chao-fensi",
     "category": "vegetable",
     "categoryName": "素菜",
     "tags": [

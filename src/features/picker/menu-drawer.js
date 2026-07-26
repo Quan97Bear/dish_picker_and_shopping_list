@@ -1,6 +1,10 @@
-import { MAX_SUGGESTION_LENGTH } from '../menu-state.js';
+import { MAX_SUGGESTION_LENGTH } from '../../domain/menu-state.js';
 
-export function createMenuDrawer({ selected, dishMap, servings, notes, suggestion, onNote, onSuggestion, onRemove, onClear, onServings, onGenerate, onClose }) {
+export function stepServings(value, delta) {
+  return Math.min(8, Math.max(1, value + delta));
+}
+
+export function createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds = new Set(), onNote, onSuggestion, onRemove, onClear, onServings, onGenerate, onClose }) {
   const backdrop = document.createElement('div');
   backdrop.className = 'drawer-backdrop';
   backdrop.addEventListener('click', (event) => { if (event.target === backdrop) onClose(); });
@@ -11,6 +15,13 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
   drawer.setAttribute('aria-labelledby', 'drawer-title');
   drawer.tabIndex = -1;
   drawer.innerHTML = `<div class="drawer-handle"></div><div class="section-heading"><div><span class="eyebrow">已选菜品</span><h2 id="drawer-title">今日菜单</h2></div><button class="icon-button" data-close aria-label="关闭菜单">×</button></div>`;
+  if (conflictingIds.size) {
+    const conflictNotice = document.createElement('p');
+    conflictNotice.className = 'dietary-conflict-notice';
+    conflictNotice.setAttribute('role', 'status');
+    conflictNotice.textContent = `已保留 ${conflictingIds.size} 道与当前忌口冲突的菜，请确认是否移除`;
+    drawer.append(conflictNotice);
+  }
   const list = document.createElement('ul');
   list.className = 'selected-list';
   for (const id of selected) {
@@ -18,7 +29,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
     const item = document.createElement('li');
     item.innerHTML = `<div class="selected-dish">
       <div class="selected-dish-row">
-        <strong>${dish.name}</strong>
+        <span class="selected-dish-name"><strong>${dish.name}</strong>${conflictingIds.has(id) ? '<small class="dietary-conflict-label">与当前忌口冲突</small>' : ''}</span>
         <div class="note-control"></div>
         <button class="text-button danger dish-remove" data-remove aria-label="移除 ${dish.name}">移除</button>
       </div>
@@ -118,8 +129,23 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
   const controls = document.createElement('div');
   controls.className = 'drawer-controls';
   controls.innerHTML = `<label for="servings">用餐人数</label><div class="stepper"><button data-minus aria-label="减少人数">−</button><output id="servings">${servings} 人</output><button data-plus aria-label="增加人数">+</button></div>`;
-  controls.querySelector('[data-minus]').addEventListener('click', () => onServings(Math.max(1, servings - 1)));
-  controls.querySelector('[data-plus]').addEventListener('click', () => onServings(Math.min(8, servings + 1)));
+  const minus = controls.querySelector('[data-minus]');
+  const plus = controls.querySelector('[data-plus]');
+  const output = controls.querySelector('output');
+  let currentServings = servings;
+  const updateServings = (nextValue) => {
+    if (nextValue === currentServings) return;
+    currentServings = nextValue;
+    output.value = `${currentServings} 人`;
+    output.textContent = `${currentServings} 人`;
+    minus.disabled = currentServings === 1;
+    plus.disabled = currentServings === 8;
+    onServings(currentServings);
+  };
+  minus.disabled = currentServings === 1;
+  plus.disabled = currentServings === 8;
+  minus.addEventListener('click', () => updateServings(stepServings(currentServings, -1)));
+  plus.addEventListener('click', () => updateServings(stepServings(currentServings, 1)));
   drawer.append(controls);
   const actions = document.createElement('div');
   actions.className = 'drawer-actions';
