@@ -5,13 +5,13 @@
 
 ## Resume here
 
-- 阶段：P1 本地候选版本
+- 阶段：P1 已发布，等待真机浏览器验收
 - 进行中：P1-58 / P1-59 顶部奶油色体验，等待真机验收
 - 下一步：在 iPhone Safari 验证页首、吸顶、预览打开、预览关闭和底部工具栏展开/收起
 - 阻塞：系统浏览器界面无法由 Playwright 代替真机确认；微信内置浏览器仍待复验
 - 本地构建：`index-DLxdGyu-.js` + `index-GqAVB97S.css`
-- 生产构建：`index-vTPQ_Vvc.js` + `index-CYz3DWOC.css`
-- 最近验证：结构清理后 83 个 Vitest、28 个完整 Playwright、数据校验、构建、产物检查和文档检查全部通过
+- 生产构建：`index-DLxdGyu-.js` + `index-GqAVB97S.css`
+- 最近验证：83 个 Vitest、28 个完整 Playwright、数据校验、构建、产物检查、文档检查和正式域名资源哈希核对全部通过
 - 本地手机演示：`npm run demo:phone`（免构建、自动刷新）
 - 本地演示关闭：`npm run demo:stop`（只停止本项目的 5173 监听进程）
 - 固定检查入口：`check:fast`、`check:phone`、`check:full`、`validate:docs`
@@ -40,8 +40,8 @@
 - [?] P1-59 网页内容位于 iOS 状态栏下方，预览开关保持滚动位置
 - [ ] P1-53 微信内置浏览器复验
 - [ ] P1-34 完成 iPhone Safari、微信、横屏和较大字体视觉回归
-- [ ] P1-35 部署当前 `dist/` 到 Cloudflare Pages
-- [ ] P1-36 核对生产资源哈希并更新生产状态
+- [x] P1-35 部署当前 `dist/` 到 Cloudflare Pages
+- [x] P1-36 核对生产资源哈希并更新生产状态
 
 ### 结果页与分享流程
 

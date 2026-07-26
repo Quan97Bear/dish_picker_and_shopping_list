@@ -11,8 +11,8 @@
 
 生产资源：
 
-- JavaScript：`index-vTPQ_Vvc.js`
-- CSS：`index-CYz3DWOC.css`
+- JavaScript：`index-DLxdGyu-.js`
+- CSS：`index-GqAVB97S.css`
 
 当前生产能力：
 
@@ -25,6 +25,8 @@
 - URL、二维码、系统分享和复制链接
 - 分享页中的完整菜谱与可生成采购清单
 - 采购清单缩放、合并、来源菜品、折叠和本机勾选状态
+- 页面、页首、吸顶工具栏和预览使用同一个奶油色
+- 网页内容保持在 iOS 状态栏下方，预览开关保持滚动位置
 
 当前分享协议为 `v=1`，保存稳定菜品 ID、人数、备注和新菜建议。
 
@@ -36,7 +38,7 @@
 - CSS：`index-GqAVB97S.css`
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
-本地版本在生产能力基础上完成了：
+本地版本与当前生产版本使用相同构建，并包含：
 
 - 向 iOS Safari 提供与页面一致的奶油色主题信号
 - 页面、页首、吸顶工具栏和预览使用同一个奶油色
@@ -46,7 +48,7 @@
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-本地版本尚未发布到 Cloudflare Pages。
+当前构建已发布到 Cloudflare Pages，并通过正式域名资源哈希核对。
 
 ## 当前产品差异
 
@@ -67,15 +69,16 @@
 
 ## 最近验证
 
-2026-07-25 本地构建通过：
+2026-07-25 本地构建与生产发布通过：
 
 - 数据校验：40 道菜，5 道汤
 - Vitest：83
 - 手机关键 Playwright：6（3 条场景 × Chromium + WebKit）
 - Playwright：28（14 条 × Chromium + WebKit）
 - Vite 构建与部署产物检查
-- 文档检查：9 份活动文档、README 命令、文档职责和本地资源哈希
+- 文档检查：8 份活动文档、README 命令、文档职责和本地资源哈希
 - 360×800 和 390×844 网页层视觉复核
+- 正式域名加载 `index-DLxdGyu-.js` 与 `index-GqAVB97S.css`
 - `git diff --check`
 
 ## 维护欠账
