@@ -1,20 +1,44 @@
 # 今晚吃什么：执行清单
 
-更新日期：2026-07-25
+更新日期：2026-07-26
 需求来源：`PRODUCT_ROADMAP.md`
 
 ## Resume here
 
-- 阶段：P1 已发布，等待真机浏览器验收
-- 进行中：P1-58 / P1-59 顶部奶油色体验，等待真机验收
-- 下一步：在 iPhone Safari 验证页首、吸顶、预览打开、预览关闭和底部工具栏展开/收起
-- 阻塞：系统浏览器界面无法由 Playwright 代替真机确认；微信内置浏览器仍待复验
-- 本地构建：`index-DLxdGyu-.js` + `index-GqAVB97S.css`
-- 生产构建：`index-DLxdGyu-.js` + `index-GqAVB97S.css`
-- 最近验证：83 个 Vitest、28 个完整 Playwright、数据校验、构建、产物检查、文档检查和正式域名资源哈希核对全部通过
-- 本地手机演示：`npm run demo:phone`（免构建、自动刷新）
-- 本地演示关闭：`npm run demo:stop`（只停止本项目的 5173 监听进程）
-- 固定检查入口：`check:fast`、`check:phone`、`check:full`、`validate:docs`
+更新时间：2026-07-26
+当前阶段：P1-53 已通过手机 Demo 真机验收，等待发布
+
+### NOW — 只做这一项
+
+- [?] P1-53：发布并核对菜篮子 13px 安全区间距修复
+- 开始方式：部署当前 `dist/` 到 Cloudflare Pages 项目 `dish-picker`
+- 通过标准：正式域名加载 `index-BQ-XqYmy.js` 和 `index-iokskmLu.css`；菜篮子在生产微信内置浏览器中仍保持四个圆角完整、可点击
+- 当前结果：手机 Demo 功能验证通过；84 个 Vitest、数据校验、构建和部署产物检查通过
+- 完成后：将 P1-53 改为 `[x]`，把 NOW 切换到 P1-34 的横屏和较大字体检查
+
+### NEXT
+
+- [ ] P1-34：完成横屏和较大字体视觉回归
+
+### BLOCKED
+
+- 无
+
+### 最近结果
+
+- 2026-07-26：用户在手机 Demo 完成功能验证；菜篮子距右侧和底部安全区各 13px，白色方块显示完整
+- 2026-07-26：新增 CSS 合约单元测试；84 个 Vitest、数据校验、构建和部署产物检查通过，本地资源为 `index-BQ-XqYmy.js` + `index-iokskmLu.css`
+- 2026-07-26：菜篮子白色方块已统一改为距可视安全区右侧 13px、底部 13px；按用户要求未跑模拟测试和 unittest，等待手机 Demo 真机确认
+- 2026-07-26：微信确认菜篮子白色方块右下角被裁切；此前尝试的右距、badge 和底距修改均已撤回，问题仍待重新定位
+- 2026-07-26：用户确认 P1-58 / P1-59 的 iPhone Safari 真机验收通过
+- 2026-07-25：本地与生产构建均为 `index-DLxdGyu-.js` + `index-GqAVB97S.css`
+- 2026-07-25：83 个 Vitest、28 个完整 Playwright、数据校验、构建、产物检查、文档检查和正式域名资源哈希核对全部通过
+
+### 固定入口
+
+- 手机演示：`npm run demo:phone`（免构建、自动刷新）
+- 关闭演示：`npm run demo:stop`（只停止本项目的 5173 监听进程）
+- 验证命令：`npm run check:fast`、`npm run check:phone`、`npm run check:full`、`npm run validate:docs`
 
 状态：
 
@@ -36,9 +60,9 @@
 
 ### 手机浏览器验收与发布
 
-- [?] P1-58 页首、页面、吸顶工具栏和预览保持同一个奶油色
-- [?] P1-59 网页内容位于 iOS 状态栏下方，预览开关保持滚动位置
-- [ ] P1-53 微信内置浏览器复验
+- [x] P1-58 页首、页面、吸顶工具栏和预览保持同一个奶油色
+- [x] P1-59 网页内容位于 iOS 状态栏下方，预览开关保持滚动位置
+- [?] P1-53 微信内置浏览器菜篮子修复已通过手机 Demo，等待发布
 - [ ] P1-34 完成 iPhone Safari、微信、横屏和较大字体视觉回归
 - [x] P1-35 部署当前 `dist/` 到 Cloudflare Pages
 - [x] P1-36 核对生产资源哈希并更新生产状态
