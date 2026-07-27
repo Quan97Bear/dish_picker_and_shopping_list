@@ -17,10 +17,11 @@ constraints that must survive every change.
 
 ## Start every task here
 
-1. Read `docs/PROJECT_STATUS.md` for deployed facts, known issues, and the current
-   handoff.
-2. Read the **Resume here** section at the top of `docs/TODO.md` to learn what is in
-   progress and what should be done next.
+1. Read only the **Resume here** section at the top of `docs/TODO.md`. Treat its
+   single `NOW` item as the current work unless the user's latest instruction
+   replaces it.
+2. Read the relevant parts of `docs/PROJECT_STATUS.md` to confirm deployed facts,
+   known issues, or blockers that affect `NOW`.
 3. Read only the documents needed for the request:
    - Product behavior or acceptance criteria: `docs/PRODUCT_REQUIREMENTS.md`
    - Approved future work or architecture: `docs/PRODUCT_ROADMAP.md`
@@ -60,17 +61,21 @@ same workflow name. Do not install npm or reconstruct the steps.
 
 Use this order:
 
-1. Report any item marked **in progress** or **awaiting verification** in
-   `docs/TODO.md`.
-2. Otherwise report the first unchecked item in **Resume here**.
+1. Report the single `NOW` item in `docs/TODO.md` **Resume here**.
+2. If `NOW` is absent, report the first item in `NEXT`; only then inspect the
+   detailed checklist for an in-progress, awaiting-verification, or unchecked
+   item.
 3. Mention blockers from `docs/PROJECT_STATUS.md`.
 4. Recommend one bounded next work unit; do not propose starting a later phase
    while an earlier priority is unfinished.
 
 At the end of any implementation session:
 
-- Update **Resume here** in `docs/TODO.md` with the last verified result, current
-  work, exact next task, blockers, and validation still required.
+- Keep exactly one item under `NOW` in `docs/TODO.md` **Resume here**. Record its
+  start action, acceptance criteria, result location, blockers, and the item
+  that becomes `NOW` after completion.
+- Add the last verified result with its date, then update `NEXT` and remaining
+  validation before ending the session.
 - Check an item only after its acceptance checks pass.
 - Update `docs/PROJECT_STATUS.md` only after user-visible behavior is deployed and
   verified in production.

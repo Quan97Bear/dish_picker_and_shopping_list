@@ -20,3 +20,25 @@ describe('floating basket layout contract', () => {
     expect(bottomOffsets).toEqual([13]);
   });
 });
+
+describe('picker preference row layout contract', () => {
+  it('keeps category, dietary and sticky rows at the same 56px height', () => {
+    expect(styles).toMatch(
+      /\.filter-toolbar\{[^}]*height:56px;[^}]*padding:4px max\(14px,calc\(\(100% - 1160px\)\/2 \+ 24px\)\)/,
+    );
+    expect(styles).toMatch(
+      /\.avoid-section\{position:relative;height:56px;[^}]*padding-block:6px\}/,
+    );
+  });
+});
+
+describe('dish add control icon contract', () => {
+  it('draws a compact 10px plus geometrically from the icon center', () => {
+    expect(styles).toMatch(
+      /\.add-button\[aria-pressed="false"\] \.add-button-icon:before,[\s\S]*top:50%;[\s\S]*left:50%;[\s\S]*width:10px;[\s\S]*height:2px;[\s\S]*transform:translate\(-50%,-50%\)/,
+    );
+    expect(styles).toMatch(
+      /\.add-button\[aria-pressed="false"\] \.add-button-icon:after\{[^}]*rotate\(90deg\)/,
+    );
+  });
+});

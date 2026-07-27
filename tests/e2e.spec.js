@@ -610,9 +610,27 @@ test('theme, canvas, header, sticky toolbar and preview keep one cream material'
   expect(expectedMaterial.toolbarImage).toBe('none');
   await expect(toolbar).not.toHaveClass(/is-stuck/);
   await expect(page.locator('.sticky-toolbar-surface')).toHaveCount(0);
+  const compactToolbarMetrics = await page.evaluate(() => {
+    const toolbarElement = document.querySelector('.filter-toolbar');
+    const avoidSection = document.querySelector('.avoid-section');
+    const controls = [...toolbarElement.querySelectorAll('button'), ...avoidSection.querySelectorAll('button')]
+      .filter((control) => {
+        const rect = control.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      });
+    return {
+      toolbarHeight: toolbarElement.getBoundingClientRect().height,
+      avoidHeight: avoidSection.getBoundingClientRect().height,
+      minimumControlHeight: Math.min(...controls.map((control) => control.getBoundingClientRect().height)),
+    };
+  });
+  expect(compactToolbarMetrics.toolbarHeight).toBe(56);
+  expect(compactToolbarMetrics.avoidHeight).toBe(56);
+  expect(compactToolbarMetrics.minimumControlHeight).toBeGreaterThanOrEqual(44);
 
   await page.evaluate(() => window.scrollTo(0,900));
   await expect(toolbar).toHaveClass(/is-stuck/);
+  expect(await toolbar.evaluate((element) => element.getBoundingClientRect().height)).toBe(56);
   expect(await readMaterial()).toEqual(expectedMaterial);
 
   await page.evaluate(() => window.scrollTo(0,0));

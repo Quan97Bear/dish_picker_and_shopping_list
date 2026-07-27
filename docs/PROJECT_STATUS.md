@@ -34,8 +34,8 @@
 
 当前构建：
 
-- JavaScript：`index-BQ-XqYmy.js`
-- CSS：`index-iokskmLu.css`
+- JavaScript：`index-12rSd-li.js`
+- CSS：`index-MDCsyraR.css`
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
 本地候选版本尚未发布，并包含：
@@ -46,10 +46,12 @@
 - 预览覆盖整个网页可视区域，打开和关闭保持滚动位置
 - 菜篮子周围保持透明
 - 菜篮子距右侧和底部安全区各 13px，已通过微信手机 Demo 功能验证
+- 分类行、忌口行和吸顶栏统一为 56px，已通过手机 Demo 真机确认
+- 未选中菜品使用居中的 10×2px CSS 几何加号，已通过手机 Demo 真机确认
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-当前构建已发布到 Cloudflare Pages，并通过正式域名资源哈希核对。
+生产基线已发布到 Cloudflare Pages，并通过正式域名资源哈希核对；以上本地候选版本尚未发布。
 
 ## 当前产品差异
 
@@ -57,7 +59,7 @@
 2. 采购清单仍在分享页中点击生成；尚未默认展示。
 3. 日历导出尚未实现。
 4. 菜篮子 13px 安全区间距修复已通过微信手机 Demo，尚未发布到生产。
-5. 横屏和较大字体视觉回归仍待完成。
+5. iPhone Safari、微信和横屏视觉回归已完成；较大字体检查延后。
 
 ## 数据与架构边界
 
@@ -73,10 +75,12 @@
 2026-07-26 本地候选版本通过：
 
 - 微信手机 Demo 功能验证：菜篮子白色方块四个圆角完整
+- 用户真机确认：菜篮子安全区间距、三行 56px 高度和 10×2px 居中加号
 - 数据校验：40 道菜，5 道汤
-- Vitest：84
+- Vitest：86（含三行 56px 与加号几何居中 CSS 合约）
+- 手机关键 Playwright：6（3 条场景 × Chromium + WebKit）
 - Vite 构建与部署产物检查
-- 本地资源：`index-BQ-XqYmy.js` 与 `index-iokskmLu.css`
+- 本地资源：`index-12rSd-li.js` 与 `index-MDCsyraR.css`
 
 2026-07-25 本地构建与生产发布通过：
 
