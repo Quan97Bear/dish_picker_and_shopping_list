@@ -38,12 +38,13 @@
 
 当前构建：
 
-- JavaScript：`index-CRx1y5bQ.js`
+- JavaScript：`index-Ce1VOU7Y.js`
 - CSS：`index-lGrJxba2.css`
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
-本地版本与当前生产版本一致，并包含：
+本地版本包含：
 
+- 菜单主动作显示“完成选菜”，当前仍进入原有分享弹层；已通过手机 Demo 真机确认
 - 点击搜索时保持页面位置；大搜索条使用更高层专注遮罩与页面锁，小放大镜使用吸顶专注遮罩；两者都在搜索框下方轻度模糊并禁止操作，完成键退出
 - 向 iOS Safari 提供与页面一致的奶油色主题信号
 - 页面、页首、吸顶工具栏和预览使用同一个奶油色
@@ -56,7 +57,7 @@
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-当前版本已发布到 Cloudflare Pages，并通过正式域名资源哈希核对。
+本地候选版本尚未发布；生产仍使用 `index-CRx1y5bQ.js` + `index-lGrJxba2.css`。
 
 ## 当前产品差异
 

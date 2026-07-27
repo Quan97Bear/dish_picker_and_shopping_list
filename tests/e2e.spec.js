@@ -25,7 +25,7 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'}).click();
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
   await page.getByRole('button',{name:'完成西红柿炒鸡蛋备注'}).click();
-  await page.getByRole('button',{name:'生成菜单'}).click();
+  await page.getByRole('button',{name:'完成选菜'}).click();
   await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toBeFocused();
   const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
   await page.goto(href);

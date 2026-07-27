@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { stepServings } from '../src/features/picker/menu-drawer.js';
+import { getMenuPrimaryActionLabel, stepServings } from '../src/features/picker/menu-drawer.js';
 import { getDietaryConflictIds } from '../src/features/picker/picker.js';
 import { copyText, shareUrl } from '../src/shared/share.js';
 
@@ -21,6 +21,13 @@ describe('servings stepper', () => {
     expect(servings).toBe(8);
     for (let index = 0; index < 10; index += 1) servings = stepServings(servings, -1);
     expect(servings).toBe(1);
+  });
+});
+
+describe('menu completion action', () => {
+  it('finishes a selected menu without presenting sharing as the primary action', () => {
+    expect(getMenuPrimaryActionLabel(['tomato-egg'])).toBe('完成选菜');
+    expect(getMenuPrimaryActionLabel([])).toBe('发送建议');
   });
 });
 

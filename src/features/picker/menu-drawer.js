@@ -4,6 +4,10 @@ export function stepServings(value, delta) {
   return Math.min(8, Math.max(1, value + delta));
 }
 
+export function getMenuPrimaryActionLabel(selected) {
+  return selected.length ? '完成选菜' : '发送建议';
+}
+
 export function createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds = new Set(), onNote, onSuggestion, onRemove, onClear, onServings, onGenerate, onClose }) {
   const backdrop = document.createElement('div');
   backdrop.className = 'drawer-backdrop';
@@ -150,7 +154,7 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
   const actions = document.createElement('div');
   actions.className = 'drawer-actions';
   const canGenerate = selected.length > 0 || suggestion?.trim();
-  actions.innerHTML = `<button class="button primary" data-generate ${canGenerate ? '' : 'disabled'}>${selected.length ? '生成菜单' : '发送建议'}</button><button class="button secondary" data-close2>继续选菜</button><button class="text-button danger" data-clear ${canGenerate ? '' : 'disabled'}>清空全部</button>`;
+  actions.innerHTML = `<button class="button primary" data-generate ${canGenerate ? '' : 'disabled'}>${getMenuPrimaryActionLabel(selected)}</button><button class="button secondary" data-close2>继续选菜</button><button class="text-button danger" data-clear ${canGenerate ? '' : 'disabled'}>清空全部</button>`;
   actions.querySelector('[data-generate]').addEventListener('click', onGenerate);
   actions.querySelector('[data-close2]').addEventListener('click', onClose);
   actions.querySelector('[data-clear]').addEventListener('click', onClear);
