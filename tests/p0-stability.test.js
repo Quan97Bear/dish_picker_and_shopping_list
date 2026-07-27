@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getMenuPrimaryActionLabel, stepServings } from '../src/features/picker/menu-drawer.js';
 import { getDietaryConflictIds } from '../src/features/picker/picker.js';
+import { getNextResultTabIndex, getShoppingCollapseState } from '../src/features/recipient/recipient.js';
 import { resetScrollForInstantViewChange } from '../src/shared/route-transition.js';
 import { copyText, shareUrl } from '../src/shared/share.js';
 
@@ -48,6 +49,29 @@ describe('menu completion action', () => {
     expect(page.style.scrollBehavior).toBe('auto');
     restore();
     expect(page.style.scrollBehavior).toBe('smooth');
+  });
+});
+
+describe('result page controls', () => {
+  it('supports wrapping arrow navigation and Home/End between result tabs', () => {
+    expect(getNextResultTabIndex(0, 'ArrowRight', 2)).toBe(1);
+    expect(getNextResultTabIndex(1, 'ArrowRight', 2)).toBe(0);
+    expect(getNextResultTabIndex(0, 'ArrowLeft', 2)).toBe(1);
+    expect(getNextResultTabIndex(1, 'Home', 2)).toBe(0);
+    expect(getNextResultTabIndex(0, 'End', 2)).toBe(1);
+  });
+
+  it('keeps the shopping heading available while collapsing only its groups', () => {
+    expect(getShoppingCollapseState(false)).toEqual({
+      ariaExpanded: 'false',
+      label: '展开整个采购清单',
+      groupsHidden: true
+    });
+    expect(getShoppingCollapseState(true)).toEqual({
+      ariaExpanded: 'true',
+      label: '收起整个采购清单',
+      groupsHidden: false
+    });
   });
 });
 

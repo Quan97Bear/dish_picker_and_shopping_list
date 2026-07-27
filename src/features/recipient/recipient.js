@@ -3,10 +3,32 @@ import { splitSuggestionList } from '../../domain/menu-state.js';
 import { copyText } from '../../shared/share.js';
 import { showToast } from '../../shared/toast.js';
 
+export function getNextResultTabIndex(index, key, length) {
+  if (key === 'Home') return 0;
+  if (key === 'End') return length - 1;
+  if (key === 'ArrowRight') return (index + 1) % length;
+  if (key === 'ArrowLeft') return (index - 1 + length) % length;
+  return index;
+}
+
+export function getShoppingCollapseState(expanded) {
+  return {
+    ariaExpanded: String(expanded),
+    label: expanded ? '收起整个采购清单' : '展开整个采购清单',
+    groupsHidden: !expanded
+  };
+}
+
 export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [] }) {
   const title = dishes.length ? '今晚吃这些' : suggestion ? '收到新菜建议' : '这份菜单空空的';
   const subtitle = dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : suggestion ? '选菜人想在菜单里看到这些菜。' : '菜品可能已下架，或链接不完整。';
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${title}</h1><p>${subtitle}</p><div class="menu-tags"></div>${dishes.length ? '<button class="button primary shopping-trigger" aria-controls="shopping-panel" aria-expanded="false" aria-label="生成采购清单">生成采购清单 <span aria-hidden="true">↓</span></button>' : '<a class="button primary" href="./">返回菜单</a>'}</section><section class="warning-area" aria-live="polite"></section><section class="suggestion-card" ${suggestion ? '' : 'hidden'} aria-labelledby="suggestion-card-title"><span class="eyebrow">新菜建议</span><h2 id="suggestion-card-title">想新增这些菜</h2><div class="suggestion-tags"></div></section><section id="shopping-panel" class="shopping-panel" hidden aria-labelledby="shopping-title"></section><section class="recipes" ${dishes.length ? '' : 'hidden'} aria-labelledby="recipes-title"><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section></main>`;
+  const resultTabs = dishes.length
+    ? '<div class="result-tabs" role="tablist" aria-label="结果内容"><button id="shopping-tab" role="tab" aria-selected="true" aria-controls="shopping-panel">采购清单</button><button id="recipes-tab" role="tab" aria-selected="false" aria-controls="recipes-panel" tabindex="-1">菜谱</button></div>'
+    : '<a class="button primary" href="./">返回菜单</a>';
+  const resultPanels = dishes.length
+    ? '<section id="shopping-panel" class="shopping-panel result-panel" role="tabpanel" aria-labelledby="shopping-tab"></section><section id="recipes-panel" class="recipes result-panel" role="tabpanel" aria-labelledby="recipes-tab" hidden><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section>'
+    : '';
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${title}</h1><p>${subtitle}</p><div class="menu-tags"></div>${resultTabs}</section><section class="warning-area" aria-live="polite"></section><section class="suggestion-card" ${suggestion ? '' : 'hidden'} aria-labelledby="suggestion-card-title"><span class="eyebrow">新菜建议</span><h2 id="suggestion-card-title">想新增这些菜</h2><div class="suggestion-tags"></div></section>${resultPanels}</main>`;
   const tags = root.querySelector('.menu-tags');
   dishes.forEach((dish) => { const tag = document.createElement('span'); tag.textContent = dish.name; tags.append(tag); });
   const warningArea = root.querySelector('.warning-area');
@@ -33,39 +55,51 @@ export function renderRecipient(root, { dishes, servings, notes = {}, suggestion
     dish.steps.forEach((step) => { const item = document.createElement('li'); item.textContent = step; details.querySelector('.step-list').append(item); });
     recipeList.append(details);
   });
-  const shoppingTrigger = root.querySelector('.shopping-trigger');
+  if (!dishes.length) return;
+
   const shoppingPanel = root.querySelector('.shopping-panel');
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let shoppingReady = false;
-  const setShoppingOpen = (open, returnFocus = false) => {
-    shoppingPanel.hidden = !open;
-    shoppingTrigger.setAttribute('aria-expanded', String(open));
-    shoppingTrigger.setAttribute('aria-label', open ? '收起采购清单' : shoppingReady ? '展开采购清单' : '生成采购清单');
-    shoppingTrigger.innerHTML = `${open ? '收起' : shoppingReady ? '展开' : '生成'}采购清单 <span aria-hidden="true">${open ? '↑' : '↓'}</span>`;
-    if (open) shoppingPanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
-    if (!open && returnFocus) {
-      shoppingTrigger.focus({ preventScroll: true });
-      shoppingTrigger.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+  const items = buildShoppingList(dishes, servings);
+  shoppingPanel.innerHTML = `<div class="shopping-header"><div class="shopping-heading"><div><span class="eyebrow">一次买齐</span><h2 id="shopping-title">采购清单</h2><p>勾选状态会保存在这台设备上</p><button class="button secondary shopping-copy" data-copy-list>复制清单</button></div><button class="shopping-collapse" data-collapse-list aria-expanded="true" aria-controls="shopping-groups" aria-label="收起整个采购清单"><span class="disclosure-chevron" aria-hidden="true"></span></button></div></div><div id="shopping-groups" class="shopping-groups"></div>`;
+  let savedItems = [];
+  try { savedItems = JSON.parse(localStorage.getItem(`shopping:${location.search}`) || '[]'); } catch {}
+  const saved = new Set(Array.isArray(savedItems) ? savedItems : []);
+  for (const category of CATEGORY_ORDER) {
+    const categoryItems = items.filter((item) => item.shoppingCategory === category); if (!categoryItems.length) continue;
+    const group = document.createElement('details'); group.className = 'shopping-group'; group.open = true; group.innerHTML = `<summary><h3>${category}<span>${categoryItems.length}</span></h3><span class="disclosure-chevron" aria-hidden="true"></span></summary><ul></ul>`;
+    categoryItems.forEach((item) => { const id = `${item.key}|${item.unit}|${item.optional}`; const li = document.createElement('li'); const checked = saved.has(id);
+      li.innerHTML = `<label class="check-row"><input type="checkbox" ${checked ? 'checked' : ''}><span class="custom-check"></span><span class="item-name"><span>${item.name}${item.optional ? '<small class="optional-label">可选</small>' : ''}</span><small class="ingredient-source">用于：${item.dishes.join('、')}</small></span><strong>${item.amount ?? ''}${item.unit === '适量' ? '适量' : item.unit}</strong></label>`;
+      li.querySelector('input').addEventListener('change', (event) => { event.target.checked ? saved.add(id) : saved.delete(id); localStorage.setItem(`shopping:${location.search}`, JSON.stringify([...saved])); }); group.querySelector('ul').append(li);
+    }); shoppingPanel.querySelector('.shopping-groups').append(group);
+  }
+  shoppingPanel.querySelector('[data-copy-list]').addEventListener('click', async () => { await copyText(shoppingListText(items)); showToast('采购清单已复制'); });
+  const shoppingCollapse = shoppingPanel.querySelector('[data-collapse-list]');
+  const shoppingGroups = shoppingPanel.querySelector('.shopping-groups');
+  shoppingCollapse.addEventListener('click', () => {
+    const expanded = shoppingCollapse.getAttribute('aria-expanded') === 'true';
+    const nextState = getShoppingCollapseState(!expanded);
+    shoppingCollapse.setAttribute('aria-expanded', nextState.ariaExpanded);
+    shoppingCollapse.setAttribute('aria-label', nextState.label);
+    shoppingGroups.hidden = nextState.groupsHidden;
+  });
+
+  const tabs = [...root.querySelectorAll('[role="tab"]')];
+  const panels = new Map(tabs.map((tab) => [tab, root.querySelector(`#${tab.getAttribute('aria-controls')}`)]));
+  const selectTab = (nextTab, focus = false) => {
+    for (const tab of tabs) {
+      const selected = tab === nextTab;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      panels.get(tab).hidden = !selected;
     }
+    if (focus) nextTab.focus();
   };
-  const prepareShoppingList = () => {
-    const items = buildShoppingList(dishes, servings);
-    shoppingPanel.innerHTML = `<div class="shopping-header"><div class="shopping-heading"><div><span class="eyebrow">一次买齐</span><h2 id="shopping-title">采购清单</h2><p>勾选状态会保存在这台设备上</p><button class="button secondary shopping-copy" data-copy-list>复制清单</button></div><button class="shopping-collapse" data-collapse-list aria-label="收起整个采购清单"><span class="disclosure-chevron" aria-hidden="true"></span></button></div></div><div class="shopping-groups"></div>`;
-    const saved = new Set(JSON.parse(localStorage.getItem(`shopping:${location.search}`) || '[]'));
-    for (const category of CATEGORY_ORDER) {
-      const categoryItems = items.filter((item) => item.shoppingCategory === category); if (!categoryItems.length) continue;
-      const group = document.createElement('details'); group.className = 'shopping-group'; group.open = true; group.innerHTML = `<summary><h3>${category}<span>${categoryItems.length}</span></h3><span class="disclosure-chevron" aria-hidden="true"></span></summary><ul></ul>`;
-      categoryItems.forEach((item) => { const id = `${item.key}|${item.unit}|${item.optional}`; const li = document.createElement('li'); const checked = saved.has(id);
-        li.innerHTML = `<label class="check-row"><input type="checkbox" ${checked ? 'checked' : ''}><span class="custom-check"></span><span class="item-name"><span>${item.name}${item.optional ? '<small class="optional-label">可选</small>' : ''}</span><small class="ingredient-source">用于：${item.dishes.join('、')}</small></span><strong>${item.amount ?? ''}${item.unit === '适量' ? '适量' : item.unit}</strong></label>`;
-        li.querySelector('input').addEventListener('change', (event) => { event.target.checked ? saved.add(id) : saved.delete(id); localStorage.setItem(`shopping:${location.search}`, JSON.stringify([...saved])); }); group.querySelector('ul').append(li);
-      }); shoppingPanel.querySelector('.shopping-groups').append(group);
-    }
-    shoppingPanel.querySelector('[data-copy-list]').addEventListener('click', async () => { await copyText(shoppingListText(items)); showToast('采购清单已复制'); });
-    shoppingPanel.querySelector('[data-collapse-list]').addEventListener('click', () => setShoppingOpen(false, true));
-    shoppingReady = true;
-  };
-  shoppingTrigger?.addEventListener('click', () => {
-    if (!shoppingReady) prepareShoppingList();
-    setShoppingOpen(shoppingPanel.hidden);
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const nextIndex = getNextResultTabIndex(index, event.key, tabs.length);
+      selectTab(tabs[nextIndex], true);
+    });
   });
 }
