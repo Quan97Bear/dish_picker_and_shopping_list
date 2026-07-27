@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-test('select, share, open menu and create shopping list', async ({ page }) => {
+test('select, complete, reopen the URL and create a shopping list', async ({ page }) => {
   await page.goto('/');
   for (const name of ['西红柿炒鸡蛋','芹菜炒肉','紫菜蛋花汤']) await page.getByRole('button',{name:`加入菜单：${name}`}).click();
   await expect(page.locator('.header-menu b')).toHaveText('3');
   await expect(page.locator('.bottom-bar b')).toHaveText('3');
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   const menuButton = page.getByRole('button',{name:/查看菜单/});
   await menuButton.click();
   const menuDialog = page.getByRole('dialog',{name:'今日菜单'});
@@ -26,9 +27,12 @@ test('select, share, open menu and create shopping list', async ({ page }) => {
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
   await page.getByRole('button',{name:'完成西红柿炒鸡蛋备注'}).click();
   await page.getByRole('button',{name:'完成选菜'}).click();
-  await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toBeFocused();
-  const href = await page.getByRole('link',{name:'预览菜单'}).getAttribute('href');
-  await page.goto(href);
+  await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
+  await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page).toHaveURL(/menu=.*&p=2&v=1/);
+  await expect(page.getByText('不要葱')).toBeVisible();
+  await page.reload();
   await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
   await expect(page.getByText('不要葱')).toBeVisible();
   await expect(page.getByRole('link',{name:/菜谱来源/})).toHaveCount(0);

@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getMenuPrimaryActionLabel, stepServings } from '../src/features/picker/menu-drawer.js';
 import { getDietaryConflictIds } from '../src/features/picker/picker.js';
+import { resetScrollForInstantViewChange } from '../src/shared/route-transition.js';
 import { copyText, shareUrl } from '../src/shared/share.js';
 
 afterEach(() => {
@@ -28,6 +29,25 @@ describe('menu completion action', () => {
   it('finishes a selected menu without presenting sharing as the primary action', () => {
     expect(getMenuPrimaryActionLabel(['tomato-egg'])).toBe('完成选菜');
     expect(getMenuPrimaryActionLabel([])).toBe('发送建议');
+  });
+
+  it('resets to the result-page top without exposing smooth scrolling', () => {
+    const page = { style: { scrollBehavior: 'smooth' } };
+    const scrollTo = vi.fn(() => {
+      expect(page.style.scrollBehavior).toBe('auto');
+    });
+    let restore;
+
+    resetScrollForInstantViewChange({
+      documentRef: { documentElement: page },
+      windowRef: { scrollTo },
+      scheduleFrame: (callback) => { restore = callback; }
+    });
+
+    expect(scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(page.style.scrollBehavior).toBe('auto');
+    restore();
+    expect(page.style.scrollBehavior).toBe('smooth');
   });
 });
 

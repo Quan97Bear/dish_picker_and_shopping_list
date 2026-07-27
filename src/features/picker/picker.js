@@ -113,7 +113,7 @@ function handleDialogKeys(event, dialog, close) {
   }
 }
 
-export function renderPicker(root, { index, dishes = [], initialSelected = [], initialServings = 2, initialNotes = {}, initialSuggestion = '', makeUrl }) {
+export function renderPicker(root, { index, dishes = [], initialSelected = [], initialServings = 2, initialNotes = {}, initialSuggestion = '', makeUrl, onComplete }) {
   let selected = [...initialSelected];
   let servings = initialServings;
   let notes = { ...initialNotes };
@@ -457,7 +457,7 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
   }
   function openDrawer({ preserveOpener = false } = {}) {
     if (!preserveOpener) drawerOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-menu]');
-    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: showShare, onClose: closeDrawer });
+    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: selected.length ? showResult : showShare, onClose: closeDrawer });
     const dialog = drawer.querySelector('.drawer');
     drawer.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closeDrawer));
     root.inert = true;
@@ -470,6 +470,11 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
     document.body.classList.remove('no-scroll');
     root.inert = false;
     if (restoreFocus && drawerOpener?.isConnected) drawerOpener.focus();
+  }
+  function showResult() {
+    const url = makeUrl(selected, servings, notes, window.location.href, suggestion);
+    closeDrawer(false);
+    onComplete({ ids: [...selected], servings, notes: { ...notes }, suggestion, url });
   }
   async function showShare() {
     const url = makeUrl(selected, servings, notes, window.location.href, suggestion); closeDrawer(false);
