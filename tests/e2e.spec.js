@@ -189,6 +189,82 @@ test('floating menu stays inside compact, large-text and landscape viewports', a
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360);
 });
 
+test('mobile search locks the page while typing and Enter dismisses the keyboard', async ({ page }) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/');
+  const heroSearch = page.locator('.hero-search input');
+  await page.locator('.hero-search').click({position:{x:28,y:25}});
+  await expect(heroSearch).toBeFocused();
+  await expect(page.locator('html')).toHaveAttribute('data-search-kind','hero');
+  const heroFocusLayer = await page.evaluate(() => {
+    const search = document.querySelector('.hero-search').getBoundingClientRect();
+    const toolbar = document.querySelector('.filter-toolbar').getBoundingClientRect();
+    const scrim = document.querySelector('.search-scrim');
+    const scrimStyle = getComputedStyle(scrim);
+    return {
+      searchBottom: Math.ceil(search.bottom),
+      scrimTop: Math.round(scrim.getBoundingClientRect().top),
+      scrimZIndex: Number(scrimStyle.zIndex),
+      searchZIndex: Number(getComputedStyle(document.querySelector('.hero-search')).zIndex),
+      toolbarHitTarget: document.elementFromPoint(innerWidth / 2, toolbar.top + toolbar.height / 2)?.className,
+      htmlOverflow: getComputedStyle(document.documentElement).overflow,
+      bodyOverflow: getComputedStyle(document.body).overflow
+    };
+  });
+  expect(heroFocusLayer.scrimTop).toBe(heroFocusLayer.searchBottom);
+  expect(heroFocusLayer.scrimZIndex).toBeGreaterThan(14);
+  expect(heroFocusLayer.searchZIndex).toBeGreaterThan(heroFocusLayer.scrimZIndex);
+  expect(heroFocusLayer.toolbarHitTarget).toBe('search-scrim');
+  expect(heroFocusLayer.htmlOverflow).toBe('hidden');
+  expect(heroFocusLayer.bodyOverflow).toBe('hidden');
+  await page.evaluate(() => window.scrollTo(0,500));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await heroSearch.press('Enter');
+  await expect(heroSearch).not.toBeFocused();
+  await expect(page.locator('html')).not.toHaveAttribute('data-search-kind');
+
+  await page.evaluate(() => window.scrollTo(0,900));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(900);
+  const compactSearch = page.locator('.compact-search input');
+  const scrollBeforeTap = await page.evaluate(() => window.scrollY);
+  await page.locator('.compact-search').click({position:{x:24,y:23}});
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(scrollBeforeTap);
+  await expect(compactSearch).toBeFocused();
+  await expect(page.locator('html')).toHaveAttribute('data-search-active','');
+  const focusLayer = await page.evaluate(() => {
+    const search = document.querySelector('.compact-search').getBoundingClientRect();
+    const scrim = document.querySelector('.search-scrim');
+    const rect = scrim.getBoundingClientRect();
+    const style = getComputedStyle(scrim);
+    return {
+      searchBottom: Math.ceil(search.bottom),
+      scrimTop: Math.round(rect.top),
+      scrimBottom: Math.round(rect.bottom),
+      opacity: style.opacity,
+      pointerEvents: style.pointerEvents,
+      backdropFilter: style.backdropFilter || style.webkitBackdropFilter,
+      hitTarget: document.elementFromPoint(innerWidth / 2, Math.min(innerHeight - 1, rect.top + 80))?.className
+    };
+  });
+  expect(focusLayer.scrimTop).toBe(focusLayer.searchBottom);
+  expect(focusLayer.scrimBottom).toBe(844);
+  expect(focusLayer.opacity).toBe('1');
+  expect(focusLayer.pointerEvents).toBe('auto');
+  expect(focusLayer.backdropFilter).toContain('blur(5px)');
+  expect(focusLayer.hitTarget).toBe('search-scrim');
+  const lockedScrollY = await page.evaluate(() => window.scrollY);
+
+  await page.evaluate(() => window.scrollTo(0,1200));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(lockedScrollY);
+
+  await compactSearch.fill('鸡蛋');
+  await compactSearch.press('Enter');
+  await expect(compactSearch).not.toBeFocused();
+  await expect(page.locator('html')).not.toHaveAttribute('data-search-active');
+  await expect(page.locator('.search-scrim')).toHaveCSS('pointer-events','none');
+  await expect(page.getByText('西红柿鸡蛋汤',{exact:true})).toBeVisible();
+});
+
 test('basket badge stays integrated for 0, 1, 9, 10, and 12 dishes', async ({ page }) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');

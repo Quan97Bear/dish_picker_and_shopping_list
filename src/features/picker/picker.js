@@ -129,7 +129,7 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
   try { avoid = new Set(JSON.parse(localStorage.getItem('home-menu-avoid') || '[]')); } catch {}
   const dishMap = new Map(index.map((dish) => [dish.id, dish]));
   const previewDishMap = new Map(dishes.map((dish) => [dish.id, dish]));
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单交给QQQ</p><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label></section><span class="sticky-sentinel" aria-hidden="true"></span><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">忌口<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>忌口</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">忌口</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">家常好味</span><h2 id="dish-title">今日候选</h2></div><div class="candidate-heading-actions"><span class="result-count" aria-live="polite"></span><label class="sort-control"><span class="sr-only">候选排序</span><select aria-label="候选排序"><option value="recommended">排序：推荐</option><option value="frequent">排序：常吃</option><option value="fastest">排序：最快</option><option value="category">排序：分类</option><option value="name">排序：菜名</option></select></label><div class="candidate-view-toggle" role="group" aria-label="候选显示方式"><button type="button" data-candidate-view="large" aria-label="大卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5"></rect><rect x="11" y="2" width="7" height="7" rx="1.5"></rect><rect x="2" y="11" width="7" height="7" rx="1.5"></rect><rect x="11" y="11" width="7" height="7" rx="1.5"></rect></svg></button><button type="button" data-candidate-view="compact" aria-label="小卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="4" height="4" rx="1"></rect><rect x="8" y="2" width="4" height="4" rx="1"></rect><rect x="14" y="2" width="4" height="4" rx="1"></rect><rect x="2" y="8" width="4" height="4" rx="1"></rect><rect x="8" y="8" width="4" height="4" rx="1"></rect><rect x="14" y="8" width="4" height="4" rx="1"></rect><rect x="2" y="14" width="4" height="4" rx="1"></rect><rect x="8" y="14" width="4" height="4" rx="1"></rect><rect x="14" y="14" width="4" height="4" rx="1"></rect></svg></button></div></div></div><div class="dish-grid"></div></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div>`;
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单交给QQQ</p><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label></section><span class="sticky-sentinel" aria-hidden="true"></span><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">忌口<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>忌口</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">忌口</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">家常好味</span><h2 id="dish-title">今日候选</h2></div><div class="candidate-heading-actions"><span class="result-count" aria-live="polite"></span><label class="sort-control"><span class="sr-only">候选排序</span><select aria-label="候选排序"><option value="recommended">排序：推荐</option><option value="frequent">排序：常吃</option><option value="fastest">排序：最快</option><option value="category">排序：分类</option><option value="name">排序：菜名</option></select></label><div class="candidate-view-toggle" role="group" aria-label="候选显示方式"><button type="button" data-candidate-view="large" aria-label="大卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5"></rect><rect x="11" y="2" width="7" height="7" rx="1.5"></rect><rect x="2" y="11" width="7" height="7" rx="1.5"></rect><rect x="11" y="11" width="7" height="7" rx="1.5"></rect></svg></button><button type="button" data-candidate-view="compact" aria-label="小卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="4" height="4" rx="1"></rect><rect x="8" y="2" width="4" height="4" rx="1"></rect><rect x="14" y="2" width="4" height="4" rx="1"></rect><rect x="2" y="8" width="4" height="4" rx="1"></rect><rect x="8" y="8" width="4" height="4" rx="1"></rect><rect x="14" y="8" width="4" height="4" rx="1"></rect><rect x="2" y="14" width="4" height="4" rx="1"></rect><rect x="8" y="14" width="4" height="4" rx="1"></rect><rect x="14" y="14" width="4" height="4" rx="1"></rect></svg></button></div></div></div><div class="dish-grid"></div></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div><div class="search-scrim" aria-hidden="true"></div>`;
   root.querySelector('.site-header').insertAdjacentHTML('beforeend', '<button class="header-menu" type="button" data-open-menu aria-label="查看菜单，今晚想吃"><span>今晚想吃</span><b>0</b></button>');
   root.querySelector('.bottom-bar').innerHTML = getBasketMarkup(0);
   const grid = root.querySelector('.dish-grid');
@@ -208,11 +208,51 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
     }
   });
   const searchInputs = [...root.querySelectorAll('input[type="search"]')];
+  const searchScrim = root.querySelector('.search-scrim');
+  ['pointerdown','pointermove','click','touchstart','touchmove','wheel'].forEach((eventName) => {
+    searchScrim.addEventListener(eventName, (event) => event.preventDefault(), { passive: false });
+  });
+  let searchScrollY = 0;
+  let restoringSearchScroll = false;
+  const restoreSearchScroll = () => {
+    if (!document.documentElement.hasAttribute('data-search-active') || restoringSearchScroll) return;
+    if (Math.abs(window.scrollY - searchScrollY) <= 0.5) return;
+    restoringSearchScroll = true;
+    window.scrollTo(0, searchScrollY);
+    restoringSearchScroll = false;
+  };
+  const lockSearchScroll = (event) => {
+    searchScrollY = window.scrollY;
+    const searchLabel = event.currentTarget.closest('label');
+    const searchBottom = searchLabel.getBoundingClientRect().bottom;
+    document.documentElement.style.setProperty('--search-scrim-top', `${Math.ceil(searchBottom)}px`);
+    document.documentElement.dataset.searchKind = searchLabel.classList.contains('hero-search') ? 'hero' : 'compact';
+    document.documentElement.setAttribute('data-search-active', '');
+    window.addEventListener('scroll', restoreSearchScroll, { passive: true });
+  };
+  const unlockSearchScroll = () => {
+    document.documentElement.removeAttribute('data-search-active');
+    delete document.documentElement.dataset.searchKind;
+    document.documentElement.style.removeProperty('--search-scrim-top');
+    window.removeEventListener('scroll', restoreSearchScroll);
+  };
   searchInputs.forEach((input) => input.addEventListener('input', (event) => {
     query = event.target.value.trim().toLowerCase();
     searchInputs.forEach((other) => { if (other !== event.target) other.value = event.target.value; });
     draw();
   }));
+  searchInputs.forEach((input) => {
+    input.closest('label').addEventListener('pointerdown', () => {
+      input.focus({ preventScroll: true });
+    });
+    input.addEventListener('focus', lockSearchScroll);
+    input.addEventListener('blur', unlockSearchScroll);
+    input.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' || event.isComposing) return;
+      event.preventDefault();
+      input.blur();
+    });
+  });
   const toolbar = root.querySelector('.filter-toolbar');
   const heroSearch = root.querySelector('.hero-search');
   const stickySentinel = root.querySelector('.sticky-sentinel');

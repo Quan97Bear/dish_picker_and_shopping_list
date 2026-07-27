@@ -11,8 +11,8 @@
 
 生产资源：
 
-- JavaScript：`index-12rSd-li.js`
-- CSS：`index-MDCsyraR.css`
+- JavaScript：`index-CRx1y5bQ.js`
+- CSS：`index-lGrJxba2.css`
 
 当前生产能力：
 
@@ -30,6 +30,7 @@
 - 菜篮子距右侧和底部安全区各 13px
 - 分类行、忌口行和吸顶栏统一为 56px
 - 未选中菜品使用居中的 10×2px CSS 几何加号
+- 大搜索条和吸顶小搜索都使用无跳动聚焦、轻度模糊专注层、完全操作锁定和键盘完成退出
 
 当前分享协议为 `v=1`，保存稳定菜品 ID、人数、备注和新菜建议。
 
@@ -37,12 +38,13 @@
 
 当前构建：
 
-- JavaScript：`index-12rSd-li.js`
-- CSS：`index-MDCsyraR.css`
+- JavaScript：`index-CRx1y5bQ.js`
+- CSS：`index-lGrJxba2.css`
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
 本地版本与当前生产版本一致，并包含：
 
+- 点击搜索时保持页面位置；大搜索条使用更高层专注遮罩与页面锁，小放大镜使用吸顶专注遮罩；两者都在搜索框下方轻度模糊并禁止操作，完成键退出
 - 向 iOS Safari 提供与页面一致的奶油色主题信号
 - 页面、页首、吸顶工具栏和预览使用同一个奶油色
 - 网页内容保持在 iOS 状态栏下方
@@ -61,7 +63,7 @@
 1. “生成菜单”仍直接打开分享界面；结果页优先流程尚未实现。
 2. 采购清单仍在分享页中点击生成；尚未默认展示。
 3. 日历导出尚未实现。
-4. iPhone Safari、微信和横屏视觉回归已完成；较大字体检查延后。
+4. iPhone Safari、微信和横屏视觉回归已完成；较大字体真机检查移至 P3 / P4。
 
 ## 数据与架构边界
 
@@ -76,17 +78,19 @@
 
 2026-07-26 生产发布通过：
 
-- 完整发布检查：86 个 Vitest、28 个 Playwright、数据、构建、产物和文档检查
+- 用户真机确认：大小搜索框的无跳动聚焦、轻度模糊专注层、完全禁止操作和完成键退出
+- 完整发布检查：89 个 Vitest、30 个 Playwright、数据、构建、产物和文档检查
 - Cloudflare Pages 仅发布 `dist/`
-- 正式域名加载 `index-12rSd-li.js` 与 `index-MDCsyraR.css`
+- 正式域名加载 `index-CRx1y5bQ.js` 与 `index-lGrJxba2.css`
 
 2026-07-26 本地候选版本通过：
 
+- 用户真机确认：大小搜索框的无跳动聚焦、轻度模糊专注层、完全禁止操作和完成键退出
 - 微信手机 Demo 功能验证：菜篮子白色方块四个圆角完整
 - 用户真机确认：菜篮子安全区间距、三行 56px 高度和 10×2px 居中加号
 - 数据校验：40 道菜，5 道汤
-- Vitest：86（含三行 56px 与加号几何居中 CSS 合约）
-- 手机关键 Playwright：6（3 条场景 × Chromium + WebKit）
+- Vitest：89（含搜索专注层层级、页面锁、交互拦截与键盘完成行为）
+- Playwright：30（15 条场景 × Chromium + WebKit）
 - Vite 构建与部署产物检查
 - 本地资源：`index-12rSd-li.js` 与 `index-MDCsyraR.css`
 

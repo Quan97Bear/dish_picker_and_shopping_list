@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const styles = fs.readFileSync(new URL('../src/styles.css', import.meta.url), 'utf8');
+const pickerSource = fs.readFileSync(new URL('../src/features/picker/picker.js', import.meta.url), 'utf8');
 
 describe('floating basket layout contract', () => {
   it('keeps the basket 13px from the right and bottom safe-area edges at every width', () => {
@@ -39,6 +40,38 @@ describe('dish add control icon contract', () => {
     );
     expect(styles).toMatch(
       /\.add-button\[aria-pressed="false"\] \.add-button-icon:after\{[^}]*rotate\(90deg\)/,
+    );
+  });
+});
+
+describe('mobile search focus contract', () => {
+  it('puts the hero-search scrim above the sticky toolbar and below the search field', () => {
+    expect(styles).toMatch(
+      /html\[data-search-kind="hero"\] \.hero-search\{[^}]*z-index:16/,
+    );
+    expect(styles).toMatch(
+      /html\[data-search-kind="hero"\] \.search-scrim\{[^}]*z-index:15/,
+    );
+    expect(styles).toMatch(/\.filter-toolbar\{[^}]*z-index:14/);
+  });
+
+  it('locks the page and blocks interaction below either active search field', () => {
+    expect(styles).toMatch(
+      /html\[data-search-kind="hero"\],[\s\S]*html\[data-search-kind="hero"\] body\{[^}]*overflow:hidden/,
+    );
+    expect(styles).toMatch(
+      /html\[data-search-active\] \.search-scrim\{[^}]*pointer-events:auto/,
+    );
+    expect(styles).toMatch(
+      /\.search-scrim\{[^}]*touch-action:none;[^}]*backdrop-filter:blur\(5px\)/,
+    );
+  });
+
+  it('prevents focus scrolling and treats Enter as keyboard completion', () => {
+    expect(pickerSource.match(/enterkeyhint="done"/g)).toHaveLength(2);
+    expect(pickerSource).toContain('input.focus({ preventScroll: true })');
+    expect(pickerSource).toMatch(
+      /event\.key !== 'Enter' \|\| event\.isComposing[\s\S]*event\.preventDefault\(\);[\s\S]*input\.blur\(\)/,
     );
   });
 });
