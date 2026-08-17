@@ -15,7 +15,7 @@ async function start() {
     const state = decodeMenu(location.search, validIds, aliases);
     const map = new Map(dishes.map((dish) => [dish.id, dish]));
     if (state.mode === 'recipient') {
-      renderRecipient(root, { dishes: state.ids.map((id) => map.get(id)).filter(Boolean), servings: state.servings, notes: state.notes, suggestion: state.suggestion, warnings: state.warnings });
+      renderRecipient(root, { dishes: state.ids.map((id) => map.get(id)).filter(Boolean), servings: state.servings, notes: state.notes, suggestion: state.suggestion, warnings: state.warnings, menuUrl: window.location.href });
       return;
     }
     let savedDraft = {};
@@ -37,7 +37,8 @@ async function start() {
           servings,
           notes,
           suggestion,
-          warnings: []
+          warnings: [],
+          menuUrl: url
         });
       }
     });

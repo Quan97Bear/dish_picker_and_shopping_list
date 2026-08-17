@@ -79,9 +79,10 @@ npx playwright install chromium
 `demo:phone` 是持续运行的开发服务；其余命令执行完会直接报告通过或失败。
 Chat 请求只运行对应的固定入口，不临时拼接另一套流程。
 
-本地固定流程由 `scripts/run-workflow.mjs` 执行。如果 Codex 的托管 shell
-只有 Node、没有 npm，Codex 会用当前 Node 直接运行同一个 workflow；不会
-安装 npm，也不会改写检查步骤。
+手机 Demo 和自动化检查由 `scripts/run-workflow.mjs` 执行。如果 Codex 的
+托管 shell 只有 Node、没有 npm，Codex 会用当前 Node 运行对应的 demo 或
+check workflow；文档检查直接运行 `scripts/validate-docs.mjs`。不会安装 npm，
+也不会改写检查步骤。
 
 ## 重要目录
 

@@ -1,6 +1,7 @@
 import { buildShoppingList, CATEGORY_ORDER, shoppingListText } from '../../domain/shopping-list.js';
 import { splitSuggestionList } from '../../domain/menu-state.js';
 import { copyText } from '../../shared/share.js';
+import { openShareDialog } from '../../shared/share-dialog.js';
 import { showToast } from '../../shared/toast.js';
 
 export function getNextResultTabIndex(index, key, length) {
@@ -19,11 +20,11 @@ export function getShoppingCollapseState(expanded) {
   };
 }
 
-export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [] }) {
+export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [], menuUrl = window.location.href }) {
   const title = dishes.length ? '今晚吃这些' : suggestion ? '收到新菜建议' : '这份菜单空空的';
   const subtitle = dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : suggestion ? '选菜人想在菜单里看到这些菜。' : '菜品可能已下架，或链接不完整。';
   const resultTabs = dishes.length
-    ? '<div class="result-tabs" role="tablist" aria-label="结果内容"><button id="shopping-tab" role="tab" aria-selected="true" aria-controls="shopping-panel">采购清单</button><button id="recipes-tab" role="tab" aria-selected="false" aria-controls="recipes-panel" tabindex="-1">菜谱</button></div>'
+    ? '<div class="result-controls"><div class="result-tabs" role="tablist" aria-label="结果内容"><button id="shopping-tab" role="tab" aria-selected="true" aria-controls="shopping-panel">采购清单</button><button id="recipes-tab" role="tab" aria-selected="false" aria-controls="recipes-panel" tabindex="-1">菜谱</button></div><button class="button secondary result-share" type="button" data-share-menu>分享菜单</button></div>'
     : '<a class="button primary" href="./">返回菜单</a>';
   const resultPanels = dishes.length
     ? '<section id="shopping-panel" class="shopping-panel result-panel" role="tabpanel" aria-labelledby="shopping-tab"></section><section id="recipes-panel" class="recipes result-panel" role="tabpanel" aria-labelledby="recipes-tab" hidden><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section>'
@@ -56,6 +57,11 @@ export function renderRecipient(root, { dishes, servings, notes = {}, suggestion
     recipeList.append(details);
   });
   if (!dishes.length) return;
+
+  const shareButton = root.querySelector('[data-share-menu]');
+  shareButton.addEventListener('click', () => {
+    openShareDialog({ root, url: menuUrl, hasDishes: true, opener: shareButton });
+  });
 
   const shoppingPanel = root.querySelector('.shopping-panel');
   const items = buildShoppingList(dishes, servings);

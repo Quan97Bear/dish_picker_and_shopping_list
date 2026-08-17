@@ -4,6 +4,7 @@ import { getDietaryConflictIds } from '../src/features/picker/picker.js';
 import { getNextResultTabIndex, getShoppingCollapseState } from '../src/features/recipient/recipient.js';
 import { resetScrollForInstantViewChange } from '../src/shared/route-transition.js';
 import { copyText, shareUrl } from '../src/shared/share.js';
+import { getShareDialogCopy } from '../src/shared/share-dialog.js';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -53,6 +54,15 @@ describe('menu completion action', () => {
 });
 
 describe('result page controls', () => {
+  it('presents menu sharing as a secondary result-page action', () => {
+    expect(getShareDialogCopy(true)).toEqual({
+      eyebrow: '菜单已备好',
+      title: '把今晚的好味分享出去',
+      description: '持有链接的人可以查看菜单和建议',
+      previewLabel: '预览菜单'
+    });
+  });
+
   it('supports wrapping arrow navigation and Home/End between result tabs', () => {
     expect(getNextResultTabIndex(0, 'ArrowRight', 2)).toBe(1);
     expect(getNextResultTabIndex(1, 'ArrowRight', 2)).toBe(0);

@@ -1,6 +1,6 @@
 import { MAX_DISHES } from '../../domain/menu-state.js';
 import { createMenuDrawer } from './menu-drawer.js';
-import { copyText, renderQr, shareUrl } from '../../shared/share.js';
+import { openShareDialog } from '../../shared/share-dialog.js';
 import { showToast } from '../../shared/toast.js';
 
 const CATEGORY_EMOJI = { vegetable: '🥬', meat: '🥩', mixed: '🍲', stew: '🥘', soup: '🥣' };
@@ -476,43 +476,10 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
     closeDrawer(false);
     onComplete({ ids: [...selected], servings, notes: { ...notes }, suggestion, url });
   }
-  async function showShare() {
-    const url = makeUrl(selected, servings, notes, window.location.href, suggestion); closeDrawer(false);
-    const prefersCopy = !navigator.share || /MicroMessenger/i.test(navigator.userAgent);
-    const modal = document.createElement('div'); modal.className = 'drawer-backdrop';
-    modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title" tabindex="-1"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${selected.length ? '菜单已备好' : '新菜建议已备好'}</span><h2 id="share-title">${selected.length ? '把今晚的好味分享出去' : '把想吃的新菜分享出去'}</h2><p>持有链接的人可以查看${selected.length ? '菜单和建议' : '这条建议'}</p><p class="share-fallback-hint" ${prefersCopy ? '' : 'hidden'}>${/MicroMessenger/i.test(navigator.userAgent) ? '微信内建议复制链接后发送' : '当前浏览器会直接复制链接'}</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button ${prefersCopy ? 'secondary' : 'primary'}" data-share ${navigator.share ? '' : 'hidden'}>${prefersCopy ? '尝试系统分享' : '系统分享'}</button><button class="button ${prefersCopy ? 'primary' : 'secondary'}" data-copy>复制链接</button><a class="button ghost" href="${url}">${selected.length ? '预览菜单' : '预览建议'}</a></div></section>`;
-    const dialog = modal.querySelector('.share-card');
-    const close = () => {
-      modal.remove();
-      document.body.classList.remove('no-scroll');
-      root.inert = false;
-      if (drawerOpener?.isConnected) drawerOpener.focus();
-    };
-    modal.querySelector('input').value = url;
-    modal.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, close));
-    root.inert = true;
-    document.body.append(modal);
-    document.body.classList.add('no-scroll');
-    modal.querySelector('.share-close').addEventListener('click', close); modal.addEventListener('click', (event) => { if (event.target === modal) close(); });
-    modal.querySelector('[data-copy]').addEventListener('click', async () => {
-      try {
-        await copyText(url);
-        showToast('链接已复制');
-      } catch {
-        showToast('复制失败，请长按上方链接复制');
-      }
-    });
-    modal.querySelector('[data-share]').addEventListener('click', async () => {
-      try {
-        const result = await shareUrl(url);
-        if (result === 'copied') showToast('当前浏览器不支持系统分享，链接已复制');
-        if (result === 'copied-after-failure') showToast('系统分享不可用，链接已复制');
-      } catch {
-        showToast('无法自动分享，请使用复制链接或二维码');
-      }
-    });
-    dialog.focus();
-    try { await renderQr(modal.querySelector('canvas'), url); } catch { showToast('二维码生成失败，请复制链接'); }
+  function showShare() {
+    const url = makeUrl(selected, servings, notes, window.location.href, suggestion);
+    closeDrawer(false);
+    openShareDialog({ root, url, hasDishes: selected.length > 0, opener: drawerOpener });
   }
   root.querySelectorAll('[data-open-menu]').forEach((button) => button.addEventListener('click', () => openDrawer()));
   const pickerHeader = root.querySelector('.site-header');

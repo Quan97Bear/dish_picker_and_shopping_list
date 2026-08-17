@@ -30,6 +30,8 @@ test('select, complete, reopen the URL and create a shopping list', async ({ pag
   await page.getByRole('button',{name:'完成选菜'}).click();
   await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
   await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toHaveCount(0);
+  const shareMenu = page.getByRole('button',{name:'分享菜单'});
+  await expect(shareMenu).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   await expect(page).toHaveURL(/menu=.*&p=2&v=1/);
   await page.reload();
@@ -42,6 +44,13 @@ test('select, complete, reopen the URL and create a shopping list', async ({ pag
   await expect(page.getByRole('heading',{name:'采购清单'})).toBeVisible();
   await expect(page.getByRole('heading',{name:'菜谱详情'})).toBeHidden();
   await expect(page.getByText('勾选状态会保存在这台设备上',{exact:true})).toBeVisible();
+  await shareMenu.click();
+  const shareDialog = page.getByRole('dialog',{name:'把今晚的好味分享出去'});
+  await expect(shareDialog).toBeFocused();
+  await expect(shareDialog.getByRole('button',{name:'复制链接'})).toBeVisible();
+  await expect(shareDialog.getByLabel('菜单链接二维码')).toBeVisible();
+  await shareDialog.press('Escape');
+  await expect(shareMenu).toBeFocused();
   const viewport = page.viewportSize();
   const shoppingPanelBox = await page.locator('.shopping-panel').boundingBox();
   expect(Math.abs(shoppingPanelBox.x - (viewport.width - shoppingPanelBox.width) / 2)).toBeLessThanOrEqual(1);

@@ -54,8 +54,9 @@ checks. Do not restart it when the current project is already listening on port
 5173. `demo:stop` may stop only a port 5173 listener whose working directory is
 this repository. The other workflows are finite and must report the failing
 stage if they do not pass. If npm is unavailable in a managed Codex shell, use
-the detected workspace Node runtime to run `scripts/run-workflow.mjs` with the
-same workflow name. Do not install npm or reconstruct the steps.
+the detected workspace Node runtime to run `scripts/run-workflow.mjs` for the
+demo and check workflows. Run `scripts/validate-docs.mjs` directly for
+`validate:docs`. Do not install npm or reconstruct the steps.
 
 ## How to answer “what is unfinished?”
 
