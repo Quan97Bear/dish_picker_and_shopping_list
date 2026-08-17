@@ -8,14 +8,12 @@ export function getShareDialogCopy(hasDishes) {
     ? {
         eyebrow: '菜单已备好',
         title: '把今晚的好味分享出去',
-        description: '持有链接的人可以查看菜单和建议',
-        previewLabel: '预览菜单'
+        description: '持有链接的人可以查看菜单和菜单外想吃的菜'
       }
     : {
-        eyebrow: '新菜建议已备好',
-        title: '把想吃的新菜分享出去',
-        description: '持有链接的人可以查看这条建议',
-        previewLabel: '预览建议'
+        eyebrow: '想吃清单已备好',
+        title: '把想吃的菜分享出去',
+        description: '持有链接的人可以查看这些菜单外想吃的菜'
       };
 }
 
@@ -49,7 +47,7 @@ export async function openShareDialog({ root, url, hasDishes, opener }) {
   const prefersCopy = !navigator.share || isWeChat;
   const modal = document.createElement('div');
   modal.className = 'drawer-backdrop';
-  modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title" tabindex="-1"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${copy.eyebrow}</span><h2 id="share-title">${copy.title}</h2><p>${copy.description}</p><p class="share-fallback-hint" ${prefersCopy ? '' : 'hidden'}>${isWeChat ? '微信内建议复制链接后发送' : '当前浏览器会直接复制链接'}</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button ${prefersCopy ? 'secondary' : 'primary'}" data-share ${navigator.share ? '' : 'hidden'}>${prefersCopy ? '尝试系统分享' : '系统分享'}</button><button class="button ${prefersCopy ? 'primary' : 'secondary'}" data-copy>复制链接</button><a class="button ghost" data-preview>${copy.previewLabel}</a></div></section>`;
+  modal.innerHTML = `<section class="share-card" role="dialog" aria-modal="true" aria-labelledby="share-title" tabindex="-1"><button class="icon-button share-close" aria-label="关闭">×</button><span class="eyebrow">${copy.eyebrow}</span><h2 id="share-title">${copy.title}</h2><p>${copy.description}</p><p class="share-fallback-hint" ${prefersCopy ? '' : 'hidden'}>${isWeChat ? '微信内建议复制链接后发送' : '当前浏览器会直接复制链接'}</p><canvas aria-label="菜单链接二维码"></canvas><input class="share-url" readonly aria-label="菜单链接"><div class="share-actions"><button class="button ${prefersCopy ? 'secondary' : 'primary'}" data-share ${navigator.share ? '' : 'hidden'}>${prefersCopy ? '尝试系统分享' : '系统分享'}</button><button class="button ${prefersCopy ? 'primary' : 'secondary'}" data-copy>复制链接</button></div></section>`;
   const dialog = modal.querySelector('.share-card');
   const close = () => {
     modal.remove();
@@ -58,7 +56,6 @@ export async function openShareDialog({ root, url, hasDishes, opener }) {
     if (opener?.isConnected) opener.focus({ preventScroll: true });
   };
   modal.querySelector('input').value = url;
-  modal.querySelector('[data-preview]').href = url;
   modal.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, close));
   root.inert = true;
   document.body.append(modal);

@@ -30,7 +30,7 @@ describe('servings stepper', () => {
 describe('menu completion action', () => {
   it('finishes a selected menu without presenting sharing as the primary action', () => {
     expect(getMenuPrimaryActionLabel(['tomato-egg'])).toBe('完成选菜');
-    expect(getMenuPrimaryActionLabel([])).toBe('发送建议');
+    expect(getMenuPrimaryActionLabel([])).toBe('查看想吃清单');
   });
 
   it('resets to the result-page top without exposing smooth scrolling', () => {
@@ -58,8 +58,12 @@ describe('result page controls', () => {
     expect(getShareDialogCopy(true)).toEqual({
       eyebrow: '菜单已备好',
       title: '把今晚的好味分享出去',
-      description: '持有链接的人可以查看菜单和建议',
-      previewLabel: '预览菜单'
+      description: '持有链接的人可以查看菜单和菜单外想吃的菜'
+    });
+    expect(getShareDialogCopy(false)).toEqual({
+      eyebrow: '想吃清单已备好',
+      title: '把想吃的菜分享出去',
+      description: '持有链接的人可以查看这些菜单外想吃的菜'
     });
   });
 

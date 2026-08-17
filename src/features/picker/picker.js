@@ -1,6 +1,5 @@
 import { MAX_DISHES } from '../../domain/menu-state.js';
 import { createMenuDrawer } from './menu-drawer.js';
-import { openShareDialog } from '../../shared/share-dialog.js';
 import { showToast } from '../../shared/toast.js';
 
 const CATEGORY_EMOJI = { vegetable: '🥬', meat: '🥩', mixed: '🍲', stew: '🥘', soup: '🥣' };
@@ -457,7 +456,7 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
   }
   function openDrawer({ preserveOpener = false } = {}) {
     if (!preserveOpener) drawerOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-menu]');
-    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: selected.length ? showResult : showShare, onClose: closeDrawer });
+    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: showResult, onClose: closeDrawer });
     const dialog = drawer.querySelector('.drawer');
     drawer.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closeDrawer));
     root.inert = true;
@@ -475,11 +474,6 @@ export function renderPicker(root, { index, dishes = [], initialSelected = [], i
     const url = makeUrl(selected, servings, notes, window.location.href, suggestion);
     closeDrawer(false);
     onComplete({ ids: [...selected], servings, notes: { ...notes }, suggestion, url });
-  }
-  function showShare() {
-    const url = makeUrl(selected, servings, notes, window.location.href, suggestion);
-    closeDrawer(false);
-    openShareDialog({ root, url, hasDishes: selected.length > 0, opener: drawerOpener });
   }
   root.querySelectorAll('[data-open-menu]').forEach((button) => button.addEventListener('click', () => openDrawer()));
   const pickerHeader = root.querySelector('.site-header');

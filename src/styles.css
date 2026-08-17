@@ -98,8 +98,8 @@ button{color:inherit}
 .drawer{width:min(100%,620px);max-height:88vh;overflow:auto;padding:12px 22px 28px;border-radius:26px 26px 16px 16px;background:var(--card);box-shadow:var(--shadow)}
 .drawer-handle{width:48px;height:5px;margin:0 auto 18px;border-radius:4px;background:var(--line)}
 .icon-button{width:44px;height:44px;border:0;border-radius:50%;background:#eee6da;font-size:1.6rem}
-.selected-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.selected-list li{min-height:52px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.selected-list{display:grid;gap:10px;list-style:none;padding:0;margin:0;border:0}
+.selected-list li{min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:16px;background:var(--warm-white)}
 .empty-row{justify-content:center!important;color:var(--muted)}
 .text-button{min-height:44px;border:0;background:transparent;font-weight:600}
 .danger{color:#a43d2a}
@@ -254,9 +254,9 @@ html[data-search-kind="hero"] .search-scrim{
 .filter-toolbar.is-stuck .compact-search:focus-within{position:absolute;right:14px;width:calc(100% - 28px);background:var(--card)}
 }
 
-.selected-list li{padding:3px 0}
+.selected-list li{padding:10px 12px}
 .selected-dish{width:100%}
-.selected-dish-row{display:flex;min-height:52px;align-items:center;gap:7px}
+.selected-dish-row{display:flex;min-height:44px;align-items:center;gap:7px}
 .selected-dish-row strong{flex:0 1 auto;min-width:0}
 .dish-remove{flex:0 0 auto;margin-left:auto;padding:0 10px;border-radius:10px;background:rgba(255,59,48,.1);color:#b42318}
 .dish-remove:hover{background:rgba(255,59,48,.16)}
@@ -272,10 +272,12 @@ html[data-search-kind="hero"] .search-scrim{
 .note-chip-action:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .selected-dish label{display:block;min-width:0}
 .selected-dish input{width:100%;height:44px;padding:0 10px;border:1px solid var(--line);border-radius:10px;background:white;font-size:16px}
-.note-editor{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:0 0 5px}
+.note-editor{padding:4px 0 2px}
 .note-editor[hidden]{display:none}
+.note-editor-meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 2px 7px;color:var(--muted);font-size:.7rem;line-height:1.2}
+.note-editor-meta strong{color:var(--ink);font-size:.76rem;font-weight:650}
+.note-editor-meta small{font-size:inherit}
 .note-editor input:focus-visible{outline:0;box-shadow:inset 0 0 0 2px var(--accent)}
-.note-done{min-width:54px;min-height:44px;padding:0 10px;border:0;border-radius:10px;background:rgba(0,113,227,.12);color:var(--accent);font-size:.82rem;font-weight:650}
 .order-note{grid-column:1/-1;padding:14px 16px;border-left:4px solid var(--accent);border-radius:10px;background:#fff0e5}
 .order-note p{margin:5px 0 0;font-weight:600}
 .order-note[hidden]{display:none}
@@ -473,7 +475,9 @@ button:active,.button:active,.add-button:active{transform:scale(.97)}
 
 .suggestion-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
 
-.suggestion-tags span{padding:7px 13px;border-radius:999px;background:rgba(255,149,0,.14);color:#8a4b00;font-size:1rem;font-weight:600;letter-spacing:-.02em;box-shadow:inset 0 0 0 1px rgba(255,149,0,.08)}
+.suggestion-tags span{display:inline-flex;align-items:center;padding:7px 13px;border-radius:999px;background:rgba(255,149,0,.14);color:#8a4b00;font-size:1rem;font-weight:650;letter-spacing:-.02em;box-shadow:inset 0 0 0 1px rgba(255,149,0,.08)}
+
+.result-empty-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}
 
 @media(max-width:600px){.suggestion-field{padding:16px}
 .suggestion-card{margin:0 14px 28px;padding:20px}
@@ -544,7 +548,7 @@ body{color:var(--sesame-ink)}
 
 .selected-dish input{background:color-mix(in oklch,var(--rice-wash),white 42%)}
 
-.note-add,.note-chip,.note-done{background:var(--celadon-soft);color:var(--celadon-dark)}
+.note-add,.note-chip{background:var(--celadon-soft);color:var(--celadon-dark)}
 
 .note-chip-action{color:var(--celadon-dark)}
 
@@ -708,7 +712,7 @@ body{color:var(--sesame-ink)}
 
   .drawer .icon-button:before{content:"";position:absolute;inset:-4px}
 
-  .selected-list li{padding:1px 0}
+  .selected-list li{padding:10px 12px}
 
   .selected-dish-row{min-height:48px;gap:6px}
 

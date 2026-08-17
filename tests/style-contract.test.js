@@ -44,6 +44,18 @@ describe('dish add control icon contract', () => {
   });
 });
 
+describe('dish note editor layout contract', () => {
+  it('keeps each dish in one card with a full-width note input', () => {
+    expect(styles).toMatch(
+      /\.selected-list li\{[^}]*padding:10px 12px;[^}]*border-radius:16px/,
+    );
+    expect(styles).toMatch(
+      /\.selected-dish input\{[^}]*width:100%;[^}]*height:44px/,
+    );
+    expect(styles).not.toContain('.note-done');
+  });
+});
+
 describe('mobile search focus contract', () => {
   it('puts the hero-search scrim above the sticky toolbar and below the search field', () => {
     expect(styles).toMatch(

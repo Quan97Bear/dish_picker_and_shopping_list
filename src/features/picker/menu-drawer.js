@@ -5,7 +5,7 @@ export function stepServings(value, delta) {
 }
 
 export function getMenuPrimaryActionLabel(selected) {
-  return selected.length ? '完成选菜' : '发送建议';
+  return selected.length ? '完成选菜' : '查看想吃清单';
 }
 
 export function createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds = new Set(), onNote, onSuggestion, onRemove, onClear, onServings, onGenerate, onClose }) {
@@ -38,15 +38,18 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
         <button class="text-button danger dish-remove" data-remove aria-label="移除 ${dish.name}">移除</button>
       </div>
       <div class="note-editor" hidden>
+        <div class="note-editor-meta"><strong>口味备注</strong><small>离开输入框自动保存</small></div>
         <label><span class="sr-only">给${dish.name}添加备注</span><input type="text" maxlength="80" placeholder="例如：少辣、不要葱"></label>
-        <button type="button" class="note-done" aria-label="完成${dish.name}备注">完成</button>
       </div>
     </div>`;
     const noteControl = item.querySelector('.note-control');
     const noteEditor = item.querySelector('.note-editor');
     const noteInput = item.querySelector('input');
 
+    let originalNote = notes[id] || '';
     const openNoteEditor = () => {
+      originalNote = notes[id] || '';
+      noteInput.value = originalNote;
       noteControl.hidden = true;
       noteEditor.hidden = false;
       noteInput.focus();
@@ -90,7 +93,14 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
         noteControl.append(add);
       }
     };
-    const closeNoteEditor = (restoreFocus = false) => {
+    const closeNoteEditor = ({ restoreFocus = false, commit = true } = {}) => {
+      if (noteEditor.hidden) return;
+      if (commit) {
+        onNote(id, noteInput.value);
+        originalNote = noteInput.value;
+      } else {
+        noteInput.value = originalNote;
+      }
       noteEditor.hidden = true;
       noteControl.hidden = false;
       renderNoteControl();
@@ -99,25 +109,28 @@ export function createMenuDrawer({ selected, dishMap, servings, notes, suggestio
 
     item.querySelector('[data-remove]').addEventListener('click', () => onRemove(id));
     noteInput.value = notes[id] || '';
-    noteInput.addEventListener('input', (event) => onNote(id, event.target.value));
+    noteInput.addEventListener('blur', () => closeNoteEditor());
     noteInput.addEventListener('keydown', (event) => {
       if (event.isComposing) return;
       if (event.key === 'Enter') {
         event.preventDefault();
-        closeNoteEditor(false);
+        noteInput.blur();
       }
-      if (event.key === 'Escape') closeNoteEditor(true);
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        closeNoteEditor({ restoreFocus: true, commit: false });
+      }
     });
-    item.querySelector('.note-done').addEventListener('click', (event) => closeNoteEditor(event.detail === 0));
     renderNoteControl();
     list.append(item);
   }
-  if (!selected.length) list.innerHTML = '<li class="empty-row">现有菜单里没有想吃的？可以在下面推荐新菜。</li>';
+  if (!selected.length) list.innerHTML = '<li class="empty-row">现有菜单里没有想吃的？可以在下面记下菜单外想吃的菜。</li>';
   drawer.append(list);
   const suggestionField = document.createElement('section');
   suggestionField.className = 'suggestion-field';
   suggestionField.setAttribute('aria-labelledby', 'suggestion-title');
-  suggestionField.innerHTML = `<div><span class="eyebrow">菜单里没有？</span><h3 id="suggestion-title">推荐新菜</h3><p>可以写多道菜，每道菜用空格隔开</p></div><label><span class="sr-only">想添加的新菜</span><input type="text" maxlength="${MAX_SUGGESTION_LENGTH}" placeholder="例如：糖醋里脊 锅包肉" aria-describedby="suggestion-count"></label><small id="suggestion-count"><b>0</b> / ${MAX_SUGGESTION_LENGTH}</small>`;
+  suggestionField.innerHTML = `<div><span class="eyebrow">还没加入正式菜单</span><h3 id="suggestion-title">菜单外想吃</h3><p>可以写多道菜，每道菜用空格隔开</p></div><label><span class="sr-only">菜单外想吃的菜</span><input type="text" maxlength="${MAX_SUGGESTION_LENGTH}" placeholder="例如：糖醋里脊 锅包肉" aria-describedby="suggestion-count"></label><small id="suggestion-count"><b>0</b> / ${MAX_SUGGESTION_LENGTH}</small>`;
   const suggestionInput = suggestionField.querySelector('input');
   const suggestionCount = suggestionField.querySelector('small b');
   suggestionInput.value = suggestion || '';

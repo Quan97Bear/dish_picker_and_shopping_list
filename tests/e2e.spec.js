@@ -26,7 +26,13 @@ test('select, complete, reopen the URL and create a shopping list', async ({ pag
   await expect(page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'})).toBeVisible();
   await page.getByRole('button',{name:'给西红柿炒鸡蛋添加备注'}).click();
   await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('不要葱');
-  await page.getByRole('button',{name:'完成西红柿炒鸡蛋备注'}).click();
+  await page.getByRole('heading',{name:'今日菜单'}).click();
+  await expect(page.getByText('不要葱')).toBeVisible();
+  await page.getByRole('button',{name:'修改西红柿炒鸡蛋的备注'}).click();
+  await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).fill('少辣');
+  await page.getByRole('textbox',{name:'给西红柿炒鸡蛋添加备注'}).press('Escape');
+  await expect(page.getByText('不要葱')).toBeVisible();
+  await expect(page.getByText('少辣',{exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'完成选菜'}).click();
   await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
   await expect(page.getByRole('dialog',{name:'把今晚的好味分享出去'})).toHaveCount(0);
@@ -123,7 +129,7 @@ test('reopens and shares the complete v1 result URL without losing state', async
   const shareDialog = page.getByRole('dialog',{name:'把今晚的好味分享出去'});
   await expect(shareDialog).toBeFocused();
   await expect(shareDialog.getByRole('textbox',{name:'菜单链接',exact:true})).toHaveValue(resultUrl);
-  await expect(shareDialog.getByRole('link',{name:'预览菜单'})).toHaveAttribute('href',resultUrl);
+  await expect(shareDialog.getByRole('link',{name:/预览/})).toHaveCount(0);
   await expect(shareDialog.getByLabel('菜单链接二维码')).toBeVisible();
   await shareDialog.getByRole('button',{name:'复制链接'}).click();
   await expect.poll(() => page.evaluate(() => window.__copiedResultUrl)).toBe(resultUrl);
@@ -131,22 +137,33 @@ test('reopens and shares the complete v1 result URL without losing state', async
   await expect(shareMenu).toBeFocused();
 });
 
-test('share a new-dish suggestion without selecting a dish', async ({ page }) => {
+test('reviews and shares menu-external dishes without selecting a menu dish', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole('button',{name:/查看菜单/}).click();
   await expect(page.getByText('可以写多道菜，每道菜用空格隔开',{exact:true})).toBeVisible();
-  await expect(page.getByLabel('想添加的新菜')).toHaveAttribute('placeholder','例如：糖醋里脊 锅包肉');
-  await page.getByLabel('想添加的新菜').fill('糖醋里脊 锅包肉');
-  await page.getByRole('button',{name:'发送建议'}).click();
-  await expect(page.getByRole('heading',{name:'把想吃的新菜分享出去'})).toBeVisible();
-  await expect(page.getByText('持有链接的人可以查看这条建议',{exact:true})).toBeVisible();
-  const href = await page.getByRole('link',{name:'预览建议'}).getAttribute('href');
-  await page.goto(href);
-  await expect(page.getByRole('heading',{name:'收到新菜建议'})).toBeVisible();
-  await expect(page.getByText('糖醋里脊')).toBeVisible();
-  await expect(page.getByText('锅包肉')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'菜单外想吃'})).toBeVisible();
+  await expect(page.getByLabel('菜单外想吃的菜')).toHaveAttribute('placeholder','例如：糖醋里脊 锅包肉');
+  await page.getByLabel('菜单外想吃的菜').fill('糖醋里脊 锅包肉');
+  await page.getByRole('button',{name:'查看想吃清单'}).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(page.getByRole('heading',{name:'想吃清单'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'还想吃这些菜'})).toBeVisible();
+  await expect(page.locator('.suggestion-tags').getByText('糖醋里脊',{exact:true})).toBeVisible();
+  await expect(page.locator('.suggestion-tags').getByText('锅包肉',{exact:true})).toBeVisible();
+  await expect(page.locator('.suggestion-tags').locator('small')).toHaveCount(0);
+  await expect(page.getByRole('tab')).toHaveCount(0);
+  await expect(page.locator('.shopping-panel, .recipes')).toHaveCount(0);
+  await expect(page).toHaveURL(/menu=&p=2&v=1&suggestion=/);
+
+  const shareList = page.getByRole('button',{name:'分享想吃清单'});
+  await shareList.click();
+  const shareDialog = page.getByRole('dialog',{name:'把想吃的菜分享出去'});
+  await expect(shareDialog).toBeFocused();
+  await expect(shareDialog.getByText('持有链接的人可以查看这些菜单外想吃的菜',{exact:true})).toBeVisible();
+  await expect(shareDialog.getByRole('link',{name:/预览/})).toHaveCount(0);
+  await expect(shareDialog.getByLabel('菜单链接二维码')).toBeVisible();
 });
 
 test('updates servings in place and preserves focus and drawer scroll', async ({ page, browserName }) => {
@@ -217,8 +234,9 @@ test('native share failure copies the link and explains the fallback', async ({ 
   });
   await page.goto('/');
   await page.getByRole('button',{name:/查看菜单/}).click();
-  await page.getByLabel('想添加的新菜').fill('锅包肉');
-  await page.getByRole('button',{name:'发送建议'}).click();
+  await page.getByLabel('菜单外想吃的菜').fill('锅包肉');
+  await page.getByRole('button',{name:'查看想吃清单'}).click();
+  await page.getByRole('button',{name:'分享想吃清单'}).click();
   await page.getByRole('button',{name:'系统分享'}).click();
   await expect(page.getByRole('status')).toHaveText('系统分享不可用，链接已复制');
   await expect.poll(() => page.evaluate(() => window.__copiedShareUrl)).toContain('suggestion=');

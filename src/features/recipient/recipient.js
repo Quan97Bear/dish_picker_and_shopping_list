@@ -21,15 +21,17 @@ export function getShoppingCollapseState(expanded) {
 }
 
 export function renderRecipient(root, { dishes, servings, notes = {}, suggestion = '', warnings = [], menuUrl = window.location.href }) {
-  const title = dishes.length ? '今晚吃这些' : suggestion ? '收到新菜建议' : '这份菜单空空的';
-  const subtitle = dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : suggestion ? '选菜人想在菜单里看到这些菜。' : '菜品可能已下架，或链接不完整。';
+  const title = dishes.length ? '今晚吃这些' : suggestion ? '想吃清单' : '这份菜单空空的';
+  const subtitle = dishes.length ? `${dishes.length} 道菜 · ${servings} 人份` : suggestion ? '这些菜还没加入正式菜单。' : '菜品可能已下架，或链接不完整。';
   const resultTabs = dishes.length
     ? '<div class="result-controls"><div class="result-tabs" role="tablist" aria-label="结果内容"><button id="shopping-tab" role="tab" aria-selected="true" aria-controls="shopping-panel">采购清单</button><button id="recipes-tab" role="tab" aria-selected="false" aria-controls="recipes-panel" tabindex="-1">菜谱</button></div><button class="button secondary result-share" type="button" data-share-menu>分享菜单</button></div>'
-    : '<a class="button primary" href="./">返回菜单</a>';
+    : suggestion
+      ? '<div class="result-empty-actions"><button class="button secondary result-share" type="button" data-share-menu>分享想吃清单</button><a class="button ghost" href="./">返回菜单</a></div>'
+      : '<a class="button primary" href="./">返回菜单</a>';
   const resultPanels = dishes.length
     ? '<section id="shopping-panel" class="shopping-panel result-panel" role="tabpanel" aria-labelledby="shopping-tab"></section><section id="recipes-panel" class="recipes result-panel" role="tabpanel" aria-labelledby="recipes-tab" hidden><div class="section-heading"><div><span class="eyebrow">照着做就好</span><h2 id="recipes-title">菜谱详情</h2></div></div><div class="recipe-list"></div></section>'
     : '';
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${title}</h1><p>${subtitle}</p><div class="menu-tags"></div>${resultTabs}</section><section class="warning-area" aria-live="polite"></section><section class="suggestion-card" ${suggestion ? '' : 'hidden'} aria-labelledby="suggestion-card-title"><span class="eyebrow">新菜建议</span><h2 id="suggestion-card-title">想新增这些菜</h2><div class="suggestion-tags"></div></section>${resultPanels}</main>`;
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./"><span class="brand-mark">食</span><span>今晚吃什么</span></a><a class="header-link" href="./">重新选菜</a></header><main id="main" class="recipient-main"><section class="menu-hero"><span class="eyebrow">今晚的餐桌</span><h1>${title}</h1><p>${subtitle}</p><div class="menu-tags"></div>${resultTabs}</section><section class="warning-area" aria-live="polite"></section><section class="suggestion-card" ${suggestion ? '' : 'hidden'} aria-labelledby="suggestion-card-title"><span class="eyebrow">菜单外想吃</span><h2 id="suggestion-card-title">还想吃这些菜</h2><div class="suggestion-tags"></div></section>${resultPanels}</main>`;
   const tags = root.querySelector('.menu-tags');
   dishes.forEach((dish) => { const tag = document.createElement('span'); tag.textContent = dish.name; tags.append(tag); });
   const warningArea = root.querySelector('.warning-area');
@@ -56,12 +58,12 @@ export function renderRecipient(root, { dishes, servings, notes = {}, suggestion
     dish.steps.forEach((step) => { const item = document.createElement('li'); item.textContent = step; details.querySelector('.step-list').append(item); });
     recipeList.append(details);
   });
-  if (!dishes.length) return;
-
   const shareButton = root.querySelector('[data-share-menu]');
-  shareButton.addEventListener('click', () => {
-    openShareDialog({ root, url: menuUrl, hasDishes: true, opener: shareButton });
+  shareButton?.addEventListener('click', () => {
+    openShareDialog({ root, url: menuUrl, hasDishes: dishes.length > 0, opener: shareButton });
   });
+
+  if (!dishes.length) return;
 
   const shoppingPanel = root.querySelector('.shopping-panel');
   const items = buildShoppingList(dishes, servings);
