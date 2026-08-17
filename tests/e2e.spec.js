@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 test('select, complete, reopen the URL and create a shopping list', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByText('只管挑喜欢的，菜谱和采购清单都会准备好',{exact:true})).toBeVisible();
   for (const name of ['西红柿炒鸡蛋','芹菜炒肉','紫菜蛋花汤']) await page.getByRole('button',{name:`加入菜单：${name}`}).click();
   await expect(page.locator('.header-menu b')).toHaveText('3');
   await expect(page.locator('.bottom-bar b')).toHaveText('3');
@@ -83,8 +84,11 @@ test('share a new-dish suggestion without selecting a dish', async ({ page }) =>
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole('button',{name:/查看菜单/}).click();
-  await page.getByLabel('想添加的新菜').fill('糖醋里脊、锅包肉');
+  await expect(page.getByText('可以写多道菜，每道菜用空格隔开',{exact:true})).toBeVisible();
+  await expect(page.getByLabel('想添加的新菜')).toHaveAttribute('placeholder','例如：糖醋里脊 锅包肉');
+  await page.getByLabel('想添加的新菜').fill('糖醋里脊 锅包肉');
   await page.getByRole('button',{name:'发送建议'}).click();
+  await expect(page.getByRole('heading',{name:'把想吃的新菜分享出去'})).toBeVisible();
   await expect(page.getByText('持有链接的人可以查看这条建议',{exact:true})).toBeVisible();
   const href = await page.getByRole('link',{name:'预览建议'}).getAttribute('href');
   await page.goto(href);
