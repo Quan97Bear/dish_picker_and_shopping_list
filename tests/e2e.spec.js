@@ -88,6 +88,49 @@ test('select, complete, reopen the URL and create a shopping list', async ({ pag
   await expect(firstShoppingItem).toBeChecked();
 });
 
+test('reopens and shares the complete v1 result URL without losing state', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,'clipboard',{
+      configurable:true,
+      value:{writeText:async (text) => { window.__copiedResultUrl = text; }}
+    });
+  });
+  const notes = encodeURIComponent(JSON.stringify({
+    'tomato-egg': '不要葱',
+    'celery-pork': '少油'
+  }));
+  const suggestion = encodeURIComponent('锅包肉 手撕包菜');
+  await page.goto(`/?menu=tomato-egg,celery-pork&p=4&notes=${notes}&suggestion=${suggestion}&v=1`);
+
+  await expect(page.getByRole('heading',{name:'今晚吃这些'})).toBeVisible();
+  await expect(page.getByText('2 道菜 · 4 人份',{exact:true})).toBeVisible();
+  await expect(page.locator('.menu-tags').getByText('西红柿炒鸡蛋',{exact:true})).toBeVisible();
+  await expect(page.locator('.menu-tags').getByText('芹菜炒肉',{exact:true})).toBeVisible();
+  await expect(page.locator('.suggestion-tags').getByText('锅包肉',{exact:true})).toBeVisible();
+  await expect(page.locator('.suggestion-tags').getByText('手撕包菜',{exact:true})).toBeVisible();
+
+  await page.getByRole('tab',{name:'菜谱'}).click();
+  await expect(page.getByText('不要葱',{exact:true})).toBeVisible();
+  const celeryRecipe = page.locator('.recipe-card').filter({
+    has: page.getByRole('heading',{name:'芹菜炒肉'})
+  });
+  await celeryRecipe.locator('summary').click();
+  await expect(celeryRecipe.getByText('少油',{exact:true})).toBeVisible();
+
+  const resultUrl = page.url();
+  const shareMenu = page.getByRole('button',{name:'分享菜单'});
+  await shareMenu.click();
+  const shareDialog = page.getByRole('dialog',{name:'把今晚的好味分享出去'});
+  await expect(shareDialog).toBeFocused();
+  await expect(shareDialog.getByRole('textbox',{name:'菜单链接',exact:true})).toHaveValue(resultUrl);
+  await expect(shareDialog.getByRole('link',{name:'预览菜单'})).toHaveAttribute('href',resultUrl);
+  await expect(shareDialog.getByLabel('菜单链接二维码')).toBeVisible();
+  await shareDialog.getByRole('button',{name:'复制链接'}).click();
+  await expect.poll(() => page.evaluate(() => window.__copiedResultUrl)).toBe(resultUrl);
+  await shareDialog.press('Escape');
+  await expect(shareMenu).toBeFocused();
+});
+
 test('share a new-dish suggestion without selecting a dish', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => localStorage.clear());

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   MAX_DISHES,
+  PROTOCOL_VERSION,
   decodeMenu,
   encodeMenu,
   normalizeDraft,
@@ -15,6 +16,25 @@ describe('URL menu state', () => {
   it('falls back for invalid servings', () => expect(decodeMenu('?menu=tomato-egg&p=99', valid).servings).toBe(2));
   it('encodes only unique ids', () => expect(new URL(encodeMenu(['tomato-egg','tomato-egg'],2,{},'https://example.test/')).searchParams.get('menu')).toBe('tomato-egg'));
   it('shares notes for selected dishes', () => { const url = encodeMenu(['tomato-egg'],2,{'tomato-egg':'不要葱'},'https://example.test/'); expect(decodeMenu(new URL(url).search,valid).notes).toEqual({'tomato-egg':'不要葱'}); });
+  it('round-trips the complete current share state with protocol version', () => {
+    const encoded = new URL(encodeMenu(
+      ['pepper-pork', 'tomato-egg'],
+      4,
+      { 'pepper-pork': '少辣', 'tomato-egg': '不要葱' },
+      'https://example.test/menu',
+      '锅包肉 手撕包菜'
+    ));
+
+    expect(encoded.searchParams.get('v')).toBe(PROTOCOL_VERSION);
+    expect(decodeMenu(encoded.search, valid)).toEqual({
+      mode: 'recipient',
+      ids: ['pepper-pork', 'tomato-egg'],
+      servings: 4,
+      notes: { 'pepper-pork': '少辣', 'tomato-egg': '不要葱' },
+      suggestion: '锅包肉 手撕包菜',
+      warnings: []
+    });
+  });
   it('shares a new-dish suggestion without selected dishes', () => { const url = encodeMenu([],2,{},'https://example.test/','糖醋里脊'); expect(decodeMenu(new URL(url).search,valid)).toMatchObject({ mode:'recipient', ids:[], suggestion:'糖醋里脊', warnings:[] }); });
   it('normalizes and limits suggestions', () => { const url = encodeMenu([],2,{},'https://example.test/',`  想吃   ${'菜'.repeat(80)}  `); const suggestion = decodeMenu(new URL(url).search,valid).suggestion; expect(suggestion.startsWith('想吃 菜')).toBe(true); expect(suggestion.length).toBe(60); });
   it('renders space-separated suggestions as separate dishes', () => expect(splitSuggestionList('锅包肉 包菜')).toEqual(['锅包肉', '包菜']));
