@@ -33,15 +33,18 @@ describe('picker preference row layout contract', () => {
   });
 });
 
-describe('picker assistant tab layout contract', () => {
-  it('keeps both assistant entries side by side with full touch targets', () => {
+describe('picker mode tab layout contract', () => {
+  it('keeps all three picker modes side by side with full touch targets', () => {
     expect(styles).toMatch(
-      /\.picker-assistants\{[^}]*grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/,
+      /\.picker-mode-tabs\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,
     );
     expect(styles).toMatch(
-      /\.picker-assistants>button\{[^}]*min-height:50px;[^}]*justify-content:center/,
+      /\.picker-mode-tabs button\{[^}]*min-height:48px/,
     );
-    expect(pickerSource).not.toContain('<i aria-hidden="true">→</i>');
+    expect(pickerSource).toContain('role="tablist" aria-label="选菜方式"');
+    expect(pickerSource).toContain('自己挑菜');
+    expect(pickerSource).toContain('帮我配菜');
+    expect(pickerSource).toContain('食材找菜');
   });
 });
 
@@ -71,23 +74,29 @@ describe('dish note editor layout contract', () => {
 describe('mobile search focus contract', () => {
   it('puts the hero-search scrim above the sticky toolbar and below the search field', () => {
     expect(styles).toMatch(
-      /html\[data-search-kind="hero"\] \.hero-search\{[^}]*z-index:16/,
+      /html\[data-search-kind="hero"\] \.hero-search,[\s\S]*?\{[^}]*z-index:16/,
     );
     expect(styles).toMatch(
-      /html\[data-search-kind="hero"\] \.search-scrim\{[^}]*z-index:15/,
+      /html\[data-search-kind="hero"\] \.search-scrim,[\s\S]*?\{[^}]*z-index:15/,
     );
     expect(styles).toMatch(/\.filter-toolbar\{[^}]*z-index:14/);
   });
 
   it('locks the page and blocks interaction below either active search field', () => {
     expect(styles).toMatch(
-      /html\[data-search-kind="hero"\],[\s\S]*html\[data-search-kind="hero"\] body\{[^}]*overflow:hidden/,
+      /html\[data-search-kind="hero"\],[\s\S]*?html\[data-search-kind="pantry"\] body\{[^}]*overflow:hidden/,
     );
     expect(styles).toMatch(
       /html\[data-search-active\] \.search-scrim\{[^}]*pointer-events:auto/,
     );
     expect(styles).toMatch(
       /\.search-scrim\{[^}]*touch-action:none;[^}]*backdrop-filter:blur\(5px\)/,
+    );
+    expect(styles).toMatch(
+      /html\[data-search-kind="pantry"\],[\s\S]*html\[data-search-kind="pantry"\] body\{[^}]*overflow:hidden/,
+    );
+    expect(styles).toMatch(
+      /html\[data-search-kind="pantry"\] \.pantry-search\{[^}]*z-index:16/,
     );
   });
 

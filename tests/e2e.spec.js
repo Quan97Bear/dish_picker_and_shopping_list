@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('previews, changes, and adds a household combination without replacing existing choices', async ({ page, browserName }) => {
+test('switches picker modes and adds a household combination without replacing existing choices', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -11,28 +11,26 @@ test('previews, changes, and adds a household combination without replacing exis
   await page.getByRole('textbox',{name:'给蒜蓉西兰花添加备注'}).press('Enter');
   await page.getByRole('button',{name:'继续选菜'}).click();
 
-  const open = page.getByRole('button',{name:'帮我选今天吃什么'});
-  await expect(page.getByRole('button',{name:'看看家里能做什么'})).toBeVisible();
+  const open = page.getByRole('tab',{name:'帮我配菜'});
+  await expect(page.getByRole('tab',{name:'食材找菜'})).toBeVisible();
   await open.click();
-  const dialog = page.getByRole('dialog',{name:'今天这样吃'});
-  await expect(dialog).toBeFocused();
-  await expect(dialog.getByRole('region',{name:'保留已选'}).getByText('蒜蓉西兰花',{exact:true})).toBeVisible();
-  await expect(dialog.getByText('2 人家常搭配 · 1 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
+  const panel = page.getByRole('tabpanel',{name:'帮我配菜'});
+  await expect(open).toHaveAttribute('aria-selected','true');
+  await expect(panel.getByRole('heading',{name:'帮你搭配一下'})).toBeVisible();
+  await expect(panel.getByRole('region',{name:'保留已选'}).getByText('蒜蓉西兰花',{exact:true})).toBeVisible();
+  await expect(panel.getByText('2 人家常搭配 · 1 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
 
-  const firstSuggestion = await dialog.locator('.combination-suggested-list strong').allTextContents();
-  await dialog.getByRole('button',{name:'换一组'}).click();
-  await expect.poll(async () => dialog.locator('.combination-suggested-list strong').allTextContents())
+  const firstSuggestion = await panel.locator('.combination-suggested-list strong').allTextContents();
+  await panel.getByRole('button',{name:'换一组'}).click();
+  await expect.poll(async () => panel.locator('.combination-suggested-list strong').allTextContents())
     .not.toEqual(firstSuggestion);
-  await dialog.press('Escape');
-  // Headless WebKit reports the restored button as inactive after closing a
-  // modal; the same harness difference already applies to the servings drawer.
-  if (browserName !== 'webkit') await expect(open).toBeFocused();
-
-  await open.click();
-  await dialog.getByRole('button',{name:'增加搭配人数'}).click();
-  await expect(dialog.getByText('3 人家常搭配 · 2 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
-  await dialog.getByRole('button',{name:'加入 3 道菜'}).click();
-  await expect(dialog).toHaveCount(0);
+  await open.press('ArrowRight');
+  await expect(page.getByRole('tab',{name:'食材找菜'})).toHaveAttribute('aria-selected','true');
+  await page.getByRole('tab',{name:'帮我配菜'}).click();
+  await panel.getByRole('button',{name:'增加搭配人数'}).click();
+  await expect(panel.getByText('3 人家常搭配 · 2 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
+  await panel.getByRole('button',{name:'加入 3 道菜'}).click();
+  await expect(panel).toBeVisible();
   await expect(page.locator('.header-menu b')).toHaveText('4');
 
   await page.getByRole('button',{name:/查看菜单/}).click();
@@ -40,43 +38,53 @@ test('previews, changes, and adds a household combination without replacing exis
   expect(selectedNames).toHaveLength(4);
   expect(selectedNames[0]).toBe('蒜蓉西兰花');
   await expect(page.getByText('少盐',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'移除 蒜蓉西兰花'}).click();
+  await page.getByRole('button',{name:'关闭菜单'}).click();
+  await expect(panel.getByRole('region',{name:'保留已选'}).getByText('蒜蓉西兰花',{exact:true})).toHaveCount(0);
 });
 
-test('finds dishes from pantry ingredients and preserves the simple assistant entries', async ({ page, browserName }) => {
+test('finds dishes from pantry ingredients in the page picker mode', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
 
-  const combinationOpen = page.getByRole('button',{name:'帮我选今天吃什么'});
-  const pantryOpen = page.getByRole('button',{name:'看看家里能做什么'});
+  const combinationOpen = page.getByRole('tab',{name:'帮我配菜'});
+  const pantryOpen = page.getByRole('tab',{name:'食材找菜'});
   await expect(combinationOpen).toBeVisible();
   await expect(pantryOpen).toBeVisible();
   await pantryOpen.click();
 
-  const dialog = page.getByRole('dialog',{name:'看看家里能做什么'});
-  await expect(dialog).toBeFocused();
-  await expect(dialog.getByText('选好食材后，这里会按缺少数量分组',{exact:true})).toBeVisible();
+  const panel = page.getByRole('tabpanel',{name:'食材找菜'});
+  await expect(pantryOpen).toHaveAttribute('aria-selected','true');
+  await expect(panel.locator('.pantry-search')).toHaveClass(/search/);
+  await expect(panel.getByRole('heading',{name:'看看家里能做什么'})).toBeVisible();
+  await expect(panel.getByText('选好食材后，这里会按缺少数量分组',{exact:true})).toBeVisible();
 
-  const search = dialog.getByRole('searchbox',{name:'搜索已有食材'});
+  const search = panel.getByRole('searchbox',{name:'搜索已有食材'});
+  await search.click();
+  await expect(page.locator('html')).toHaveAttribute('data-search-kind','pantry');
+  await expect(page.locator('.search-scrim')).toHaveCSS('pointer-events','auto');
   await search.fill('番茄');
-  await dialog.getByRole('button',{name:'西红柿',exact:true}).click();
-  await expect(dialog.getByRole('region',{name:'还差 1 样'}).getByText('西红柿炒鸡蛋',{exact:true})).toBeVisible();
+  await search.press('Enter');
+  await expect(page.locator('html')).not.toHaveAttribute('data-search-kind');
+  await panel.getByRole('button',{name:'西红柿',exact:true}).click();
+  await expect(panel.getByRole('region',{name:'还差 1 样'}).getByText('西红柿炒鸡蛋',{exact:true})).toBeVisible();
 
   await search.fill('鸡蛋');
-  await dialog.getByRole('button',{name:'鸡蛋',exact:true}).click();
-  const ready = dialog.getByRole('region',{name:'现在就能做'});
+  await search.press('Enter');
+  await panel.getByRole('button',{name:'鸡蛋',exact:true}).click();
+  const ready = panel.getByRole('region',{name:'现在就能做'});
   const tomatoEgg = ready.locator('.pantry-result-row').filter({hasText:'西红柿炒鸡蛋'});
   await expect(tomatoEgg).toBeVisible();
   await tomatoEgg.getByRole('button',{name:'加入菜单：西红柿炒鸡蛋'}).click();
   await expect(tomatoEgg.getByRole('button',{name:'已加入菜单：西红柿炒鸡蛋'})).toBeDisabled();
 
-  await dialog.press('Escape');
-  if (browserName !== 'webkit') await expect(pantryOpen).toBeFocused();
+  await page.getByRole('tab',{name:'自己挑菜'}).click();
   await expect(page.getByRole('button',{name:/查看菜单.*已选 1 道菜/})).toBeVisible();
 
   await pantryOpen.click();
-  await expect(dialog.getByRole('button',{name:'移除已有食材：西红柿'})).toBeVisible();
-  await expect(dialog.getByRole('button',{name:'移除已有食材：鸡蛋'})).toBeVisible();
+  await expect(panel.getByRole('button',{name:'移除已有食材：西红柿'})).toBeVisible();
+  await expect(panel.getByRole('button',{name:'移除已有食材：鸡蛋'})).toBeVisible();
 });
 
 test('select, complete, reopen the URL and create a shopping list', async ({ page }) => {
@@ -593,12 +601,16 @@ test('candidate sorting is stable, persisted, and uses local pick history', asyn
   const sort = page.getByLabel('候选排序');
   const firstDishName = () => page.locator('.dish-card h3').first();
   await expect(sort).toBeVisible();
+  await expect(page.getByRole('heading',{name:'慢慢挑'})).toBeVisible();
   const headingLayout = await page.evaluate(() => {
     const title = document.querySelector('#dish-title').getBoundingClientRect();
+    const search = document.querySelector('.manual-search-wrap').getBoundingClientRect();
     const actions = document.querySelector('.candidate-heading-actions').getBoundingClientRect();
     const select = document.querySelector('.sort-control select').getBoundingClientRect();
     return {
       titleRight: title.right,
+      titleBottom: title.bottom,
+      searchTop: search.top,
       actionsLeft: actions.left,
       selectLeft: select.left,
       selectRight: select.right,
@@ -606,6 +618,7 @@ test('candidate sorting is stable, persisted, and uses local pick history', asyn
     };
   });
   expect(headingLayout.titleRight).toBeLessThanOrEqual(headingLayout.actionsLeft);
+  expect(headingLayout.titleBottom).toBeLessThanOrEqual(headingLayout.searchTop);
   expect(headingLayout.selectLeft).toBeGreaterThanOrEqual(0);
   expect(headingLayout.selectRight).toBeLessThanOrEqual(headingLayout.viewportWidth);
 

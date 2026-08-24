@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getMenuPrimaryActionLabel, stepServings } from '../src/features/picker/menu-drawer.js';
-import { getCombinationShortageText } from '../src/features/picker/combination-dialog.js';
+import { getCombinationShortageText } from '../src/features/picker/combination-panel.js';
 import { getDietaryConflictIds } from '../src/features/picker/picker.js';
 import { getNextResultTabIndex, getShoppingCollapseState } from '../src/features/recipient/recipient.js';
 import { resetScrollForInstantViewChange } from '../src/shared/route-transition.js';

@@ -11,7 +11,7 @@ const RESULT_GROUPS = [
   ['missingTwo', '还差 2 样'],
 ];
 
-export function createPantryDialog({
+export function createPantryPanel({
   dishes,
   guide,
   avoid,
@@ -19,30 +19,19 @@ export function createPantryDialog({
   menuSelectedIds = [],
   onSelectionChange,
   onAddDish,
-  onClose,
 }) {
   const guideByKey = new Map(guide.ingredients.map((ingredient) => [ingredient.key, ingredient]));
   const currentKeys = new Set(selectedKeys);
   const menuSelected = new Set(menuSelectedIds);
   const expandedGroups = new Set();
-  const backdrop = document.createElement('div');
-  backdrop.className = 'drawer-backdrop pantry-backdrop';
-  backdrop.addEventListener('click', (event) => {
-    if (event.target === backdrop) onClose();
-  });
-
-  const dialog = document.createElement('section');
-  dialog.className = 'drawer pantry-dialog';
-  dialog.setAttribute('role', 'dialog');
-  dialog.setAttribute('aria-modal', 'true');
-  dialog.setAttribute('aria-labelledby', 'pantry-title');
-  dialog.tabIndex = -1;
-  dialog.innerHTML = `<div class="drawer-handle"></div>
+  const panel = document.createElement('section');
+  panel.className = 'pantry-panel';
+  panel.setAttribute('aria-labelledby', 'pantry-title');
+  panel.innerHTML = `
     <div class="section-heading pantry-heading">
-      <div><span class="eyebrow">家里有什么</span><h2 id="pantry-title">看看家里能做什么</h2></div>
-      <button class="icon-button" type="button" data-close-pantry aria-label="关闭已有食材找菜">×</button>
+      <div><span class="eyebrow">食材找菜</span><h2 id="pantry-title">看看家里能做什么</h2></div>
     </div>
-    <label class="pantry-search"><span aria-hidden="true">⌕</span><span class="sr-only">搜索已有食材</span><input type="search" placeholder="搜索食材，例如番茄" autocomplete="off" enterkeyhint="done"></label>
+    <label class="search pantry-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索已有食材</span><input type="search" placeholder="搜索食材，例如番茄" autocomplete="off" enterkeyhint="done"></label>
     <section class="pantry-selected" aria-labelledby="pantry-selected-title">
       <div class="pantry-section-heading"><strong id="pantry-selected-title">家里有</strong><div><small></small><button type="button" data-clear-pantry>清空</button></div></div>
       <div class="pantry-selected-tags"></div>
@@ -53,13 +42,13 @@ export function createPantryDialog({
     </section>
     <section class="pantry-results" aria-label="可做菜品" aria-live="polite"></section>`;
 
-  const search = dialog.querySelector('.pantry-search input');
-  const selectedCount = dialog.querySelector('.pantry-selected small');
-  const clear = dialog.querySelector('[data-clear-pantry]');
-  const selectedTags = dialog.querySelector('.pantry-selected-tags');
-  const optionsTitle = dialog.querySelector('#pantry-options-title');
-  const optionChips = dialog.querySelector('.pantry-option-chips');
-  const resultsRoot = dialog.querySelector('.pantry-results');
+  const search = panel.querySelector('.pantry-search input');
+  const selectedCount = panel.querySelector('.pantry-selected small');
+  const clear = panel.querySelector('[data-clear-pantry]');
+  const selectedTags = panel.querySelector('.pantry-selected-tags');
+  const optionsTitle = panel.querySelector('#pantry-options-title');
+  const optionChips = panel.querySelector('.pantry-option-chips');
+  const resultsRoot = panel.querySelector('.pantry-results');
 
   const notifySelection = () => onSelectionChange([...currentKeys]);
 
@@ -187,7 +176,7 @@ export function createPantryDialog({
       more.addEventListener('click', () => {
         expandedGroups.add(key);
         renderResults();
-        dialog.querySelector(`.pantry-result-${key} .pantry-result-heading`)?.scrollIntoView({ block: 'nearest' });
+        panel.querySelector(`.pantry-result-${key} .pantry-result-heading`)?.scrollIntoView({ block: 'nearest' });
       });
       section.append(more);
     }
@@ -232,17 +221,8 @@ export function createPantryDialog({
     renderResults();
   });
   search.addEventListener('input', renderOptions);
-  search.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && !event.isComposing) {
-      event.preventDefault();
-      search.blur();
-    }
-  });
-  dialog.querySelector('[data-close-pantry]').addEventListener('click', onClose);
-
   renderSelected();
   renderOptions();
   renderResults();
-  backdrop.append(dialog);
-  return backdrop;
+  return panel;
 }

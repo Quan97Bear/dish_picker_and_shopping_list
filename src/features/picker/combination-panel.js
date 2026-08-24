@@ -21,31 +21,20 @@ export function getCombinationShortageText(missing) {
     : '';
 }
 
-export function createCombinationDialog({
+export function createCombinationPanel({
   dishes,
   selectedIds,
   servings,
   avoid,
   onAdd,
-  onClose,
 }) {
   const dishMap = new Map(dishes.map((dish) => [dish.id, dish]));
-  const backdrop = document.createElement('div');
-  backdrop.className = 'drawer-backdrop combination-backdrop';
-  backdrop.addEventListener('click', (event) => {
-    if (event.target === backdrop) onClose();
-  });
-
-  const dialog = document.createElement('section');
-  dialog.className = 'drawer combination-dialog';
-  dialog.setAttribute('role', 'dialog');
-  dialog.setAttribute('aria-modal', 'true');
-  dialog.setAttribute('aria-labelledby', 'combination-title');
-  dialog.tabIndex = -1;
-  dialog.innerHTML = `<div class="drawer-handle"></div>
+  const panel = document.createElement('section');
+  panel.className = 'combination-panel';
+  panel.setAttribute('aria-labelledby', 'combination-title');
+  panel.innerHTML = `
     <div class="section-heading combination-heading">
-      <div><span class="eyebrow">按人数和忌口搭配</span><h2 id="combination-title">今天这样吃</h2></div>
-      <button class="icon-button" type="button" data-close-combination aria-label="关闭家常搭配">×</button>
+      <div><span class="eyebrow">帮我配菜</span><h2 id="combination-title">帮你搭配一下</h2></div>
     </div>
     <div class="combination-servings">
       <div><strong>用餐人数</strong><small>人数变化后重新搭配</small></div>
@@ -66,15 +55,15 @@ export function createCombinationDialog({
       <button class="button primary" type="button" data-add-combination>加入菜单</button>
     </div>`;
 
-  const output = dialog.querySelector('output');
-  const minus = dialog.querySelector('[data-combination-minus]');
-  const plus = dialog.querySelector('[data-combination-plus]');
-  const preserved = dialog.querySelector('.combination-preserved');
-  const preservedTags = dialog.querySelector('.combination-preserved-tags');
-  const suggestedList = dialog.querySelector('.combination-suggested-list');
-  const shortage = dialog.querySelector('.combination-shortage');
-  const another = dialog.querySelector('[data-another-combination]');
-  const add = dialog.querySelector('[data-add-combination]');
+  const output = panel.querySelector('output');
+  const minus = panel.querySelector('[data-combination-minus]');
+  const plus = panel.querySelector('[data-combination-plus]');
+  const preserved = panel.querySelector('.combination-preserved');
+  const preservedTags = panel.querySelector('.combination-preserved-tags');
+  const suggestedList = panel.querySelector('.combination-suggested-list');
+  const shortage = panel.querySelector('.combination-shortage');
+  const another = panel.querySelector('[data-another-combination]');
+  const add = panel.querySelector('[data-add-combination]');
   let currentServings = servings;
   let variant = 0;
   let result;
@@ -108,7 +97,7 @@ export function createCombinationDialog({
     output.textContent = `${currentServings} 人`;
     minus.disabled = currentServings === 1;
     plus.disabled = currentServings === 8;
-    dialog.querySelector('.combination-ratio').textContent = `${currentServings} 人家常搭配 · ${targetSummary(result.target)}`;
+    panel.querySelector('.combination-ratio').textContent = `${currentServings} 人家常搭配 · ${targetSummary(result.target)}`;
 
     preserved.hidden = result.selectedIds.length === 0;
     preservedTags.replaceChildren();
@@ -164,9 +153,6 @@ export function createCombinationDialog({
     additions: result.additions,
     servings: currentServings,
   }));
-  dialog.querySelector('[data-close-combination]').addEventListener('click', onClose);
-
   render();
-  backdrop.append(dialog);
-  return backdrop;
+  return panel;
 }

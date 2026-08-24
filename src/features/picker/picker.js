@@ -1,7 +1,7 @@
 import { MAX_DISHES } from '../../domain/menu-state.js';
 import { createMenuDrawer } from './menu-drawer.js';
-import { createCombinationDialog } from './combination-dialog.js';
-import { createPantryDialog } from './pantry-dialog.js';
+import { createCombinationPanel } from './combination-panel.js';
+import { createPantryPanel } from './pantry-panel.js';
 import { showToast } from '../../shared/toast.js';
 
 const CATEGORY_EMOJI = { vegetable: '🥬', meat: '🥩', mixed: '🍲', stew: '🥘', soup: '🥣' };
@@ -123,8 +123,6 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
   let category = 'all';
   let query = '';
   let drawerOpener = null;
-  let combinationOpener = null;
-  let pantryOpener = null;
   let sortMode = resolveSortMode(localStorage.getItem(SORT_MODE_KEY));
   let pickHistory = {};
   try { pickHistory = JSON.parse(localStorage.getItem(PICK_HISTORY_KEY) || '{}'); } catch {}
@@ -139,9 +137,10 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
   } catch {}
   const dishMap = new Map(index.map((dish) => [dish.id, dish]));
   const previewDishMap = new Map(dishes.map((dish) => [dish.id, dish]));
-  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单都会准备好</p><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label></section><span class="sticky-sentinel" aria-hidden="true"></span><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">忌口<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>忌口</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">忌口</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="picker-assistants" aria-label="选菜助手"><button type="button" data-open-combination>帮我选今天吃什么</button><button type="button" data-open-pantry>看看家里能做什么</button></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">家常好味</span><h2 id="dish-title">今日候选</h2></div><div class="candidate-heading-actions"><span class="result-count" aria-live="polite"></span><label class="sort-control"><span class="sr-only">候选排序</span><select aria-label="候选排序"><option value="recommended">排序：推荐</option><option value="frequent">排序：常吃</option><option value="fastest">排序：最快</option><option value="category">排序：分类</option><option value="name">排序：菜名</option></select></label><div class="candidate-view-toggle" role="group" aria-label="候选显示方式"><button type="button" data-candidate-view="large" aria-label="大卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5"></rect><rect x="11" y="2" width="7" height="7" rx="1.5"></rect><rect x="2" y="11" width="7" height="7" rx="1.5"></rect><rect x="11" y="11" width="7" height="7" rx="1.5"></rect></svg></button><button type="button" data-candidate-view="compact" aria-label="小卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="4" height="4" rx="1"></rect><rect x="8" y="2" width="4" height="4" rx="1"></rect><rect x="14" y="2" width="4" height="4" rx="1"></rect><rect x="2" y="8" width="4" height="4" rx="1"></rect><rect x="8" y="8" width="4" height="4" rx="1"></rect><rect x="14" y="8" width="4" height="4" rx="1"></rect><rect x="2" y="14" width="4" height="4" rx="1"></rect><rect x="8" y="14" width="4" height="4" rx="1"></rect><rect x="14" y="14" width="4" height="4" rx="1"></rect></svg></button></div></div></div><div class="dish-grid"></div></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div><div class="search-scrim" aria-hidden="true"></div>`;
+  root.innerHTML = `<header class="site-header"><a class="brand" href="./" aria-label="今晚吃什么首页"><span class="brand-mark">食</span><span>今晚吃什么</span></a></header><main id="main"><section class="hero"><span class="eyebrow">两分钟定下晚餐</span><h1>今晚，想吃点什么？</h1><p>只管挑喜欢的，菜谱和采购清单都会准备好</p></section><nav class="picker-mode-tabs" role="tablist" aria-label="选菜方式"><button type="button" role="tab" id="picker-mode-manual" aria-controls="picker-panel-manual" aria-selected="true" tabindex="0" data-picker-mode="manual">自己挑菜</button><button type="button" role="tab" id="picker-mode-combination" aria-controls="picker-panel-combination" aria-selected="false" tabindex="-1" data-picker-mode="combination">帮我配菜</button><button type="button" role="tab" id="picker-mode-pantry" aria-controls="picker-panel-pantry" aria-selected="false" tabindex="-1" data-picker-mode="pantry">食材找菜</button></nav><section class="picker-mode-panel picker-mode-manual" id="picker-panel-manual" role="tabpanel" aria-labelledby="picker-mode-manual"><div class="manual-search-wrap"><label class="search hero-search"><span aria-hidden="true">🔍</span><span class="sr-only">搜索菜名</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label></div><span class="sticky-sentinel" aria-hidden="true"></span><div class="filter-toolbar"><div class="control-label category-label"><strong id="category-title">分类</strong><span>单选</span></div><nav class="filters" aria-labelledby="category-title"></nav><span class="toolbar-divider" aria-hidden="true"></span><button class="compact-avoid" type="button" aria-expanded="false">忌口<span hidden></span></button><label class="compact-search" aria-label="搜索菜名"><span aria-hidden="true">🔍</span><input type="search" placeholder="搜索菜名…" autocomplete="off" enterkeyhint="done" /></label><section class="avoid-popover" hidden aria-label="修改忌口"><div><strong>忌口</strong><button type="button" data-close-avoid aria-label="收起忌口选项">×</button></div><div class="avoid-filters"></div></section></div><section class="avoid-section" aria-labelledby="avoid-title"><div class="control-label"><strong id="avoid-title">忌口</strong><span>可多选</span></div><div class="avoid-filters"></div></section><section class="dish-section" aria-labelledby="dish-title"><div class="section-heading"><div><span class="eyebrow">自己挑菜</span><h2 id="dish-title">慢慢挑</h2></div><div class="candidate-heading-actions"><span class="result-count" aria-live="polite"></span><label class="sort-control"><span class="sr-only">候选排序</span><select aria-label="候选排序"><option value="recommended">排序：推荐</option><option value="frequent">排序：常吃</option><option value="fastest">排序：最快</option><option value="category">排序：分类</option><option value="name">排序：菜名</option></select></label><div class="candidate-view-toggle" role="group" aria-label="候选显示方式"><button type="button" data-candidate-view="large" aria-label="大卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1.5"></rect><rect x="11" y="2" width="7" height="7" rx="1.5"></rect><rect x="2" y="11" width="7" height="7" rx="1.5"></rect><rect x="11" y="11" width="7" height="7" rx="1.5"></rect></svg></button><button type="button" data-candidate-view="compact" aria-label="小卡片显示"><svg aria-hidden="true" viewBox="0 0 20 20"><rect x="2" y="2" width="4" height="4" rx="1"></rect><rect x="8" y="2" width="4" height="4" rx="1"></rect><rect x="14" y="2" width="4" height="4" rx="1"></rect><rect x="2" y="8" width="4" height="4" rx="1"></rect><rect x="8" y="8" width="4" height="4" rx="1"></rect><rect x="14" y="8" width="4" height="4" rx="1"></rect><rect x="2" y="14" width="4" height="4" rx="1"></rect><rect x="8" y="14" width="4" height="4" rx="1"></rect><rect x="14" y="14" width="4" height="4" rx="1"></rect></svg></button></div></div></div><div class="dish-grid"></div></section></section><section class="picker-mode-panel picker-mode-embedded" id="picker-panel-combination" role="tabpanel" aria-labelledby="picker-mode-combination" hidden></section><section class="picker-mode-panel picker-mode-embedded" id="picker-panel-pantry" role="tabpanel" aria-labelledby="picker-mode-pantry" hidden></section></main><div class="bottom-bar"><div><span>今日菜单</span><strong><b>0</b> 道菜</strong></div><button class="button primary" data-open-menu>查看菜单 <span>→</span></button></div><div class="search-scrim" aria-hidden="true"></div>`;
   root.querySelector('.site-header').insertAdjacentHTML('beforeend', '<button class="header-menu" type="button" data-open-menu aria-label="查看菜单，今晚想吃"><span>今晚想吃</span><b>0</b></button>');
   root.querySelector('.bottom-bar').innerHTML = getBasketMarkup(0);
+  root.querySelector('.manual-search-wrap').before(root.querySelector('.dish-section > .section-heading'));
   const grid = root.querySelector('.dish-grid');
   const wideViewQuery = window.matchMedia('(min-width: 700px)');
   let storedCandidateView = localStorage.getItem(CANDIDATE_VIEW_KEY);
@@ -236,7 +235,9 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
     const searchLabel = event.currentTarget.closest('label');
     const searchBottom = searchLabel.getBoundingClientRect().bottom;
     document.documentElement.style.setProperty('--search-scrim-top', `${Math.ceil(searchBottom)}px`);
-    document.documentElement.dataset.searchKind = searchLabel.classList.contains('hero-search') ? 'hero' : 'compact';
+    document.documentElement.dataset.searchKind = searchLabel.classList.contains('hero-search')
+      ? 'hero'
+      : searchLabel.classList.contains('pantry-search') ? 'pantry' : 'compact';
     document.documentElement.setAttribute('data-search-active', '');
     window.addEventListener('scroll', restoreSearchScroll, { passive: true });
   };
@@ -251,7 +252,7 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
     searchInputs.forEach((other) => { if (other !== event.target) other.value = event.target.value; });
     draw();
   }));
-  searchInputs.forEach((input) => {
+  const attachSearchFocus = (input) => {
     input.closest('label').addEventListener('pointerdown', () => {
       input.focus({ preventScroll: true });
     });
@@ -262,7 +263,8 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
       event.preventDefault();
       input.blur();
     });
-  });
+  };
+  searchInputs.forEach(attachSearchFocus);
   const toolbar = root.querySelector('.filter-toolbar');
   const heroSearch = root.querySelector('.hero-search');
   const stickySentinel = root.querySelector('.sticky-sentinel');
@@ -327,7 +329,9 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
       pickHistory[id] = (pickHistory[id] || 0) + 1;
       localStorage.setItem(PICK_HISTORY_KEY, JSON.stringify(pickHistory));
     }
-    persist(); draw();
+    persist();
+    draw();
+    refreshActivePickerMode();
   }
   function persist() { localStorage.setItem('home-menu-draft', JSON.stringify({ selected, servings, notes, suggestion })); }
   function updateCounts() { updateMenuCounts(root, selected.length); }
@@ -465,20 +469,20 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
     previewCard.focus({ preventScroll: true });
     root.setAttribute('aria-hidden', 'true');
   }
-  function openCombination() {
-    combinationOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-combination]');
-    const closeCombination = (restoreFocus = true) => {
-      document.querySelector('.combination-backdrop')?.remove();
-      document.body.classList.remove('no-scroll');
-      root.inert = false;
-      if (restoreFocus && combinationOpener?.isConnected) combinationOpener.focus();
-    };
-    const backdrop = createCombinationDialog({
+  const modeTabs = [...root.querySelectorAll('[role="tab"][data-picker-mode]')];
+  const modePanels = new Map([
+    ['manual', root.querySelector('#picker-panel-manual')],
+    ['combination', root.querySelector('#picker-panel-combination')],
+    ['pantry', root.querySelector('#picker-panel-pantry')],
+  ]);
+
+  function renderCombinationPanel() {
+    const panel = modePanels.get('combination');
+    panel.replaceChildren(createCombinationPanel({
       dishes,
       selectedIds: selected,
       servings,
       avoid,
-      onClose: closeCombination,
       onAdd: ({ combinedIds, additions, servings: nextServings }) => {
         selected = combinedIds;
         servings = nextServings;
@@ -486,26 +490,15 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
         localStorage.setItem(PICK_HISTORY_KEY, JSON.stringify(pickHistory));
         persist();
         draw();
-        closeCombination(false);
+        renderCombinationPanel();
         showToast(additions.length ? `已加入 ${additions.length} 道搭配` : '当前菜单已保留');
       },
-    });
-    const dialog = backdrop.querySelector('.combination-dialog');
-    backdrop.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closeCombination));
-    root.inert = true;
-    document.body.append(backdrop);
-    document.body.classList.add('no-scroll');
-    dialog.focus();
+    }));
   }
-  function openPantry() {
-    pantryOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-pantry]');
-    const closePantry = (restoreFocus = true) => {
-      document.querySelector('.pantry-backdrop')?.remove();
-      document.body.classList.remove('no-scroll');
-      root.inert = false;
-      if (restoreFocus && pantryOpener?.isConnected) pantryOpener.focus();
-    };
-    const backdrop = createPantryDialog({
+
+  function renderPantryPanel() {
+    const panel = modePanels.get('pantry');
+    panel.replaceChildren(createPantryPanel({
       dishes,
       guide: ingredientGuide,
       avoid,
@@ -525,18 +518,31 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
         showToast(`已加入${dishMap.get(id)?.name || '这道菜'}`);
         return true;
       },
-      onClose: closePantry,
+    }));
+    attachSearchFocus(panel.querySelector('.pantry-search input'));
+  }
+
+  function refreshActivePickerMode() {
+    if (root.dataset.pickerMode === 'combination') renderCombinationPanel();
+    if (root.dataset.pickerMode === 'pantry') renderPantryPanel();
+  }
+
+  function selectPickerMode(mode, { focus = false } = {}) {
+    if (!modePanels.has(mode)) return;
+    root.dataset.pickerMode = mode;
+    modeTabs.forEach((tab) => {
+      const active = tab.dataset.pickerMode === mode;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focus) tab.focus();
     });
-    const dialog = backdrop.querySelector('.pantry-dialog');
-    backdrop.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closePantry));
-    root.inert = true;
-    document.body.append(backdrop);
-    document.body.classList.add('no-scroll');
-    dialog.focus();
+    for (const [key, panel] of modePanels) panel.hidden = key !== mode;
+    if (mode === 'combination') renderCombinationPanel();
+    if (mode === 'pantry') renderPantryPanel();
   }
   function openDrawer({ preserveOpener = false } = {}) {
     if (!preserveOpener) drawerOpener = document.activeElement instanceof HTMLElement ? document.activeElement : root.querySelector('[data-open-menu]');
-    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: showResult, onClose: closeDrawer });
+    const drawer = createMenuDrawer({ selected, dishMap, servings, notes, suggestion, conflictingIds: getDietaryConflictIds(selected, dishMap, avoid), onNote: (id, value) => { notes[id] = value.slice(0, 80); persist(); }, onSuggestion: (value) => { suggestion = value.slice(0, 60); persist(); }, onRemove: (id) => { delete notes[id]; toggle(id); closeDrawer(false); openDrawer({ preserveOpener: true }); }, onClear: () => { selected = []; notes = {}; suggestion = ''; persist(); draw(); refreshActivePickerMode(); closeDrawer(); }, onServings: (value) => { servings = value; persist(); }, onGenerate: showResult, onClose: closeDrawer });
     const dialog = drawer.querySelector('.drawer');
     drawer.addEventListener('keydown', (event) => handleDialogKeys(event, dialog, closeDrawer));
     root.inert = true;
@@ -556,8 +562,21 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
     onComplete({ ids: [...selected], servings, notes: { ...notes }, suggestion, url });
   }
   root.querySelectorAll('[data-open-menu]').forEach((button) => button.addEventListener('click', () => openDrawer()));
-  root.querySelector('[data-open-combination]').addEventListener('click', openCombination);
-  root.querySelector('[data-open-pantry]').addEventListener('click', openPantry);
+  modeTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectPickerMode(tab.dataset.pickerMode));
+    tab.addEventListener('keydown', (event) => {
+      const offsets = { ArrowLeft: -1, ArrowRight: 1 };
+      if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault();
+        selectPickerMode(modeTabs[event.key === 'Home' ? 0 : modeTabs.length - 1].dataset.pickerMode, { focus: true });
+        return;
+      }
+      if (!(event.key in offsets)) return;
+      event.preventDefault();
+      const next = (index + offsets[event.key] + modeTabs.length) % modeTabs.length;
+      selectPickerMode(modeTabs[next].dataset.pickerMode, { focus: true });
+    });
+  });
   const pickerHeader = root.querySelector('.site-header');
   const compactMenu = root.querySelector('.bottom-bar');
   const headerMenu = root.querySelector('.header-menu');
@@ -571,5 +590,6 @@ export function renderPicker(root, { index, dishes = [], ingredientGuide, initia
     compactMenuButton.tabIndex = headerVisible ? -1 : 0;
   }, { threshold: 0 });
   headerObserver.observe(pickerHeader);
+  selectPickerMode('manual');
   draw();
 }
