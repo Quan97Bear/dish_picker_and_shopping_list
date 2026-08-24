@@ -10,7 +10,7 @@ const root = document.querySelector('#app');
 async function start() {
   root.innerHTML = '<main class="loading"><span></span><p>正在准备今晚的菜单…</p></main>';
   try {
-    const { index, dishes, aliases } = await loadAppData();
+    const { index, dishes, aliases, ingredientGuide } = await loadAppData();
     const validIds = new Set(index.map((dish) => dish.id));
     const state = decodeMenu(location.search, validIds, aliases);
     const map = new Map(dishes.map((dish) => [dish.id, dish]));
@@ -24,6 +24,7 @@ async function start() {
     renderPicker(root, {
       index,
       dishes,
+      ingredientGuide,
       initialSelected: draft.selected,
       initialServings: draft.servings,
       initialNotes: draft.notes,

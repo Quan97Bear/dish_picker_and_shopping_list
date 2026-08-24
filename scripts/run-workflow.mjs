@@ -17,7 +17,7 @@ const validateData = path.join(rootDir, "scripts/validate-data.mjs");
 const validateDeploy = path.join(rootDir, "scripts/validate-deploy.mjs");
 const validateDocs = path.join(rootDir, "scripts/validate-docs.mjs");
 const phoneTestPattern =
-  "theme, canvas|solid background|opening and closing|mobile search|household combination";
+  "theme, canvas|solid background|opening and closing|mobile search|household combination|pantry ingredients";
 const phoneDemoPort = 5173;
 
 async function runStep(label, scriptPath, args = []) {

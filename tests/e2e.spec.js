@@ -11,9 +11,8 @@ test('previews, changes, and adds a household combination without replacing exis
   await page.getByRole('textbox',{name:'给蒜蓉西兰花添加备注'}).press('Enter');
   await page.getByRole('button',{name:'继续选菜'}).click();
 
-  const helper = page.getByRole('region',{name:'帮我选今天吃什么'});
-  await expect(helper.getByText('结合当前忌口生成家常搭配',{exact:true})).toBeVisible();
-  const open = helper.getByRole('button',{name:'帮我选'});
+  const open = page.getByRole('button',{name:'帮我选今天吃什么'});
+  await expect(page.getByRole('button',{name:'看看家里能做什么'})).toBeVisible();
   await open.click();
   const dialog = page.getByRole('dialog',{name:'今天这样吃'});
   await expect(dialog).toBeFocused();
@@ -41,6 +40,43 @@ test('previews, changes, and adds a household combination without replacing exis
   expect(selectedNames).toHaveLength(4);
   expect(selectedNames[0]).toBe('蒜蓉西兰花');
   await expect(page.getByText('少盐',{exact:true})).toBeVisible();
+});
+
+test('finds dishes from pantry ingredients and preserves the simple assistant entries', async ({ page, browserName }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+
+  const combinationOpen = page.getByRole('button',{name:'帮我选今天吃什么'});
+  const pantryOpen = page.getByRole('button',{name:'看看家里能做什么'});
+  await expect(combinationOpen).toBeVisible();
+  await expect(pantryOpen).toBeVisible();
+  await pantryOpen.click();
+
+  const dialog = page.getByRole('dialog',{name:'看看家里能做什么'});
+  await expect(dialog).toBeFocused();
+  await expect(dialog.getByText('选好食材后，这里会按缺少数量分组',{exact:true})).toBeVisible();
+
+  const search = dialog.getByRole('searchbox',{name:'搜索已有食材'});
+  await search.fill('番茄');
+  await dialog.getByRole('button',{name:'西红柿',exact:true}).click();
+  await expect(dialog.getByRole('region',{name:'还差 1 样'}).getByText('西红柿炒鸡蛋',{exact:true})).toBeVisible();
+
+  await search.fill('鸡蛋');
+  await dialog.getByRole('button',{name:'鸡蛋',exact:true}).click();
+  const ready = dialog.getByRole('region',{name:'现在就能做'});
+  const tomatoEgg = ready.locator('.pantry-result-row').filter({hasText:'西红柿炒鸡蛋'});
+  await expect(tomatoEgg).toBeVisible();
+  await tomatoEgg.getByRole('button',{name:'加入菜单：西红柿炒鸡蛋'}).click();
+  await expect(tomatoEgg.getByRole('button',{name:'已加入菜单：西红柿炒鸡蛋'})).toBeDisabled();
+
+  await dialog.press('Escape');
+  if (browserName !== 'webkit') await expect(pantryOpen).toBeFocused();
+  await expect(page.getByRole('button',{name:/查看菜单.*已选 1 道菜/})).toBeVisible();
+
+  await pantryOpen.click();
+  await expect(dialog.getByRole('button',{name:'移除已有食材：西红柿'})).toBeVisible();
+  await expect(dialog.getByRole('button',{name:'移除已有食材：鸡蛋'})).toBeVisible();
 });
 
 test('select, complete, reopen the URL and create a shopping list', async ({ page }) => {

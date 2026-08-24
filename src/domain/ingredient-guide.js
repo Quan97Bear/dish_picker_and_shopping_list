@@ -1,6 +1,6 @@
 const ROLE_NAMES = ['core', 'auxiliary', 'optional'];
 
-function normalizeTerm(value) {
+export function normalizeIngredientTerm(value) {
   return typeof value === 'string'
     ? value.normalize('NFKC').trim().toLocaleLowerCase('zh-CN')
     : '';
@@ -14,14 +14,14 @@ export function createIngredientLookup(guide) {
   const lookup = new Map();
   for (const ingredient of guide.ingredients) {
     for (const term of [ingredient.key, ingredient.name, ...ingredient.aliases]) {
-      lookup.set(normalizeTerm(term), ingredient.key);
+      lookup.set(normalizeIngredientTerm(term), ingredient.key);
     }
   }
   return lookup;
 }
 
 export function resolveIngredientKey(guide, value) {
-  return createIngredientLookup(guide).get(normalizeTerm(value)) || null;
+  return createIngredientLookup(guide).get(normalizeIngredientTerm(value)) || null;
 }
 
 export function getIngredientGuideEntry(guide, key) {
@@ -52,7 +52,7 @@ export function validateIngredientGuide(guide, dishes) {
     entriesByKey.set(entry.key, entry);
 
     for (const value of [entry.name, ...entry.aliases]) {
-      const term = normalizeTerm(value);
+      const term = normalizeIngredientTerm(value);
       assert(term, `名称或别名为空：${entry.key}`);
       assert(!terms.has(term), `名称或别名重复：${value}`);
       terms.set(term, entry.key);
