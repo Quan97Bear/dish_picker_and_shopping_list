@@ -1,6 +1,6 @@
 # 今晚吃什么：项目现状
 
-更新日期：2026-08-17
+更新日期：2026-08-24
 生产地址：https://dish-picker.pages.dev
 部署平台：Cloudflare Pages，项目 `dish-picker`
 
@@ -11,8 +11,8 @@
 
 生产资源：
 
-- JavaScript：`index-B8E--pJ0.js`
-- CSS：`index-WUaxJ4Vv.css`
+- JavaScript：`index-7HhKfOox.js`
+- CSS：`index-CYjFdaod.css`
 
 当前生产能力：
 
@@ -45,7 +45,7 @@
 
 - JavaScript：`index-7HhKfOox.js`
 - CSS：`index-CYjFdaod.css`
-- 生产发布源码：`31a9a18`，已推送至 `origin/dev` 并部署；当前本地候选尚未发布
+- 生产发布源码：`cf07ad5`，已推送至 `origin/dev` 并部署
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
 本地版本包含：
@@ -71,11 +71,11 @@
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-本地候选使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`；生产仍使用 `index-B8E--pJ0.js` + `index-WUaxJ4Vv.css`。
+本地与生产均使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`。
 
 ## 当前产品差异
 
-1. P1.5-01 至 P1.5-03 家常搭配已在本地候选实现并通过手机 Demo 真机验收，尚未发布。
+1. P1.5-04 静态食材指南尚未实现。
 2. 日历导出优先级已移至 P1.5 之后，尚未实现。
 3. iPhone Safari、微信和横屏视觉回归已完成；较大字体真机检查移至 P3 / P4。
 
@@ -89,6 +89,14 @@
 - P0/P1 保持静态架构，不使用账号、数据库或服务端函数
 
 ## 最近验证
+
+2026-08-24 P1.5-01 至 P1.5-03 生产发布通过：
+
+- 发布源码：`cf07ad5`
+- 完整发布检查：119 个 Vitest、34 个 Playwright、数据、构建、部署产物和文档检查
+- Cloudflare Pages 仅发布 `dist/` 的 6 个运行时文件
+- 正式域名确认加载 `index-7HhKfOox.js` 与 `index-CYjFdaod.css`
+- “帮我选今天吃什么”“今天这样吃”、人数调整、换一组和保留已有选择均已上线
 
 2026-08-24 P1.5-01 至 P1.5-03 本地候选验证：
 
