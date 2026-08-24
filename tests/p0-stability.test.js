@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getMenuPrimaryActionLabel, stepServings } from '../src/features/picker/menu-drawer.js';
+import { getCombinationShortageText } from '../src/features/picker/combination-dialog.js';
 import { getDietaryConflictIds } from '../src/features/picker/picker.js';
 import { getNextResultTabIndex, getShoppingCollapseState } from '../src/features/recipient/recipient.js';
 import { resetScrollForInstantViewChange } from '../src/shared/route-transition.js';
@@ -50,6 +51,14 @@ describe('menu completion action', () => {
     expect(page.style.scrollBehavior).toBe('auto');
     restore();
     expect(page.style.scrollBehavior).toBe('smooth');
+  });
+});
+
+describe('household combination copy', () => {
+  it('explains missing roles without suggesting a dietary conflict', () => {
+    expect(getCombinationShortageText({ main: 0, vegetable: 0, soup: 1 }))
+      .toBe('当前忌口和候选下还缺1 道汤，先保留这份有效搭配。');
+    expect(getCombinationShortageText({ main: 0, vegetable: 0, soup: 0 })).toBe('');
   });
 });
 

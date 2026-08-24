@@ -1,4 +1,48 @@
 import { test, expect } from '@playwright/test';
+
+test('previews, changes, and adds a household combination without replacing existing choices', async ({ page, browserName }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.getByRole('button',{name:'加入菜单：蒜蓉西兰花'}).click();
+  await page.getByRole('button',{name:/查看菜单/}).click();
+  await page.getByRole('button',{name:'给蒜蓉西兰花添加备注'}).click();
+  await page.getByRole('textbox',{name:'给蒜蓉西兰花添加备注'}).fill('少盐');
+  await page.getByRole('textbox',{name:'给蒜蓉西兰花添加备注'}).press('Enter');
+  await page.getByRole('button',{name:'继续选菜'}).click();
+
+  const helper = page.getByRole('region',{name:'帮我选今天吃什么'});
+  await expect(helper.getByText('结合当前忌口生成家常搭配',{exact:true})).toBeVisible();
+  const open = helper.getByRole('button',{name:'帮我选'});
+  await open.click();
+  const dialog = page.getByRole('dialog',{name:'今天这样吃'});
+  await expect(dialog).toBeFocused();
+  await expect(dialog.getByRole('region',{name:'保留已选'}).getByText('蒜蓉西兰花',{exact:true})).toBeVisible();
+  await expect(dialog.getByText('2 人家常搭配 · 1 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
+
+  const firstSuggestion = await dialog.locator('.combination-suggested-list strong').allTextContents();
+  await dialog.getByRole('button',{name:'换一组'}).click();
+  await expect.poll(async () => dialog.locator('.combination-suggested-list strong').allTextContents())
+    .not.toEqual(firstSuggestion);
+  await dialog.press('Escape');
+  // Headless WebKit reports the restored button as inactive after closing a
+  // modal; the same harness difference already applies to the servings drawer.
+  if (browserName !== 'webkit') await expect(open).toBeFocused();
+
+  await open.click();
+  await dialog.getByRole('button',{name:'增加搭配人数'}).click();
+  await expect(dialog.getByText('3 人家常搭配 · 2 荤 · 1 素 · 1 汤',{exact:true})).toBeVisible();
+  await dialog.getByRole('button',{name:'加入 3 道菜'}).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(page.locator('.header-menu b')).toHaveText('4');
+
+  await page.getByRole('button',{name:/查看菜单/}).click();
+  const selectedNames = await page.locator('.selected-list .selected-dish-name strong').allTextContents();
+  expect(selectedNames).toHaveLength(4);
+  expect(selectedNames[0]).toBe('蒜蓉西兰花');
+  await expect(page.getByText('少盐',{exact:true})).toBeVisible();
+});
+
 test('select, complete, reopen the URL and create a shopping list', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByText('只管挑喜欢的，菜谱和采购清单都会准备好',{exact:true})).toBeVisible();
