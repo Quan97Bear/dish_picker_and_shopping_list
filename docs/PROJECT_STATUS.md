@@ -43,14 +43,14 @@
 
 当前构建：
 
-- JavaScript：`index-CR_sogGZ.js`
-- CSS：`index-BSYFOHPo.css`
+- JavaScript：`index-Lu9AKBih.js`
+- CSS：`index-C5EOjvLX.css`
 - 生产发布源码：`cf07ad5`，已推送至 `origin/dev` 并部署；当前 P1.5-04 至 P1.5-05 本地候选尚未发布
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
 本地版本包含：
 
-- 选菜首页仅使用“帮我选今天吃什么”和“看看家里能做什么”两个简单助手入口
+- 选菜首页使用左右并排的两个 Tab 提供“帮我选今天吃什么”和“看看家里能做什么”
 - “看看家里能做什么”支持标准名称和人工别名搜索、常见食材多选，并把菜分为“现在就能做”“还差 1 样”“还差 2 样”
 - 缺少数量只计算核心食材，辅助、可选和常备调料不增加缺少数；结果遵守当前忌口并可直接加入菜单
 - P1.5 静态食材指南覆盖 59 种运行时食材，维护标准名称、人工别名、常备调料、短购买提示和逐菜核心/辅助/可选角色
@@ -76,7 +76,7 @@
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-本地候选使用 `index-CR_sogGZ.js` + `index-BSYFOHPo.css`；生产使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`。
+本地候选使用 `index-Lu9AKBih.js` + `index-C5EOjvLX.css`；生产使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`。
 
 ## 当前产品差异
 
@@ -98,13 +98,13 @@
 
 2026-08-24 P1.5-05 本地候选验证：
 
-- 首页仅保留“帮我选今天吃什么”和“看看家里能做什么”两个简单入口
+- 首页用左右并排的两个 Tab 提供“帮我选今天吃什么”和“看看家里能做什么”
 - 标准名称、人工别名、常见食材选择、三档缺少食材分组和加入菜单回归通过
 - 缺少计算只使用核心食材，辅助、可选和常备调料不增加缺少数；结果遵守当前忌口
-- Vitest：136；完整 Playwright：36（18 条场景 × Chromium + WebKit）；手机关键 Playwright：12（6 条场景 × Chromium + WebKit）
+- Vitest：137；完整 Playwright：36（18 条场景 × Chromium + WebKit）；手机关键 Playwright：12（6 条场景 × Chromium + WebKit）
 - 数据、构建、7 文件部署产物和文档检查通过
 - 360px 检查无横向溢出，抽屉顶部留出 20px，可见操作目标至少 44×44px
-- 本地资源：`index-CR_sogGZ.js`、`index-BSYFOHPo.css` 与 `ingredient-guide-DmnUzIIP.json`
+- 本地资源：`index-Lu9AKBih.js`、`index-C5EOjvLX.css` 与 `ingredient-guide-DmnUzIIP.json`
 
 2026-08-24 P1.5-04 本地候选验证：
 

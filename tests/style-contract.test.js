@@ -33,6 +33,18 @@ describe('picker preference row layout contract', () => {
   });
 });
 
+describe('picker assistant tab layout contract', () => {
+  it('keeps both assistant entries side by side with full touch targets', () => {
+    expect(styles).toMatch(
+      /\.picker-assistants\{[^}]*grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/,
+    );
+    expect(styles).toMatch(
+      /\.picker-assistants>button\{[^}]*min-height:50px;[^}]*justify-content:center/,
+    );
+    expect(pickerSource).not.toContain('<i aria-hidden="true">→</i>');
+  });
+});
+
 describe('dish add control icon contract', () => {
   it('draws a compact 10px plus geometrically from the icon center', () => {
     expect(styles).toMatch(
