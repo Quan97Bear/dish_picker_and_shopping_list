@@ -124,6 +124,10 @@ When information conflicts, use this precedence:
   allowed.
 - `data/dish-catalog.json` is a local rotation pool and must not be requested at
   runtime or shipped as runtime menu data.
+- `data/ingredient-guide.json` contains every ingredient key used by the runtime
+  menu. One key represents one interchangeable ingredient; canonical names and
+  aliases are unique, and every dish ingredient has exactly one core,
+  auxiliary, or optional role.
 - Use `data/aliases.json` for published-ID compatibility.
 - Keep `avoid` metadata accurate for green/pointed pepper, fish, pork, egg, and
   spicy food.
@@ -169,6 +173,7 @@ When information conflicts, use this precedence:
 - `src/features/recipient/`: recipes and shopping list
 - `src/domain/menu-state.js`: persisted and shared state
 - `src/domain/shopping-list.js`: ingredient scaling and merging
+- `src/domain/ingredient-guide.js`: ingredient identity, aliases, roles, and validation
 - `src/infrastructure/load-app-data.js`: runtime data loading and validation
 - `src/shared/`: system share, QR and toast utilities
 - `src/styles.css`: responsive layout, motion, and accessibility

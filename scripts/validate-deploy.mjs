@@ -19,6 +19,7 @@ const forbiddenFiles = [
   /^vite\.config\./i,
   /^dish-catalog(?:-[^.]+)?\.json$/i,
   /^dishes\.schema(?:-[^.]+)?\.json$/i,
+  /^ingredient-guide\.schema(?:-[^.]+)?\.json$/i,
   /^source-manifest(?:-[^.]+)?\.json$/i,
   /\.md$/i,
   /\.map$/i

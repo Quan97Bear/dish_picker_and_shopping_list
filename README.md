@@ -92,9 +92,14 @@ check workflow；文档检查直接运行 `scripts/validate-docs.mjs`。不会�
 - `src/shared/`：跨功能共享的分享、二维码与提示工具
 - `data/dishes.json`：生产环境使用的 40 道完整菜谱
 - `data/dish-index.json`：与生产菜谱对应的轻量索引
+- `data/ingredient-guide.json`：标准食材、人工别名、常备调料、购买提示和逐菜角色
 - `data/dish-catalog.json`：只在本地使用的轮换候选池
 - `tests/`：Vitest 与 Playwright 测试
 - `dist/`：唯一允许部署的构建产物
+
+食材指南的 `core` 表示决定菜品主体的食材，`auxiliary` 表示调味、
+增香或可替代的配菜，`optional` 必须与菜谱中的可选标记一致。购买提示
+只帮助挑选，不参与用量缩放或采购清单合并。
 
 菜品数据约束、URL 合同和验收规则见
 [`docs/PRODUCT_REQUIREMENTS.md`](docs/PRODUCT_REQUIREMENTS.md)。

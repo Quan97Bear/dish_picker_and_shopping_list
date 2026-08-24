@@ -1,19 +1,23 @@
+import { validateIngredientGuide } from '../domain/ingredient-guide.js';
+
 const dataUrl = (name) => new URL(`../../data/${name}`, import.meta.url);
 
 export async function loadAppData() {
-  const [indexResponse, dishesResponse, aliasesResponse] = await Promise.all([
+  const [indexResponse, dishesResponse, aliasesResponse, ingredientGuideResponse] = await Promise.all([
     fetch(dataUrl('dish-index.json')),
     fetch(dataUrl('dishes.json')),
-    fetch(dataUrl('aliases.json'))
+    fetch(dataUrl('aliases.json')),
+    fetch(dataUrl('ingredient-guide.json'))
   ]);
-  if (!indexResponse.ok || !dishesResponse.ok || !aliasesResponse.ok) {
+  if (!indexResponse.ok || !dishesResponse.ok || !aliasesResponse.ok || !ingredientGuideResponse.ok) {
     throw new Error('菜谱数据加载失败');
   }
-  const [index, full, aliases] = await Promise.all([
-    indexResponse.json(), dishesResponse.json(), aliasesResponse.json()
+  const [index, full, aliases, ingredientGuide] = await Promise.all([
+    indexResponse.json(), dishesResponse.json(), aliasesResponse.json(), ingredientGuideResponse.json()
   ]);
   validateRuntimeData(index, full);
-  return { index, dishes: full.dishes, aliases };
+  validateIngredientGuide(ingredientGuide, full.dishes);
+  return { index, dishes: full.dishes, aliases, ingredientGuide };
 }
 
 export function validateRuntimeData(index, full) {

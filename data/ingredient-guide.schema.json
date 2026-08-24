@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "ingredients", "dishIngredientRoles"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "updatedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "ingredients": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["key", "name", "aliases", "shoppingCategory", "pantryStaple"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string", "pattern": "^[a-z]+(?:-[a-z]+)*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "aliases": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "shoppingCategory": { "enum": ["蔬菜", "肉蛋水产", "调味品", "其他"] },
+          "pantryStaple": { "type": "boolean" },
+          "purchaseTip": { "type": "string", "minLength": 1, "maxLength": 40 }
+        }
+      }
+    },
+    "dishIngredientRoles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["core", "auxiliary", "optional"],
+        "additionalProperties": false,
+        "properties": {
+          "core": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "auxiliary": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "optional": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+        }
+      }
+    }
+  }
+}

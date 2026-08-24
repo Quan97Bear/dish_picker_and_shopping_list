@@ -43,13 +43,15 @@
 
 当前构建：
 
-- JavaScript：`index-7HhKfOox.js`
+- JavaScript：`index-1P5jRd0K.js`
 - CSS：`index-CYjFdaod.css`
-- 生产发布源码：`cf07ad5`，已推送至 `origin/dev` 并部署
+- 生产发布源码：`cf07ad5`，已推送至 `origin/dev` 并部署；当前 P1.5-04 本地候选尚未发布
 - 手机访问：同一 Wi‑Fi 下运行 `npm run demo:phone`
 
 本地版本包含：
 
+- P1.5 静态食材指南覆盖 59 种运行时食材，维护标准名称、人工别名、常备调料、短购买提示和逐菜核心/辅助/可选角色
+- 北豆腐/嫩豆腐、小葱/大葱、粉丝/红薯粉条、小白菜/油菜使用独立 key，避免采购合并和已有食材匹配误判
 - 选菜页新增“帮我选今天吃什么”入口；“今天这样吃”预览按 1–8 人和当前忌口生成荤素汤搭配，支持人数调整、保留已有选择、换一组和加入菜单
 - 搭配优先避免重复主食材和相似口味；候选不足时返回最接近的有效组合并解释缺少项，不会为了凑数违反忌口
 - 选菜首页和分享弹层使用面向所有用户的通用文案，不包含个人称呼；“菜单外想吃”明确提示每道菜用空格隔开
@@ -71,11 +73,11 @@
 - Chromium 与 WebKit 共用同一套端到端回归
 - 源码按领域逻辑、产品功能、基础设施和共享工具分层，产品文档集中在 `docs/`
 
-本地与生产均使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`。
+本地候选使用 `index-1P5jRd0K.js` + `index-CYjFdaod.css`；生产使用 `index-7HhKfOox.js` + `index-CYjFdaod.css`。
 
 ## 当前产品差异
 
-1. P1.5-04 静态食材指南尚未实现。
+1. P1.5-04 静态食材指南已在本地候选实现并通过完整回归，尚未发布。
 2. 日历导出优先级已移至 P1.5 之后，尚未实现。
 3. iPhone Safari、微信和横屏视觉回归已完成；较大字体真机检查移至 P3 / P4。
 
@@ -83,12 +85,22 @@
 
 - 生产菜谱：`data/dishes.json`
 - 轻量索引：`data/dish-index.json`
+- 运行时食材指南：`data/ingredient-guide.json`
 - 本地轮换池：`data/dish-catalog.json`
 - 历史 ID 兼容：`data/aliases.json`
 - 来源复核：`data/source-manifest.json`
 - P0/P1 保持静态架构，不使用账号、数据库或服务端函数
 
 ## 最近验证
+
+2026-08-24 P1.5-04 本地候选验证：
+
+- 59 种标准食材覆盖 40 道菜的 223 次食材使用，逐菜角色无遗漏或重复
+- 标准名称、人工别名、常备调料和购买提示由同一份运行时指南提供
+- 4 组不可互换的食材拆为独立 key，避免采购合并和已有食材匹配误判
+- Vitest：128；完整 Playwright：34（17 条场景 × Chromium + WebKit）
+- 数据、构建、7 文件部署产物和文档检查通过
+- 本地资源：`index-1P5jRd0K.js`、`index-CYjFdaod.css` 与 `ingredient-guide-DmnUzIIP.json`
 
 2026-08-24 P1.5-01 至 P1.5-03 生产发布通过：
 
