@@ -188,6 +188,13 @@ When information conflicts, use this precedence:
 - Do not add or upgrade production dependencies unless the requested feature
   requires it.
 
+## Git commits
+
+- Use `buildwithqqq <buildwithqqq@users.noreply.github.com>` as the repository
+  commit identity.
+- Every commit message must contain a title, one blank line, and a body.
+- Keep every commit-message line at 70 characters or fewer.
+
 ## Deployment
 
 - Canonical target: Cloudflare Pages project `dish-picker` at
